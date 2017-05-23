@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="mapillary_color">#3db878</color>
+	<color name="mapillary_color_pressed">#3a9f73</color>
 	<color name="buy_button_color">#50ae55</color>
     <color name="buy_button_pressed_color">#b5e5b9</color>
 
@@ -113,6 +115,8 @@
 	<color name="ctx_menu_info_text_dark">#b4c3cc</color>
 	<color name="ctx_menu_info_divider_light">#d9d9d9</color>
 	<color name="ctx_menu_info_divider_dark">#333b40</color>
+	<color name="ctx_menu_card_btn_light">#F5F5F5</color>
+	<color name="ctx_menu_card_btn_dark">#3d474c</color>
 
 	<color name="dashboard_gpx_on_map">#448AFF</color>
 	<color name="dashboard_background">#eaeaea</color>

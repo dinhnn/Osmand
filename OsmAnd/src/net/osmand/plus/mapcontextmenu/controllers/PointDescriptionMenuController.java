@@ -8,6 +8,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.util.Algorithms;
 
 public class PointDescriptionMenuController extends MenuController {

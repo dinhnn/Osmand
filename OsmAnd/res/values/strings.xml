@@ -9,7 +9,19 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="open_mapillary">Open Mapillary</string>
+    <string name="shared_string_install">Install</string>
+    <string name="improve_coverage_mapillary">Improve coverage with Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">You can take your own photos or series of photos and add it to this map location.\n\nTo do this you need install Mapillary app from Google Play.</string>
+    <string name="online_photos">Online photos</string>
+    <string name="shared_string_add_photos">Add photos</string>
+    <string name="no_photos_descr">We don\'t have photos for this location</string>
+    <string name="mapillary_action_descr">Contribute with your own street-level views of this location with Mapillary.</string>
+    <string name="mapillary_widget">Mapillary widget</string>
+    <string name="mapillary_widget_descr">Allow you to quick contribute to Mapillary</string>
+    <string name="mapillary_descr">Online Street-Photos for everyone. Discover places, collaborate, capture the world.</string>
     <string name="mapillary">Mapillary</string>
+    <string name="plugin_mapillary_descr">Street-Level Photos for Everyone. Discover places, collaborate, capture the world.</string>
     <string name="private_access_routing_req">Your destination is located in the area with a private access. Do you want to allow access to the private roads for this trip?</string>
     <string name="restart_search">Restart search</string>
     <string name="increase_search_radius">Increase search radius</string>
@@ -36,7 +48,7 @@
     <string name="change_color">Change color</string>
     <string name="edit_name">Edit name</string>
     <string name="animate_my_location">Animate my location</string>
-    <string name="animate_my_location_desc">Enable extrapolation of my location during temporary loss of location fix</string>
+    <string name="animate_my_location_desc">Enable animation of my location during navigation</string>
     <string name="shared_string_overview">Overview</string>
     <string name="select_street">Select street</string>
     <string name="shared_string_in_name">in %1$s</string>

@@ -90,7 +90,7 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="plugins_screen">Zásuvné moduly</string>
     <string name="prefs_plugins_descr">Zásuvné moduly aktivujú pokročilé nastavenia a dodatočné funkcie</string>
     <string name="prefs_plugins">Zásuvné moduly</string>
-    <string name="osm_editing_plugin_description">Pomocou tohto modulu môže byť OsmAnd použitý na prispievanie do OSM, napr. vytváraním alebo úpravami OSM objektov záujmu, otváraním alebo komentovaním OSM chýb a prispievaním zaznamenanými GPX súbormi. OSM je celosvetový komunitný projekt. Pozri https://openstreetmap.org pre podrobnosti. Aktívna účasť je vítaná a príspevky môžu byť vytvárané priamo v OsmAnd, ak v aplikácii uvediete svoje registračné údaje do OSM.</string>
+    <string name="osm_editing_plugin_description">Pomocou tohto modulu môže byť OsmAnd použitý na prispievanie do OSM, napr. vytváraním alebo úpravami OSM objektov záujmu, otváraním alebo komentovaním OSM poznámok a prispievaním zaznamenanými GPX súbormi. OSM je celosvetový komunitný projekt. Pozri https://openstreetmap.org pre podrobnosti. Aktívna účasť je vítaná a príspevky môžu byť vytvárané priamo v OsmAnd, ak v aplikácii uvediete svoje registračné údaje do OSM.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorové mapy môžu byť zobrazované rýchlejšie. Nemusí správne fungovať na niektorých zariadeniach.</string>
     <string name="play_commands_of_currently_selected_voice">Prehrať povely zvoleného hlasu</string>
     <string name="debugging_and_development">Vývoj OsmAndu</string>
@@ -2218,7 +2218,7 @@ Dĺžka %2$s</string>
     <string name="number_of_recipients">Počet príjemcov</string>
     <string name="osm_user_stat">Počet úprav %1$s, pozícia %2$s, celkový počet úprav %3$s</string>
     <string name="osm_editors_ranking">Pozícia medzi editormi OSM</string>
-    <string name="osm_live_subscription">Predplatné v OSM Naživo</string>
+    <string name="osm_live_subscription">Predplatné v OSM Live</string>
     <string name="osm_live_subscribe_btn">Registrovať</string>
     <string name="osm_live_email_desc">Potrebujeme to na poskytnutie informácií o príspevkoch</string>
     <string name="osm_live_user_public_name">Verejné meno</string>
@@ -2233,7 +2233,7 @@ Dĺžka %2$s</string>
     <string name="osm_live_thanks">Ďakujeme za registrovanie na okamžité aktualizácie!</string>
     <string name="osm_live_region_desc">Časť z príspevku bude zaslaná používateľom OSM, ktorí upravujú mapu v danom regióne</string>
     <string name="osm_live_subscription_settings">Nastavenia registrácie</string>
-    <string name="osm_live_ask_for_purchase">Prosím zakúpte si najprv OSM Naživo</string>
+    <string name="osm_live_ask_for_purchase">Prosím zakúpte si najprv OSM Live</string>
 
     <string name="osm_live_header">Registrácia umožní hodinové aktualizácie všetkých máp sveta.
 Časť príjmu ide späť do OSM komunity a za každý príspevok do OSM je vyplatená odmena.
@@ -2298,23 +2298,23 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="report">Hlásenie</string>
     <string name="storage_permission_restart_is_required">Aplikácia teraz má povolenie zapisovať do externého úložiska. Je potrebný reštart aplikácie.</string>
     <string name="release_2_3">"
- • OSM Naživo. Podporte tvorcov mapy a vývojárov a získajte aktualizácie máp každú hodinu.
-
-
- • Mapové značky. Nový spôsob rýchleho výberu miest na mape.
-
-
- • Detailnejšie mapy z OSM s ikonami ciest pre príslušné krajiny a nové objekty na mape.
-
-
- • Vylepšený vzhľad a použitie tvorby trasy.
-
-
- • Vylepšenia v menu mapy, ako napríklad hľadanie adresy podľa kontextu.
-
-
- a ďalšie…
- "</string>
+\n • OSM Live. Podporte tvorcov mapy a vývojárov a získajte aktualizácie máp každú hodinu.
+\n
+\n
+\n • Mapové značky. Nový spôsob rýchleho výberu miest na mape.
+\n
+\n
+\n • Detailnejšie mapy z OSM s ikonami ciest pre príslušné krajiny a nové objekty na mape.
+\n
+\n
+\n • Vylepšený vzhľad a použitie tvorby trasy.
+\n
+\n
+\n • Vylepšenia v menu mapy, ako napríklad hľadanie adresy podľa kontextu.
+\n
+\n
+\n a ďalšie…
+\n "</string>
     <string name="full_report">Plné hlásenie</string>
     <string name="open_street_map_login_and_pass">Meno a heslo pre OpenStreetMap</string>
     <string name="file_name_containes_illegal_char">Názov súboru obsahuje nepovolený znak</string>
@@ -2348,8 +2348,8 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="access_autoannounce_period_descr">Minimálny čas medzi oznamami</string>
     <string name="access_no_destination">Cieľ nie je určený</string>
     <string name="map_widget_magnetic_bearing">Magnetické smerovanie</string>
-    <string name="use_osm_live_routing_description">Zapnúť navigáciu pomocou zmien z OSM Naživo (beta test)</string>
-	<string name="use_osm_live_routing">Navigácia OSM Naživo</string>
+    <string name="use_osm_live_routing_description">Povoliť navigácii použiť zmeny z OSM Live (beta test)</string>
+	<string name="use_osm_live_routing">Navigácia OSM Live</string>
     <string name="follow_us">Sledujte nás</string>
     <string name="access_direction_audio_feedback">Zvuková indikácia smeru</string>
     <string name="access_direction_audio_feedback_descr">Indikovať smer k cieľu pomocou zvuku</string>
@@ -2531,7 +2531,7 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="rendering_value_medium_w_name">Stredná</string>
     <string name="rendering_value_low_name">Nízka</string>
     <string name="rendering_attr_hideWaterPolygons_name">Skryť vodu</string>
-    <string name="quick_action_add_osm_bug">Pridať OSM chybu</string>
+    <string name="quick_action_add_osm_bug">Pridať OSM poznámku</string>
     <string name="quick_action_navigation_voice">Hlas zapnúť/vypnúť</string>
     <string name="quick_action_navigation_voice_off">Hlas je vypnutý</string>
     <string name="quick_action_navigation_voice_on">Hlas je zapnutý</string>
@@ -2568,7 +2568,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="quick_action_take_audio_note_descr">Aktivovaním tlačidla akcie sa pridá zvuková poznámka do stredu obrazovky.</string>
     <string name="quick_action_take_video_note_descr">Aktivovaním tlačidla akcie sa pridá video poznámka do stredu obrazovky.</string>
     <string name="quick_action_take_photo_note_descr">Aktivovaním tlačidla akcie sa pridá fotografická poznámka do stredu obrazovky.</string>
-    <string name="quick_action_add_osm_bug_descr">Aktivovaním tlačidla akcie sa pridá OSM chyba do stredu obrazovky.</string>
+    <string name="quick_action_add_osm_bug_descr">Aktivovaním tlačidla akcie sa pridá OSM poznámka do stredu obrazovky.</string>
     <string name="quick_action_add_poi_descr">Aktivovaním tlačidla akcie sa pridá bod záujmu (POI) do stredu obrazovky.</string>
     <string name="quick_action_navigation_voice_descr">Aktivovaním tlačidla akcie sa vypnú alebo zapnú hlasové pokyny počas navigácie.</string>
     <string name="quick_action_add_parking_descr">Aktivovaním tlačidla akcie sa pridá miesto zaparkovania do stredu obrazovky.</string>
@@ -2913,4 +2913,5 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="increase_search_radius">Zväčšiť okruh hľadania</string>
     <string name="nothing_found">Nič sa nenašlo :(</string>
     <string name="nothing_found_descr">Skúste zmeniť vyhľadávacie kritérium alebo oblasť hľadania</string>
+    <string name="mapillary">Mapillary</string>
     </resources>

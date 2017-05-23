@@ -3,11 +3,14 @@ package net.osmand.plus;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.view.View;
 
 import net.osmand.IProgress;
 import net.osmand.Location;
@@ -19,12 +22,13 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.distancecalculator.DistanceCalculatorPlugin;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
-import net.osmand.plus.osmo.OsMoPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
@@ -56,10 +60,6 @@ public abstract class OsmandPlugin {
 
 	public abstract int getAssetResourceName();
 
-	public boolean isStationary() {
-		return false;
-	}
-
 	@DrawableRes
 	public int getLogoResourceId() {
 		return R.drawable.ic_extension_dark;
@@ -83,7 +83,7 @@ public abstract class OsmandPlugin {
 	}
 
 	public boolean isActive() {
-		return active || isStationary();
+		return active;
 	}
 
 	public boolean needsInstallation() {
@@ -103,6 +103,25 @@ public abstract class OsmandPlugin {
 
 	public String getHelpFileName() {
 		return null;
+	}
+
+	/*
+	 * Return true in case if plugin should fill the map context menu with buildContextMenuRows method.
+	 */
+	public boolean isMenuControllerSupported(Class<? extends MenuController> menuControllerClass) {
+		return false;
+	}
+
+	/*
+	 * Add menu rows to the map context menu.
+	 */
+	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view) {
+	}
+
+	/*
+	 * Clear resources after menu was closed
+	 */
+	public void clearContextMenuRows() {
 	}
 
 	public static void initPlugins(OsmandApplication app) {
@@ -284,16 +303,6 @@ public abstract class OsmandPlugin {
 		return allPlugins;
 	}
 
-	public static List<OsmandPlugin> getAdjustablePlugins() {
-		List<OsmandPlugin> res = new ArrayList<>();
-		for (OsmandPlugin plugin : allPlugins) {
-			if (!plugin.isStationary()) {
-				res.add(plugin);
-			}
-		}
-		return res;
-	}
-
 	public static List<OsmandPlugin> getEnabledPlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
@@ -455,14 +464,13 @@ public abstract class OsmandPlugin {
 		return collection;
 	}
 
-	private static boolean isPackageInstalled(String packageInfo,
-											  OsmandApplication app) {
+	public static boolean isPackageInstalled(String packageInfo, Context ctx) {
 		if (packageInfo == null) {
 			return false;
 		}
 		boolean installed = false;
 		try {
-			installed = app.getPackageManager().getPackageInfo(packageInfo, 0) != null;
+			installed = ctx.getPackageManager().getPackageInfo(packageInfo, 0) != null;
 		} catch (NameNotFoundException e) {
 		}
 		return installed;

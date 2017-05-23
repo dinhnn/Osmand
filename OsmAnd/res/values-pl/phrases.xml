@@ -2592,9 +2592,9 @@
 
 	<string name="poi_min_age">Minimalny wiek</string>
 
-	<string name="poi_organic_yes">Ekologiczna żywność: dostępna</string>
-	<string name="poi_organic_no">Ekologiczna żywność: brak</string>
-	<string name="poi_organic_only">Tylko ekologiczna żywność</string>
+	<string name="poi_organic_yes">dostępna</string>
+	<string name="poi_organic_no">brak</string>
+	<string name="poi_organic_only">tylko</string>
 
 	<string name="poi_diaper_table_count">Stołów do przewijania pieluch</string>
 
@@ -2812,7 +2812,7 @@
 	<string name="poi_health_specialty_plastic_surgery_yes">Chirurgia plastyczna</string>
 	<string name="poi_health_specialty_orthodontics_yes">Ortodoncja</string>
 	<string name="poi_health_specialty_physiotherapy_yes">Fizjoterapia</string>
-	<string name="poi_health_specialty_biochemistry_yes">Bbiochemia</string>
+	<string name="poi_health_specialty_biochemistry_yes">Biochemia</string>
 	<string name="poi_health_specialty_occupational_yes">Terapia zajęciowa</string>
 	<string name="poi_health_specialty_child_psychiatry_yes">Psychiatria dziecięca</string>
 	<string name="poi_health_specialty_physiatry_yes">Rrehabilitacja medyczna</string>
@@ -3389,5 +3389,7 @@
 <string name="poi_resort_kids_camp">Pensjonat kolonijny</string>
 	<string name="poi_music_school">Szkoła muzyczna</string>
 	<string name="poi_language_school">Szkoła językowa</string>
+
+<string name="poi_life_ring">Koło ratunkowe</string>
 
 </resources>

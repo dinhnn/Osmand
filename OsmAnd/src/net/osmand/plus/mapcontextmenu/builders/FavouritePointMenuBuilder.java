@@ -11,6 +11,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
