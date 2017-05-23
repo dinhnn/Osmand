@@ -444,6 +444,8 @@ public class RouteInfoWidgetsFactory {
 					}
 					if (Math.abs(loc.getSpeed() - cachedSpeed) > minDelta) {
 						cachedSpeed = loc.getSpeed();
+						RoutingHelper rh = map.getRoutingHelper();
+						if(rh!=null)rh.setCurrentSpeed(cachedSpeed);
 						String ds = OsmAndFormatter.getFormattedSpeed(cachedSpeed, app);
 						int ls = ds.lastIndexOf(' ');
 						if (ls == -1) {
@@ -1139,7 +1141,7 @@ public class RouteInfoWidgetsFactory {
 					&& (trafficWarnings || cams)) {
 				AlarmInfo alarm;
 				if(rh.isFollowingMode() && !rh.isDeviatedFromRoute() && rh.getCurrentGPXRoute() == null) {
-					alarm = wh.getMostImportantAlarm(settings.METRIC_SYSTEM.get(), cams);
+					alarm = wh.getMostImportantAlarm(rh.getCurrentMaxSpeed(),settings.METRIC_SYSTEM.get(), cams);
 				} else {
 					RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
 					Location loc = locationProvider.getLastKnownLocation();

@@ -14,6 +14,7 @@ import net.osmand.aidl.maplayer.AMapLayer;
 import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapwidget.AMapWidget;
+import net.osmand.core.jni.FloatPtr;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities;
@@ -45,6 +46,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class OsmandAidlApi {
 
+	private static final String AIDL_MAX_SPEED = "aidl_max_speed";
 	private static final String AIDL_REFRESH_MAP = "aidl_refresh_map";
 	private static final String AIDL_SET_MAP_LOCATION = "aidl_set_map_location";
 	private static final String AIDL_LATITUDE = "aidl_latitude";
@@ -66,6 +68,7 @@ public class OsmandAidlApi {
 	private Map<String, AMapLayer> layers = new ConcurrentHashMap<>();
 	private Map<String, OsmandMapLayer> mapLayers = new ConcurrentHashMap<>();
 
+	private BroadcastReceiver maxSpeedReceiver;
 	private BroadcastReceiver refreshMapReceiver;
 	private BroadcastReceiver setMapLocationReceiver;
 	private BroadcastReceiver addMapWidgetReceiver;
@@ -78,6 +81,7 @@ public class OsmandAidlApi {
 	}
 
 	public void onCreateMapActivity(final MapActivity mapActivity) {
+		registerMaxSpeedReceiver(mapActivity);
 		registerRefreshMapReceiver(mapActivity);
 		registerSetMapLocationReceiver(mapActivity);
 		registerAddMapWidgetReceiver(mapActivity);
@@ -87,6 +91,9 @@ public class OsmandAidlApi {
 	}
 
 	public void onDestroyMapActivity(final MapActivity mapActivity) {
+		if(maxSpeedReceiver!=null){
+			mapActivity.unregisterReceiver(maxSpeedReceiver);
+		}
 		if (refreshMapReceiver != null) {
 			mapActivity.unregisterReceiver(refreshMapReceiver);
 		}
@@ -108,6 +115,19 @@ public class OsmandAidlApi {
 		if (removeMapLayerReceiver != null) {
 			mapActivity.unregisterReceiver(removeMapLayerReceiver);
 		}
+	}
+
+	private void registerMaxSpeedReceiver(final MapActivity mapActivity) {
+		maxSpeedReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				float speed = intent.getFloatExtra(AIDL_MAX_SPEED,Float.NaN);
+				if(speed != Float.NaN) {
+					mapActivity.setMaxSpeed(speed);
+				}
+			}
+		};
+		mapActivity.registerReceiver(maxSpeedReceiver, new IntentFilter(AIDL_MAX_SPEED));
 	}
 
 	private void registerRefreshMapReceiver(final MapActivity mapActivity) {
@@ -601,6 +621,13 @@ public class OsmandAidlApi {
 		intent.putExtra(AIDL_LONGITUDE, longitude);
 		intent.putExtra(AIDL_ZOOM, zoom);
 		intent.putExtra(AIDL_ANIMATED, animated);
+		app.sendBroadcast(intent);
+		return true;
+	}
+	boolean setMaxSpeed(float speed){
+		Intent intent = new Intent();
+		intent.setAction(AIDL_MAX_SPEED);
+		intent.putExtra(AIDL_MAX_SPEED, speed);
 		app.sendBroadcast(intent);
 		return true;
 	}

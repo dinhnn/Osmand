@@ -723,8 +723,27 @@ public class RoutingHelper {
 		}
 		return i;
 	}
-	
+	private float manualMaxSpeed;
+	private float currentSpeed;
+
+	public void setCurrentSpeed(float currentSpeed) {
+		this.currentSpeed = currentSpeed;
+	}
+
+	public void changeManualMaxSpeed(float step){
+		float ms = manualMaxSpeed==0?currentSpeed:manualMaxSpeed;
+		ms = (Math.round((ms+step)*0.36f)/0.36f);
+		if(ms<8f/3.6f)ms = 0;
+		setManualMaxSpeed(ms);
+	}
+	public void setManualMaxSpeed(float speed){
+		if(Float.compare(speed,manualMaxSpeed)!=0) {
+			getVoiceRouter().getNewCommandPlayerToPlay().maxSpeed(Math.round(speed*3.5f)).play();
+			manualMaxSpeed = speed;
+		}
+	}
 	public synchronized float getCurrentMaxSpeed() {
+		if(manualMaxSpeed>0)return manualMaxSpeed;
 		return route.getCurrentMaxSpeed();
 	}
 	

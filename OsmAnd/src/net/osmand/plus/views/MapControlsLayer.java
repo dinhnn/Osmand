@@ -621,7 +621,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (view.isZooming()) {
+				if(mapActivity.getRoutingHelper().isFollowingMode()){
+					mapActivity.getRoutingHelper().changeManualMaxSpeed(10f/3.6f);
+				} else if (view.isZooming()) {
 					mapActivity.changeZoom(2, System.currentTimeMillis());
 				} else {
 					mapActivity.changeZoom(1, System.currentTimeMillis());
@@ -629,7 +631,18 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 			}
 		});
-		final View.OnLongClickListener listener = MapControlsLayer.getOnClickMagnifierListener(view);
+		final View.OnLongClickListener magnifierListener = MapControlsLayer.getOnClickMagnifierListener(view);
+		final View.OnLongClickListener listener = new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View view) {
+				if(mapActivity.getRoutingHelper().isFollowingMode()){
+					mapActivity.getRoutingHelper().setManualMaxSpeed(0);
+					return true;
+				} else {
+					return magnifierListener.onLongClick(view);
+				}
+			}
+		};
 		zoomInButton.setOnLongClickListener(listener);
 		View zoomOutButton = mapActivity.findViewById(R.id.map_zoom_out_button);
 		mapZoomOut = createHudButton(zoomOutButton, R.drawable.map_zoom_out).
@@ -638,7 +651,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mapActivity.changeZoom(-1, System.currentTimeMillis());
+				if(mapActivity.getRoutingHelper().isFollowingMode()){
+					mapActivity.getRoutingHelper().changeManualMaxSpeed(-10f/3.6f);
+				} else {
+					mapActivity.changeZoom(-1, System.currentTimeMillis());
+				}
 			}
 		});
 		zoomOutButton.setOnLongClickListener(listener);

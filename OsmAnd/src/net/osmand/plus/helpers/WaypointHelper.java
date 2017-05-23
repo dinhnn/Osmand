@@ -167,9 +167,9 @@ public class WaypointHelper {
 		return found;
 	}
 
-	public AlarmInfo getMostImportantAlarm(MetricsConstants mc, boolean showCameras) {
+	public AlarmInfo getMostImportantAlarm(float mxspeed,MetricsConstants mc, boolean showCameras) {
 		Location lastProjection = app.getRoutingHelper().getLastProjection();
-		float mxspeed = route.getCurrentMaxSpeed();
+		//float mxspeed = route.getCurrentMaxSpeed();
 		float delta = app.getSettings().SPEED_LIMIT_EXCEED.get() / 3.6f;
 		AlarmInfo speedAlarm = createSpeedAlarm(mc, mxspeed, lastProjection, delta);
 		if (speedAlarm != null) {

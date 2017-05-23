@@ -112,6 +112,7 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControll
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -881,11 +882,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			dp.onPrepareDialog(id, dialog);
 		}
 	}
-
 	public void changeZoom(int stp, long time) {
 		mapViewTrackingUtilities.setZoomTime(time);
 		changeZoom(stp);
 	}
+
 
 	public void changeZoom(int stp) {
 		// delta = Math.round(delta * OsmandMapTileView.ZOOM_DELTA) * OsmandMapTileView.ZOOM_DELTA_1;
@@ -1272,7 +1273,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		OsmandPlugin.onMapActivityResult(requestCode, resultCode, data);
 	}
-
+	public void setMaxSpeed(float speed){
+		RoutingHelper rh = this.getRoutingHelper();
+		if(rh==null)return;
+		rh.setManualMaxSpeed(speed);
+	}
 	public void refreshMap() {
 		getMapView().refreshMap();
 	}
