@@ -49,7 +49,9 @@ public class CommandBuilder {
 	protected static final String C_ROUTE_NEW_CALC = "route_new_calc";  //$NON-NLS-1$
 	protected static final String C_LOCATION_LOST = "location_lost";  //$NON-NLS-1$
 	protected static final String C_LOCATION_RECOVERED = "location_recovered";  //$NON-NLS-1$
-	
+
+	protected static final String C_MAXSPEED = "max_speed";  //$NON-NLS-1$
+
 	/**
 	 * 
 	 */
@@ -183,6 +185,10 @@ public class CommandBuilder {
 	
 	public CommandBuilder roundAbout(double angle, int exit, Term streetName) {
 		return alt(prepareStruct(C_ROUNDABOUT, angle, exit, streetName), prepareStruct(C_ROUNDABOUT, angle, exit));
+	}
+
+	public CommandBuilder maxSpeed(float speed){
+		return addCommand(C_MAXSPEED,speed);
 	}
 	
 	public CommandBuilder andArriveAtDestination(String name){

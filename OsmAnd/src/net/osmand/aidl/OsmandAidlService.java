@@ -250,5 +250,11 @@ public class OsmandAidlService extends Service {
 				return true;
 			}
 		}
+
+		@Override
+		public boolean setMaxSpeed(float maxSpeed) throws RemoteException {
+			getApi().setMaxSpeed(maxSpeed);
+			return true;
+		}
 	};
 }

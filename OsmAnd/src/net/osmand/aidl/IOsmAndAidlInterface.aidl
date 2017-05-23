@@ -54,4 +54,5 @@ interface IOsmAndAidlInterface {
 
 	boolean setMapLocation(in SetMapLocationParams params);
     boolean calculateRoute(in CalculateRouteParams params);
+    boolean setMaxSpeed(in float maxSpeed);
 }
