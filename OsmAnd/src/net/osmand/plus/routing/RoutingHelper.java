@@ -738,7 +738,11 @@ public class RoutingHelper {
 	}
 	public void setManualMaxSpeed(float speed){
 		if(Float.compare(speed,manualMaxSpeed)!=0) {
-			getVoiceRouter().getNewCommandPlayerToPlay().maxSpeed(Math.round(speed*3.5f)).play();
+			try {
+				int say = Math.round(speed*3.6f);
+				getVoiceRouter().getNewCommandPlayerToPlay().speedAlarm(say,say).play();
+			}catch(NullPointerException e){
+			}
 			manualMaxSpeed = speed;
 		}
 	}
