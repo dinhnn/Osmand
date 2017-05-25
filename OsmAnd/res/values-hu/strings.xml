@@ -2445,21 +2445,17 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="number_of_edits">Szerkesztések száma</string>
     <string name="reports_for">Jelentés erről</string>
 <string name="report">Jelentés</string>
-    <string name="release_2_3">"
- • OSM Live. Támogasd a térkép szerkesztőit és fejlesztőket, és óránkénti térképfrissítést kapsz.
-
-
- • Térkép jelölők. Egy új mód arra, hogy a gyorsan tudj helyeket kiválasztani a térképen.
-
-
- • Még részletesebb OSM térképek, országspecifikus útszám ikonokkal és sok új térképelemmel.
-
-
- • Továbbfejlesztett útvonal előkészítő felület.
-
-
- • Számos fejlesztés a térkép környezeti menüjében, mint például a cím azonnali keresése.
- "</string>
+    <string name="release_2_3">" • OSM Live. Támogasd a térkép szerkesztőit és fejlesztőket, és óránkénti térképfrissítést kapsz.
+\n
+\n • Térkép jelölők. Egy új mód arra, hogy a gyorsan tudj helyeket kiválasztani a térképen.
+\n
+\n • Még részletesebb OSM térképek, országspecifikus útszám ikonokkal és sok új térképelemmel.
+\n
+\n • Továbbfejlesztett útvonal előkészítő felület.
+\n
+\n • Számos fejlesztés a térkép környezeti menüjében, mint például a cím azonnali keresése.
+\n 
+\nés még számos dolog… "</string>
     <string name="shared_string_move_up">Mozgatás fel</string>
     <string name="shared_string_move_down">Mozgatás le</string>
     <string name="finish_navigation">Navigáció befejezése</string>
@@ -2534,19 +2530,19 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="back_to_search">Vissza a kereséshez</string>
     <string name="confirmation_to_delete_history_items">Törölni szeretnéd a kiválasztott elemeket az előzményekből?</string>
     <string name="show_something_on_map">%1$s megjelenítése a térképen</string>
-    <string name="release_2_4">"
- • Új, hatékony szabad szavas kereső
-
- • Autó hangrendszer integráció Bluetoothon keresztül
-
- • Továbbfejlesztett navigáció, hangutasítások, és kanyarodósáv kijelzés
-
- • Továbbfejlesztett tömegközlekedési réteg útvonalak megjelenítésével
-
- • Új nyelvek, valamint már nyelvjárások is elérhetőek
-
- • Sok más fejlesztés és hibajavítás
- "</string>
+    <string name="release_2_4">" • Új, hatékony szabad szavas kereső
+\n
+\n • Autó hangrendszer integráció Bluetoothon keresztül
+\n
+\n • Továbbfejlesztett navigáció, hangutasítások és kanyarodósáv kijelzés
+\n
+\n • Továbbfejlesztett tömegközlekedési réteg útvonalak megjelenítésével
+\n
+\n • Új nyelvek, valamint már nyelvjárások is elérhetőek
+\n
+\n • Sok más fejlesztés és hibajavítás
+\n 
+\nés még számos dolog… "</string>
     <string name="dist_away_from_my_location">Keresés %1$s távolságban</string>
     <string name="show_on_map">Megjelenítés a térképen</string>
     <string name="share_history_subject">" megosztva OsmAnd segítségével"</string>
@@ -2953,18 +2949,32 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="nothing_found">Nincs találat :(</string>
     <string name="nothing_found_descr">Próbálkozz a keresőkifejezés módosításával vagy a keresett terület szélesítésével</string>
     <string name="mapillary">Mapillary</string>
-    <string name="shared_string_add_photos">Fotók hozzáadása</string>
+    <string name="shared_string_add_photos">Fényképek hozzáadása</string>
     <string name="no_photos_descr">Itt nincsenek fényképeink</string>
-    <string name="mapillary_action_descr">Add hozzá a saját fotódat a hely utcanézetéről a Mapillary-n keresztül!</string>
+    <string name="mapillary_action_descr">Add hozzá a saját fényképedet a hely utcanézetéről a Mapillaryvel!</string>
     <string name="mapillary_widget">Mapillary vezérlőgomb</string>
-    <string name="mapillary_widget_descr">Segítségével gyorsan hozzá tudsz járulni a Mapillary-hez</string>
+    <string name="mapillary_widget_descr">Segítségével gyorsan hozzájárulhatsz a Mapillaryhez</string>
     <string name="mapillary_descr">Online utcaképek mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
     <string name="plugin_mapillary_descr">Utcaképek mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
     <string name="osmand_extended_description_part4">" Az OsmAnd sítérkép bővítménye lehetővé teszi a sípályák megjelenítését nehézség szerint, valamint további információkat, mint például a a felvonók helyét, és más berendezéseket. "</string>
-    <string name="online_photos">Online fotók</string>
-    <string name="improve_coverage_mapillary">Javítsd a lefedettséget a Mapillary-vel</string>
-    <string name="improve_coverage_install_mapillary_desc">Készíthetsz saját fotót, vagy fotósorozatot és hozzáadhatod a térképhez ezen a helyen. 
+    <string name="online_photos">Online fényképek</string>
+    <string name="improve_coverage_mapillary">Javítsd a lefedettséget a Mapillaryvel</string>
+    <string name="improve_coverage_install_mapillary_desc">Készíthetsz saját fényképet, vagy fényképsorozatot és hozzáadhatod a térképhez ezen a helyen. 
 \n 
 \nEhhez először telepítened kell a Mapillary alkalmazást a Google Play-ről.</string>
     <string name="shared_string_install">Telepítés</string>
+    <string name="open_mapillary">Mapillary megnyitása</string>
+    <string name="mapillary_image">Mapillary kép</string>
+    <string name="osmand_plus_extended_description_part8">" Hozzávetőleges lefedettség és térképminőség:
+\n • Nyugat-Európa: ****
+\n • Kelet-Európa: ***
+\n • Oroszország: ***
+\n • Észak-Amerika: ***
+\n • Dél-Amerika: **
+\n • Ázsia: **
+\n • Japán és Korea: ***
+\n • Közel-Kelet: **
+\n • Afrika: **
+\n • Antarktisz: *
+\n A világ legtöbb országa letölthető. Afganisztántól Zimbabwéig, Ausztráliától az Egyesült Államokig. Magyarország, Szlovákia, Románia, Ausztria, Németország, Olaszország… "</string>
     </resources>

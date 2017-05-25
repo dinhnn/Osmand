@@ -575,7 +575,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				.objectEquals(targets.getIntermediatePointsLatLonNavigation(), routingHelper.getIntermediatePoints()))) {
 			targets.updateRouteAndRefresh(true);
 		}
-		app.getLocationProvider().resumeAllUpdates();
 
 		if (settings != null && settings.isLastKnownMapLocation() && !intentLocation) {
 			LatLon l = settings.getLastKnownMapLocation();
@@ -940,6 +939,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		super.onStart();
 		wakeLockHelper.onStart(this);
 		getMyApplication().getNotificationHelper().showNotifications();
+
+		app.getLocationProvider().resumeAllUpdates();
 	}
 
 	protected void setProgressDlg(Dialog progressDlg) {
@@ -958,6 +959,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	//			mNotificationManager.notify(APP_NOTIFICATION_ID, getNotification());
 	//		}
 	//	}
+		app.getLocationProvider().pauseAllUpdates();
+
 		wakeLockHelper.onStop(this);
 		getMyApplication().getNotificationHelper().removeNotifications();
 		super.onStop();
@@ -1014,7 +1017,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			atlasMapRendererView.handleOnPause();
 		}
 		super.onPause();
-		app.getLocationProvider().pauseAllUpdates();
 		app.getDaynightHelper().stopSensorIfNeeded();
 		settings.APPLICATION_MODE.removeListener(applicationModeListener);
 
