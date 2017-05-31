@@ -3088,4 +3088,27 @@
 	<string name="poi_crossing_barrier_double_half">平交道柵欄︰雙一半的</string>
 	<string name="poi_crossing_bell_yes">平交道警鐘</string>
 	<string name="poi_crossing_bell_no">平交道警鐘︰無</string>
+	<string name="poi_crossing_light_yes">平交道燈號</string>
+	<string name="poi_crossing_light_no">平交道燈號︰無</string>
+	<string name="poi_crossing_on_demand_yes">平交道長閉遮斷器</string>
+	<string name="poi_zoo_type">類型</string>
+
+<string name="poi_crossing_on_demand_no">平交道長閉遮斷器︰無</string>
+	<string name="poi_crossing_saltire_yes">平交道X形警示</string>
+	<string name="poi_crossing_saltire_no">平交道X形警示︰無</string>
+	<string name="poi_crossing_supervision_yes">平交道管理</string>
+	<string name="poi_crossing_supervision_no">平交道管理︰無</string>
+	<string name="poi_crossing_supervision_attendant">平交道管理︰值班員</string>
+	<string name="poi_crossing_supervision_camera">平交道管理︰攝影機</string>
+
+	<string name="poi_dispensing_yes">是的</string>
+	<string name="poi_dispensing_no">配藥︰無</string>
+
+	<string name="poi_aerodrome_type_international">國際性的</string>
+	<string name="poi_aerodrome_type_regional">區域性的</string>
+	<string name="poi_aerodrome_type_public">民用</string>
+	<string name="poi_aerodrome_type_military">軍用</string>
+	<string name="poi_aerodrome_type_military_public">軍/民共用</string>
+	<string name="poi_aerodrome_type_private">私人</string>
+
 	</resources>
