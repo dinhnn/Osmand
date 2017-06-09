@@ -1490,7 +1490,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			OsmandPlugin.onMapActivityScreenOff(MapActivity.this);
+			try {
+				OsmandPlugin.onMapActivityScreenOff(MapActivity.this);
+			}catch(Exception e){
+				LOG.error(e);
+			}
 		}
 
 	}

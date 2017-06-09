@@ -1565,22 +1565,25 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	public void stopRecording(final MapActivity mapActivity, boolean restart) {
-		if (!recordingDone) {
-			if (!restart || !stopMediaRecording(true)) {
-				recordingDone = true;
-				if (!recordControl.isVisible()) {
-					recordControl.setExplicitlyVisible(false);
-					mapActivity.getMapLayers().getMapInfoLayer().recreateControls();
+		try {
+			if (!recordingDone) {
+				if (!restart || !stopMediaRecording(true)) {
+					recordingDone = true;
+					if (!recordControl.isVisible()) {
+						recordControl.setExplicitlyVisible(false);
+						mapActivity.getMapLayers().getMapInfoLayer().recreateControls();
+					}
+					stopMediaRecording(false);
+					if (recordControl != null) {
+						setRecordListener(recordControl, mapActivity);
+					}
+					SHOW_RECORDINGS.set(true);
+					mapActivity.getMapView().refreshMap();
+					updateWidgetIcon(recordControl);
+					closeRecordingMenu();
 				}
-				stopMediaRecording(false);
-				if (recordControl != null) {
-					setRecordListener(recordControl, mapActivity);
-				}
-				SHOW_RECORDINGS.set(true);
-				mapActivity.getMapView().refreshMap();
-				updateWidgetIcon(recordControl);
-				closeRecordingMenu();
 			}
+		}catch(RuntimeException e){
 		}
 	}
 
