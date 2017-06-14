@@ -21,6 +21,7 @@ import android.media.MediaRecorder;
 import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.os.StatFs;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -774,10 +775,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	private static File getBaseFileName(double lat, double lon, OsmandApplication app, String ext) {
-		File baseDir;
-		if(Environment.getExternalStorageDirectory().exist()){
-			baseDir = new File(Environment.getExternalStorageDirectory(),"avnote");
+	private File getBaseFileName(double lat, double lon, OsmandApplication app, String ext) {
+		File baseDir = this.getMapActivity().getExternalFilesDir(Environment.DIRECTORY_MOVIES);
+		if(baseDir.exists()){
+			baseDir = new File(baseDir,"avnote");
 		} else {
 			baseDir = app.getAppPath(IndexConstants.AV_INDEX_DIR);
 		}
