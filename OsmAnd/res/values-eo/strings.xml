@@ -1195,7 +1195,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="poi_filter_emergency">Vivsavo</string>
     <string name="poi_filter_public_transport">Transporto publika</string>
     <string name="poi_filter_entertainment">Ripozejo</string>
-    <string name="poi_filter_accomodation">Loĝado</string>
+    <string name="poi_filter_accomodation">Loĝo</string>
     <string name="poi_filter_restaurants">Restoracioj</string>
     <string name="poi_filter_sightseeing">Vidindaĵoj</string>
     <string name="poi_filter_car_aid">Aŭt-helpo</string>
@@ -1606,7 +1606,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="amenity_type_entertainment">Ripozejo</string>
     <string name="amenity_type_finance">Financo</string>
     <string name="amenity_type_geocache">Geokaŝado</string>
-    <string name="amenity_type_healthcare">Kuracado</string>
+    <string name="amenity_type_healthcare">Kuraco</string>
     <string name="amenity_type_historic">Historiejo</string>
     <string name="poi_filter_closest_poi">Proksimaj interesejoj</string>
     <string name="daynight_mode_day">Taga</string>
@@ -2762,7 +2762,7 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="index_item_depth_points_northern_hemisphere">Maraj profundec-kurboj de norda duonsfero</string>
     <string name="download_depth_countours">Maraj profundec-kurboj</string>
     <string name="nautical_maps">Maraj mapoj</string>
-    <string name="depth_contour_descr">Kolekto da mapoj reprezentantaj marajn profundec-kurbojn kaj punktojn (bazitajn sur 30-arksekunda krado).</string>
+    <string name="depth_contour_descr">Kolekto da mapoj reprezentantaj marajn profundec-kurbojn kaj punktojn.</string>
     <string name="quick_action_add_destination">Aldoni celon</string>
     <string name="quick_action_replace_destination">Anstataŭigi celon</string>
     <string name="quick_action_add_first_intermediate">Aldoni unuan interlokon</string>

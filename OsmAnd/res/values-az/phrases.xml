@@ -64,4 +64,21 @@
 	<string name="poi_mall">Ticarət mərkəzi</string>
 	<string name="poi_beverages">İçki mağazası</string>
 	<string name="poi_shop">Mağaza</string>
+	<string name="poi_greengrocer">Meyvə-tərəvəz</string>
+	<string name="poi_seafood">Dəniz məhsulları</string>
+	<string name="poi_confectionery">Qənnadı</string>
+	<string name="poi_tea">Çay dükanı</string>
+	<string name="poi_pasta">Makaron dükanı</string>
+	<string name="poi_dairy">Süd dükanı</string>
+	<string name="poi_vending_machine">Satış maşını</string>
+	<string name="poi_wine">Şərab mağazası</string>
+	<string name="poi_books">Kitab mağazası</string>
+	<string name="poi_bicycle">Velosiped mağazası</string>
+	<string name="poi_mobile_phone">Mobil telefon mağazası</string>
+	<string name="poi_motorcycle">Motosiklet mağazası</string>
+	<string name="poi_music">Musiqi mağazası</string>
+	<string name="poi_musical_instrument">Musiqi alətləri</string>
+	<string name="poi_outdoor">Açıq havada mağaza</string>
+	<string name="poi_paint">Boya mağazası</string>
+	<string name="poi_pet">Ev heyvanı mağazası</string>
 	</resources>

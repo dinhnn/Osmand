@@ -1636,7 +1636,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="osmo_group_share">Um eine Verbindung zur Gruppe %2$s herzustellen, bitte die Gruppen-ID (%1$s) angeben oder (%3$s) antippen.</string>
 	<string name="osmo_share_connect_device">Diesem Gerät permanent folgen</string>
 	<string name="osmo_share_current_session">Aktuelle Sitzung im Browser teilen</string>
-	<string name="osmo_session_not_available">Keine Sitzung vorhanden. Ist \'Standort senden\' aktiviert?</string>
+	<string name="osmo_session_not_available">Keine Sitzung vorhanden, überprüfen Sie ob \'Standort senden\' aktiv ist.</string>
 	<string name="osmo_share_session">Sitzung teilen</string>
 	<string name="osmo_session_id_share">Sitzungs-URL zur Geräteverfolgung (%1$s)</string>
 	<string name="osmo_track_interval">Aufzeichnungsintervall</string>
@@ -1713,7 +1713,7 @@ Mit Neuanmeldung fortfahren?</string>
 	<string name="gpx_selection_track">%1$s \nTrack %2$s</string>
 	
 	<string name="gpx_split_interval">Trennungsintervall</string>
-	<string name="gpx_info_subtracks">"Track-Teile: %1$s "</string>
+	<string name="gpx_info_subtracks">"Track-Segmente: %1$s "</string>
 	<string name="gpx_monitoring_start">GPX-Aufzeichnung starten</string>
 	<string name="gpx_monitoring_stop">GPX-Aufzeichnung beenden</string>
 	<string name="gpx_start_new_segment">Neues Segment starten</string>
@@ -2173,21 +2173,21 @@ Lon %2$s</string>
     <string name="access_from_map_description">Menütaste zeigt Dashboard, nicht das Menü</string>
     <string name="show_on_start_description">\"Aus\" startet direkt die Kartenansicht</string>
     <string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
-    <string name="release_2_2">" • Neue kontextbezogene Benutzeroberfläche bei Auswahl von Orten auf der Karte und in anderen Ansichten
+    <string name="release_2_2">" • Neue kontextbezogene Benutzeroberfläche bei Auswahl von Orten auf der Karte und anderen Ansichten
 \n
-\n • Kartenansicht wird nun direkt gestartet, wenn nicht \'Dashboard bei App-Start\' eingestellt ist
+\n • Kartenansicht wird nun direkt gestartet, außer bei Auswahl von \'Zeige Dashboard bei App-Start\'
 \n
-\n • Auswahl der im Dashboard anzuzeigenden Elemente möglich
+\n • Auswahl der anzuzeigenden Elemente im Dashboard möglich
 \n
 \n • Dashboard kann umgangen werden, falls menübasierte App-Steuerung gewünscht ist
 \n
-\n • Zum Herunterladen von Karten können Regionen durch Antippen auf der Weltkarte direkt ausgewählt werden
+\n • Zum Herunterladen von Kartendateien können nun Regionen direkt durch Tippen auf der Weltkarte ausgewählt werden
 \n
-\n • Die POI-Suche unterstützt nun präzisere Abfragen
+\n • Die POI-Suche ermöglicht nun speziellere Abfragen
 \n
 \n • Verbesserungen beim Editieren von POI- und OSM-Objekten
 \n
-\n • Überarbeitete Download-Schnittstelle und -Struktur für Kartendaten
+\n • Oberfläche und Struktur zum Herunterladen der Karten wurden überarbeitet
 \n
 \n und mehr … "</string>
     <string name="osm_save_offline">Offline speichern</string>
@@ -2240,7 +2240,7 @@ Lon %2$s</string>
 	<string name="file_size_in_mb">%.1f MB</string>
     <string name="please_specify_poi_type_only_from_list">Bitte einen gültigen POI-Typ angeben oder überspringen</string>
     <string name="share_osm_edits_subject">OSM-Bearbeitung mit OsmAnd geteilt</string>
-    <string name="av_locations_descr">GPX-Datei mit Notizen zu Orten</string>
+    <string name="av_locations_descr">GPX-Datei mit Notizen</string>
     <string name="free_downloads_used_description">Anzeige der genutzten freien Downloads</string>
 
     <string name="shared_string_location">Standort</string>
@@ -2343,7 +2343,7 @@ Aktuell sind nur {2} MB verfügbar.</string>
     <string name="upload_osm_note_description">Sie können Ihre OSM-Notizen anonym hochladen oder Ihr OpenStreetMap.org-Profil nutzen.</string>
     <string name="upload_osm_note">OSM-Notiz hochladen</string>
     <string name="upload_anonymously">Anonym hochladen</string>
-<string name="show_transparency_seekbar">Transparenz-Suchleiste anzeigen</string>
+<string name="show_transparency_seekbar">Transparenz-Schieber anzeigen</string>
     <string name="recalculate_route">Route neu berechnen</string>
     <string name="donations">Spenden</string>
     <string name="number_of_recipients">Anzahl der Empfänger</string>
@@ -2698,7 +2698,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 
     <string name="rendering_attr_depthContours_name">Nautische Tiefenlinien</string>
 	<string name="rendering_attr_depthContours_description">Tiefenlinien und -punkte einblenden</string>
-    <string name="route_altitude">Routenhöhe</string>
+    <string name="route_altitude">Routenhöhenprofil</string>
     <string name="altitude_descent">Abstieg</string>
     <string name="altitude_ascent">Aufstieg</string>
     <string name="altitude_range">Höhendifferenz</string>
@@ -2712,9 +2712,9 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_move">Verschieben</string>
     <string name="shared_string_tracks">Tracks</string>
     <string name="shared_string_time_moving">Zeit in Bewegung</string>
-    <string name="shared_string_time_span">Zeitspanne</string>
+    <string name="shared_string_time_span">Dauer</string>
     <string name="shared_string_max">Max</string>
-    <string name="shared_string_start_time">Startzeit</string>
+    <string name="shared_string_start_time">Anfangszeit</string>
     <string name="shared_string_end_time">Endzeit</string>
     <string name="shared_string_color">Farbe</string>
     <string name="max_speed">Höchstgeschwindigkeit</string>
@@ -2723,7 +2723,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="points_delete_multiple_succesful">Punkt(e) erfolgreich gelöscht.</string>
     <string name="points_delete_multiple">Es werden %1$d Punkt(e) gelöscht. Fortfahren?</string>
     <string name="track_points_category_name">Markante Punkte auf dieser Route</string>
-    <string name="route_points_category_name">Zu passierende Kehren auf dieser Route</string>
+    <string name="route_points_category_name">Richtungsänderungen entlang dieser Route</string>
     <string name="add_new_folder">Neuen Ordner hinzufügen</string>
     <string name="shared_string_slope">Steigung</string>
     <string name="relief_smoothness_factor_hills">Berge</string>
@@ -2741,12 +2741,12 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="parking_options">Parkmöglichkeiten</string>
     <string name="full_version_thanks">Vielen Dank, dass Sie die Vollversion von OsmAnd erworben haben!</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Bergig</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Hügelig</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Weniger bergig</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Flach</string>
     <string name="routing_attr_driving_style_speed_name">Schnell</string>
     <string name="routing_attr_driving_style_balance_name">Ausgewogen</string>
     <string name="routing_attr_driving_style_safety_name">Sicher</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Höhenprofil</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Steigung wählen</string>
     <string name="driving_region_automatic">Automatisch</string>
     <string name="osmand_extended_description_part1">" OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsanwendung mit Zugriff auf die kostenlosen, weltweiten und qualitativ hochwertigen Daten von OpenStreetMap (OSM). Erfreuen Sie sich an der akustischen und visuellen Navigation, der Betrachtung von POIs (points of interest), der Erstellung und Verwaltung von GPX-Tracks, der Visualisierung von Höhenlinien und -angaben (über ein Erweiterungsmodul), den Auswahlmöglichkeiten zwischen Auto-, Fahrrad- und Fußgänger-Betriebsart, der Möglichkeit an OSM mitzuarbeiten und vielem mehr. "</string>
     <string name="osmand_extended_description_part2">" GPS-Navigation • Sie haben die Wahl zwischen dem Offline-Betrieb (ohne Roaming-Gebühren, wenn Sie im Ausland sind) oder dem (schnelleren) Online-Betrieb • Die Sprachführung (mit aufgenommenen oder synthetischen Stimmen) begleitet Sie Schritt für Schritt auf Ihrem Weg • Ihre Route wird neu berechnet, sobald Sie von ihr abweichen • Fahrspurassistent, Straßennamen und voraussichtliche Ankunftszeit helfen Ihnen auf der Strecke • Zur Erhöhung Ihrer Reisesicherheit erfolgt ein automatischer Wechsel zwischen Tag- und Nachtmodus • Sie können wählen, ob Tempolimits angezeigt werden sollen, und ob Sie bei deren Überschreitung darauf hingewiesen werden wollen • Die Kartenvergrößerung passt sich Ihrer Geschwindigkeit an • Sie können Ziele nach Adresse, Typ (z. B.: Parkplatz, Restaurant, Hotel, Tankstelle, Museum) oder geographischen Koordinaten suchen • Die Festlegung von Zwischenstopps entlang Ihrer Reiseroute ist möglich • Sie können Ihre GPX-Tracks aufzeichnen, einspielen und ihnen folgen "</string>
@@ -2834,10 +2834,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="show_from_zoom_level">Darstellen ab Zoomstufe</string>
     <string name="shared_string_add_photos">Fotos hinzufügen</string>
     <string name="mapillary_widget">Mapillary-Widget</string>
-    <string name="mapillary_widget_descr">Ermöglicht Ihnen auf schnelle Weise Mapillary-Beiträge</string>
-    <string name="mapillary_descr">Fotos von der Straße aus dem Netz für jedermann. Orte entdecken, mitwirken, die Welt in Bildern festhalten.</string>
+    <string name="mapillary_widget_descr">Ermöglicht einen schnellen Zugriff auf Mapillary</string>
+    <string name="mapillary_descr">Fotos von der Straße aus dem Netz für jeden. Orte entdecken, mitwirken und die Welt in Bildern festhalten.</string>
     <string name="mapillary">Mapillary</string>
-    <string name="mapillary_action_descr">Mit Mapillary Ihre ganz persönlichen Ansichten dieses Ortes beisteuern.</string>
+    <string name="mapillary_action_descr">Mit Mapillary eigene Bilder von diesem Ort hinzufügen.</string>
     <string name="shared_string_install">Installieren</string>
     <string name="online_photos">Online-Fotos</string>
     <string name="no_photos_descr">Es gibt keine Fotos von diesem Ort</string>
