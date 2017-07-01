@@ -776,7 +776,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	private File getBaseFileName(double lat, double lon, OsmandApplication app, String ext) {
-		File baseDir = this.getMapActivity().getExternalFilesDir(Environment.DIRECTORY_MOVIES);
+		File baseDir = Environment.getExternalStorageDirectory();
 		if(baseDir.exists()){
 			baseDir = new File(baseDir,"avnote");
 		} else {
