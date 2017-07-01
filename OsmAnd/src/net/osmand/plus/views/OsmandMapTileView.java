@@ -161,6 +161,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private boolean afterDoubleTap = false;
 	private boolean wasMapLinkedBeforeGesture = false;
 
+	private LatLon firstTouchPointLatLon;
+	private LatLon secondTouchPointLatLon;
+	private boolean multiTouch;
+	private long multiTouchEndTime;
+	private boolean wasZoomInMultiTouch;
+
 	public OsmandMapTileView(MapActivity activity, int w, int h) {
 		this.activity = activity;
 		init(activity, w, h);
@@ -305,6 +311,30 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	// ///////////////////////// NON UI PART (could be extracted in common) /////////////////////////////
+	public LatLon getFirstTouchPointLatLon() {
+		return firstTouchPointLatLon;
+	}
+
+	public LatLon getSecondTouchPointLatLon() {
+		return secondTouchPointLatLon;
+	}
+
+	public boolean isMultiTouch() {
+		return multiTouch;
+	}
+
+	public long getMultiTouchEndTime() {
+		return multiTouchEndTime;
+	}
+
+	public boolean isWasZoomInMultiTouch() {
+		return wasZoomInMultiTouch;
+	}
+
+	public void setWasZoomInMultiTouch(boolean wasZoomInMultiTouch) {
+		this.wasZoomInMultiTouch = wasZoomInMultiTouch;
+	}
+
 	public void setIntZoom(int zoom) {
 		zoom = zoom > getMaxZoom() ? getMaxZoom() : zoom;
 		zoom = zoom < getMinZoom() ? getMinZoom() : zoom;
@@ -1007,6 +1037,28 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			this.y1 = y1;
 			this.x2 = x2;
 			this.y2 = y2;
+			if (x1 != x2 || y1 != y2) {
+				firstTouchPointLatLon = currentViewport.getLatLonFromPixel(x1, y1);
+				secondTouchPointLatLon = currentViewport.getLatLonFromPixel(x2, y2);
+				multiTouch = true;
+                wasZoomInMultiTouch = false;
+			}
+		}
+
+		@Override
+		public void onActionPointerUp() {
+			multiTouch = false;
+			if (isZooming()) {
+				wasZoomInMultiTouch = true;
+			} else {
+				multiTouchEndTime = System.currentTimeMillis();
+				wasZoomInMultiTouch = false;
+			}
+		}
+
+		@Override
+		public void onActionCancel() {
+			multiTouch = false;
 		}
 
 		@Override

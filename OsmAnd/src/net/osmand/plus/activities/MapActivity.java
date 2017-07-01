@@ -48,6 +48,7 @@ import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
@@ -108,6 +109,7 @@ import net.osmand.plus.views.OsmAndMapLayersView;
 import net.osmand.plus.views.OsmAndMapSurfaceView;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.RulerControlLayer;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
@@ -844,6 +846,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					mapContextMenu.showMinimized(latLonToShow, mapLabelToShow, toShow);
 					mapLayers.getMapControlsLayer().getMapRouteInfoMenu().updateMenu();
 					MapRouteInfoMenu.showLocationOnMap(this, latLonToShow.getLatitude(), latLonToShow.getLongitude());
+				} else if (toShow instanceof QuadRect) {
+					QuadRect qr = (QuadRect) toShow;
+					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
 				} else {
 					mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
 				}
