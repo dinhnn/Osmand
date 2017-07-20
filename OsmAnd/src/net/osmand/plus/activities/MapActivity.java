@@ -1096,7 +1096,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		LOG.info("onKeyDown "+keyCode+"@"+event);
 		if(keyCode==KeyEvent.KEYCODE_BUTTON_X){
 			RoutingHelper rh = getRoutingHelper();
 			if(rh!=null){
