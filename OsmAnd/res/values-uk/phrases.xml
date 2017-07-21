@@ -1610,7 +1610,7 @@
 	<string name="poi_historic_period_first_intermediate_period">Історичний період: перший перехідний період (2181 - 2055 р. до н.е.)</string>
 	<string name="poi_piste_difficulty_advanced">Для просунутих</string>
 	<string name="poi_historic_period_second_intermediate_period">Історичний період: другий перехідний період (1650 - 1550 р. до н.е.)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Історичний період: третій перехідний період (1069 - 664 до н.е.) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Історичний період: третій перехідний період (1069 – 664 до н.е.)</string>
 	<string name="poi_piste_difficulty_novice">Для новачків</string>
 	<string name="poi_piste_difficulty_expert">Експерт</string>
 	<string name="poi_historic_period_first_persian_period">Історичний період: перший перський період</string>
@@ -2567,7 +2567,7 @@
 	<string name="poi_min_age">Мінімальний вік</string>
 
 	<string name="poi_cuisine_brasserie">Брассери (стейк і чіпси)</string>
-	<string name="poi_payment_pro100_yes">"ПРО100 "</string>
+	<string name="poi_payment_pro100_yes">ПРО100</string>
 	<string name="poi_vending_excrement_bags">Пакети для екскрементів тварин</string>
 	<string name="poi_wetland_wet_meadow">Заболочений луг</string>
 	<string name="poi_industrial_oil">Тип: нафтова промисловість</string>
@@ -3360,5 +3360,42 @@
 	<string name="poi_language_school">Школа іноземних мов</string>
 
 	<string name="poi_life_ring">Рятувальний круг</string>
+
+<string name="poi_zoo_type">Тип</string>
+
+<string name="poi_zoo_petting_zoo">Контактний зоопарк</string>
+	<string name="poi_zoo_wildlife_park">Парк дикої природи</string>
+	<string name="poi_zoo_safari_park">Сафарі-парк</string>
+	<string name="poi_zoo_birds">Птахи</string>
+	<string name="poi_zoo_aviary">Вольєр для птахів</string>
+	<string name="poi_zoo_falconry">Соколине полювання</string>
+	<string name="poi_zoo_reptile">Рептилії</string>
+
+<string name="poi_zoo_enclosure">Клітки</string>
+	<string name="poi_stands">Спортивна трибуна</string>
+
+<string name="poi_motorcycle_services">Послуги</string>
+	<string name="poi_motorcycle_type">Тип мотоциклів</string>
+
+<string name="poi_motorcycle_sales_yes">Продаж</string>
+	<string name="poi_motorcycle_sales_no">Продаж: немає</string>
+	<string name="poi_motorcycle_sales_yes_used">Продаж: є; також б/у</string>
+	<string name="poi_motorcycle_sales_used">Продаж: б/у</string>
+	<string name="poi_motorcycle_rental_yes">Оренда</string>
+	<string name="poi_motorcycle_rental_no">Оренда: немає</string>
+	<string name="poi_motorcycle_repair_yes">Ремонт</string>
+	<string name="poi_motorcycle_repair_no">Ремонт: немає</string>
+	<string name="poi_motorcycle_parts_yes">Запчастини</string>
+	<string name="poi_motorcycle_parts_no">Запчастини: немає</string>
+	<string name="poi_motorcycle_tyres_yes">Шини</string>
+	<string name="poi_motorcycle_tyres_no">Шини: немає</string>
+	<string name="poi_motorcycle_clothes_yes">Мотоциклетний одяг</string>
+	<string name="poi_motorcycle_clothes_no">Мотоциклетний одяг: немає</string>
+	<string name="poi_motorcycle_type_scooter">Скутер, моторолер</string>
+	<string name="poi_motorcycle_type_sportbike">Спортивні</string>
+	<string name="poi_motorcycle_type_chopper">Чоппери</string>
+	<string name="poi_motorcycle_type_offroad">Позашляхові</string>
+	<string name="poi_motorcycle_type_dualsport">Подвійного призначення</string>
+	<string name="poi_motorcycle_type_standard">Класика</string>
 
 </resources>

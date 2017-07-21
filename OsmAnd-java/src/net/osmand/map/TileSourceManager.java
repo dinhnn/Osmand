@@ -1,5 +1,13 @@
 package net.osmand.map;
 
+import net.osmand.PlatformUtil;
+import net.osmand.osm.io.NetworkUtils;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -18,15 +26,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.PlatformUtil;
-import net.osmand.osm.io.NetworkUtils;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
-
 import bsh.Interpreter;
 
 
@@ -39,7 +38,7 @@ public class TileSourceManager {
 	private static final TileSourceTemplate MAPNIK_SOURCE =
 			new TileSourceTemplate("OsmAnd (online tiles)", "http://tile.osmand.net/hd/{0}/{1}/{2}.png", ".png", 19, 1, 512, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	private static final TileSourceTemplate CYCLE_MAP_SOURCE =
-			new TileSourceTemplate("CycleMap", "http://b.tile.opencyclemap.org/cycle/{0}/{1}/{2}.png", ".png", 16, 1, 256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+			new TileSourceTemplate("CycleMap", "https://b.tile.thunderforest.com/cycle/{0}/{1}/{2}.png?apikey=a778ae1a212641d38f46dc11f20ac116", ".png", 16, 1, 256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$ http://b.tile.opencyclemap.org/cycle/{0}/{1}/{2}.png
 	private static final TileSourceTemplate MAPILLARY_RASTER_SOURCE =
 			new TileSourceTemplate("Mapillary (raster tiles)", "https://d6a1v2w10ny40.cloudfront.net/v0.1/{0}/{1}/{2}.png", ".png", 13, 0, 256, 16, 32000);
 	private static final TileSourceTemplate MAPILLARY_VECTOR_SOURCE =
@@ -278,7 +277,7 @@ public class TileSourceManager {
 		
 		
 		@Override
-		public void clearTiles(String path) {
+		public void deleteTiles(String path) {
 			File pf = new File(path);
 			File[] list = pf.listFiles();
 			if(list != null) {

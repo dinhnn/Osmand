@@ -1577,7 +1577,7 @@
 	<string name="poi_payment_gift_card_no">Gavekort accepteres ikke</string>
 	<string name="poi_payment_golden_crown_yes">Golden Crown</string>
 	<string name="poi_payment_golden_crown_no">Golden Crown kort accepteres ikke</string>
-	<string name="poi_payment_pro100_yes">"PRO100 "</string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
 	<string name="poi_payment_pro100_no">PRO100 kort accepteres ikke</string>
 	<string name="poi_payment_union_card_yes">Union Card</string>
 	<string name="poi_payment_union_card_no">Union kort accepteres ikke</string>
@@ -2311,7 +2311,7 @@
 	<string name="poi_historic_period_old_kingdom">Historiskperiode: det gamle Kongerige (2686 - 2181 f.Kr.)</string>
 	<string name="poi_historic_period_first_intermediate_period">Historiskperiode: første mellemliggende periode (2181- 2055 f.Kr.)</string>
 	<string name="poi_historic_period_second_intermediate_period">Historiskperiode: anden mellemliggende periode (1650 – 1550 f.Kr.)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Historiskperiode: tredje mellemliggende periode (1069 - 664 f.Kr.) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Historiskperiode: tredje mellemliggende periode (1069 - 664 f.Kr.)</string>
 	<string name="poi_historic_period_first_persian_period">Historiskperiode: første persiske periode</string>
 	<string name="poi_historic_period_late_period">Historiskperiode: sene periode (664 - 332 f.Kr.)</string>
 	<string name="poi_historic_period_second_persian_period">Historiskperiode: anden Persiske periode</string>
@@ -3451,5 +3451,42 @@
 	<string name="poi_language_school">Sprogskole</string>
 
 <string name="poi_life_ring">Redningskrans</string>
+
+<string name="poi_zoo_type">Type</string>
+
+<string name="poi_zoo_petting_zoo">Børnezoo</string>
+	<string name="poi_zoo_enclosure">Indhegning</string>
+	<string name="poi_zoo_safari_park">Safaripark</string>
+	<string name="poi_zoo_birds">Fugle</string>
+	<string name="poi_zoo_aviary">Voliere</string>
+	<string name="poi_zoo_falconry">Falkoneri</string>
+	<string name="poi_zoo_reptile">Krybdyr</string>
+
+<string name="poi_zoo_wildlife_park">Dyrepark</string>
+	<string name="poi_stands">Stande</string>
+
+<string name="poi_motorcycle_services">Service</string>
+	<string name="poi_motorcycle_type">Motorcykeltype</string>
+
+<string name="poi_motorcycle_sales_yes">Salg</string>
+	<string name="poi_motorcycle_sales_no">Salg: nej</string>
+	<string name="poi_motorcycle_sales_yes_used">Salg: ja; brugt</string>
+	<string name="poi_motorcycle_sales_used">Salg: brugt</string>
+	<string name="poi_motorcycle_rental_yes">Udlejning</string>
+	<string name="poi_motorcycle_rental_no">Udlejning: nej</string>
+	<string name="poi_motorcycle_repair_yes">Reparation</string>
+	<string name="poi_motorcycle_repair_no">Reparation: nej</string>
+	<string name="poi_motorcycle_parts_yes">Reservedele</string>
+	<string name="poi_motorcycle_parts_no">Reservedele: nej</string>
+	<string name="poi_motorcycle_tyres_yes">Dæk</string>
+	<string name="poi_motorcycle_tyres_no">Dæk: nej</string>
+	<string name="poi_motorcycle_clothes_yes">Motorcykelbeklædning</string>
+	<string name="poi_motorcycle_clothes_no">Motorcykelbeklædning: nej</string>
+	<string name="poi_motorcycle_type_scooter">Scooter</string>
+	<string name="poi_motorcycle_type_sportbike">Sportsbike</string>
+	<string name="poi_motorcycle_type_chopper">Chopper</string>
+	<string name="poi_motorcycle_type_offroad">Offroad</string>
+	<string name="poi_motorcycle_type_dualsport">Enduro</string>
+	<string name="poi_motorcycle_type_standard">Standard</string>
 
 </resources>

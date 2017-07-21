@@ -2277,7 +2277,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="storage_directory_card">Minneskort</string>
     <string name="coords_format">Koordinatformat</string>
     <string name="coords_format_descr">Format för geografiska koordinater</string>
-  	<string name="share_history_subject">" delad via OsmAnd"</string>
+  	<string name="share_history_subject">delad via OsmAnd</string>
     <string name="search_categories">Kategorier</string>
     <string name="postcode">Postnummer</string>
     <string name="rec_split"/>
@@ -2540,7 +2540,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="restart_search">Starta om sökningen</string>
     <string name="increase_search_radius">Utöka sökradien</string>
     <string name="nothing_found">Hittade ingenting :(</string>
-    <string name="nothing_found_descr">Försök med att ändra sökorden eller utöka sökradien</string>
+    <string name="nothing_found_descr">Ändra sökord eller utöka sökradien</string>
     <string name="sorted_by_distance">Sorterat efter avstånd</string>
     <string name="search_favorites">Sökfavoriter</string>
     <string name="shared_string_plugin">Insticksmodul</string>
@@ -2561,4 +2561,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="mapillary_widget">Mapillary-widget</string>
     <string name="mapillary">Mapillary</string>
     <string name="shared_string_install">Installera</string>
+    <string name="shared_string_permissions">Tillstånd</string>
+    <string name="import_gpx_failed_descr">OsmAnd kan inte importera filen. Kolla om OsmAnd har tillåtelse att läsa filen från sin plats.</string>
+    <string name="distance_moving">Distansen korrigerad</string>
     </resources>

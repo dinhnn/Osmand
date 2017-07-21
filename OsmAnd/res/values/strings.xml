@@ -9,25 +9,43 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="shared_string_reset">Reset</string>
+    <string name="shared_string_reload">Reload</string>
+    <string name="mapillary_menu_descr_tile_cache">Reload tiles to see up to date data.</string>
+    <string name="mapillary_menu_title_tile_cache">Tile cache</string>
+    <string name="wrong_user_name">Wrong user name!</string>
+    <string name="shared_string_to">To</string>
+    <string name="mapillary_menu_date_from">From</string>
+    <string name="mapillary_menu_descr_dates">View images added in a certain period.</string>
+    <string name="mapillary_menu_title_dates">Dates</string>
+    <string name="mapillary_menu_edit_text_hint">Type user name</string>
+    <string name="mapillary_menu_descr_username">View images added by a certain user.</string>
+    <string name="mapillary_menu_title_username">Username</string>
+    <string name="mapillary_menu_filter_description">You can filter images by submitter or by date. Filters apply only for closeup zoom.</string>
+    <string name="map_widget_ruler_control_first_mode">Two point ruler</string>
+    <string name="map_widget_ruler_control_second_mode">Radius ruler</string>
+    <string name="shared_string_permissions">Permissions</string>
+    <string name="import_gpx_failed_descr">OsmAnd cannot import the file. Please check if OsmAnd has permission to read file from its location.</string>
+    <string name="distance_moving">Distance corrected</string>
     <string name="mapillary_image">Mapillary image</string>
     <string name="open_mapillary">Open Mapillary</string>
     <string name="shared_string_install">Install</string>
-    <string name="improve_coverage_mapillary">Improve coverage with Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">You can take your own photos or series of photos and add it to this map location.\n\nTo do this you need install Mapillary app from Google Play.</string>
+    <string name="improve_coverage_mapillary">Improve photo coverage with Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">You can take your own photos or series of photos and attach them to this map location.\n\nTo do this you need to install the Mapillary app from the Google Play Store.</string>
     <string name="online_photos">Online photos</string>
     <string name="shared_string_add_photos">Add photos</string>
-    <string name="no_photos_descr">We don\'t have photos for this location</string>
-    <string name="mapillary_action_descr">Contribute with your own street-level views of this location with Mapillary.</string>
+    <string name="no_photos_descr">We do not have photos for this location</string>
+    <string name="mapillary_action_descr">Contribute with your own street-level views of this location via Mapillary.</string>
     <string name="mapillary_widget">Mapillary widget</string>
-    <string name="mapillary_widget_descr">Allow you to quick contribute to Mapillary</string>
-    <string name="mapillary_descr">Online Street-Photos for everyone. Discover places, collaborate, capture the world.</string>
+    <string name="mapillary_widget_descr">Allows you to quickly contribute to Mapillary</string>
+    <string name="mapillary_descr">Online street-level photos for everyone. Discover places, collaborate, capture the world.</string>
     <string name="mapillary">Mapillary</string>
-    <string name="plugin_mapillary_descr">Street-Level Photos for Everyone. Discover places, collaborate, capture the world.</string>
-    <string name="private_access_routing_req">Your destination is located in the area with a private access. Do you want to allow access to the private roads for this trip?</string>
+    <string name="plugin_mapillary_descr">Street-level photos for everyone. Discover places, collaborate, capture the world.</string>
+    <string name="private_access_routing_req">Your destination is located in an area with private access. Do you want to allow access to the private roads for this trip?</string>
     <string name="restart_search">Restart search</string>
     <string name="increase_search_radius">Increase search radius</string>
     <string name="nothing_found">Nothing found :(</string>
-    <string name="nothing_found_descr">Try to change search query or increase radius of search</string>
+    <string name="nothing_found_descr">Modify the search query or increase the search radius</string>
     <string name="quick_action_showhide_osmbugs_title">Show/hide OSM Notes</string>
     <string name="quick_action_osmbugs_show">Show OSM Notes</string>
     <string name="quick_action_osmbugs_hide">Hide OSM Notes</string>
@@ -37,7 +55,7 @@
     <string name="hillshade_menu_download_descr">To see relief hillshading on the map, you need to download the hillshade overlay map of this region.</string>
     <string name="hillshade_purchase_header">To see relief hillshading on the map, you need to buy and install the Contour Lines plugin</string>
     <string name="hide_from_zoom_level">Hide from zoom level</string>
-    <string name="srtm_menu_download_descr">For view contour lines on the map, you need to download contour line map of this region.</string>
+    <string name="srtm_menu_download_descr">To view contour lines on the map, you need to download the contour line map of this region.</string>
     <string name="shared_string_plugin">Plugin</string>
     <string name="srtm_purchase_header">To see contour lines on the map, you need to buy and install the Contour Lines plugin</string>
     <string name="srtm_color_scheme">Color scheme</string>
@@ -73,7 +91,7 @@
     <string name="no_underlay">No underlay</string>
     <string name="subscribe_email_error">Error</string>
     <string name="subscribe_email_desc">Subscribe to our email list about app discounts and get 3 more map downloads!</string>
-    <string name="depth_contour_descr">Set of maps containing the sea depth contour lines and points (based on a 30 arc-second grid).</string>
+    <string name="depth_contour_descr">Set of maps containing the sea depth contour lines and points.</string>
     <string name="sea_depth_thanks">Thank you for purchasing nautical depth contours!</string>
     <string name="index_item_depth_contours_osmand_ext">Nautical depth contours</string>
     <string name="index_item_depth_points_southern_hemisphere">Nautical depth points southern hemisphere</string>
@@ -194,11 +212,11 @@
     </string>
     <string name="rendering_attr_contourColorScheme_description">Contour lines color scheme</string>
     <string name="save_track_min_speed">Logging minimum speed</string>
-    <string name="save_track_min_speed_descr">Set minimum speed for a point to be logged</string>
-    <string name="save_track_min_distance">Logging motion detection</string>
-    <string name="save_track_min_distance_descr">Set minimum distance from last position for point to be logged</string>
+    <string name="save_track_min_speed_descr">Filter: Set minimum speed for a point to be logged</string>
+    <string name="save_track_min_distance">Logging minimum displacement</string>
+    <string name="save_track_min_distance_descr">Filter: Set minimum distance from last position for point to be logged</string>
     <string name="save_track_precision">Logging minimum accuracy</string>
-    <string name="save_track_precision_descr">Set minimum accuracy for a point to be logged</string>
+    <string name="save_track_precision_descr">Filter: Set minimum accuracy for a point to be logged</string>
     <string name="christmas_poi">Christmas POI</string>
     <string name="christmas_desc">Anticipating Christmas and New Year holidays, you can choose to display the POI associated with Christmas: Christmas trees, markets, etc.</string>
     <string name="christmas_desc_q">Show Christmas POI?</string>
@@ -617,7 +635,7 @@
     <string name="lang_bn">Bengali</string>
     <string name="lang_tl">Tagalog</string>
     <string name="lang_sh">Serbo-Croatian</string>
-    <string name="lang_az">Azeri</string>
+    <string name="lang_az">Azerbaijani</string>
     <string name="lang_br">Breton</string>
     <string name="lang_sq">Albanian</string>
     <string name="lang_is">Icelandic</string>

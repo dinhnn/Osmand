@@ -214,6 +214,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				"af",
 				"ar",
 				"ast",
+				"az",
 				"be",
 				"be_BY",
 				"bg",
@@ -272,6 +273,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				getString(R.string.lang_af) + incompleteSuffix,
 				getString(R.string.lang_ar),
 				getString(R.string.lang_ast) + incompleteSuffix,
+				getString(R.string.lang_az) + incompleteSuffix,
 				getString(R.string.lang_be),
 				getString(R.string.lang_be_by),
 				getString(R.string.lang_bg),
@@ -342,6 +344,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 
 
 	protected void enableProxy(boolean enable) {
+		settings.ENABLE_PROXY.set(enable);
 		if (enable) {
 			NetworkUtils.setProxy(settings.PROXY_HOST.get(), settings.PROXY_PORT.get());
 		} else {
@@ -350,7 +353,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 	}
 
 	private void addProxyPrefs(PreferenceGroup proxy) {
-		CheckBoxPreference enableProxyPref = (CheckBoxPreference) proxy.findPreference("enable_proxy");
+		CheckBoxPreference enableProxyPref = (CheckBoxPreference) proxy.findPreference(settings.ENABLE_PROXY.getId());
 		enableProxyPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {

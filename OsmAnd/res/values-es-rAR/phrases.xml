@@ -74,7 +74,7 @@
 	<string name="poi_charity">Negocio benéfico</string>
 	<string name="poi_chemist">Higiene personal y del hogar</string>
 	<string name="poi_clothes">Tienda de ropa</string>
-	<string name="poi_clothes_children">Ropa infantil</string>
+	<string name="poi_clothes_children">Infantil</string>
 	<string name="poi_shoes">Zapatería</string>
 	<string name="poi_computer">Tienda de informática</string>
 	<string name="poi_copyshop">Fotocopiadora</string>
@@ -318,7 +318,7 @@
 
 	<string name="poi_college">Instituto educativo</string>
 	<string name="poi_driving_school">Autoescuela</string>
-	<string name="poi_kindergarten">Jardín infantil</string>
+	<string name="poi_kindergarten">Jardín de infantes</string>
 	<string name="poi_school">Escuela</string>
 	<string name="poi_training">Centro de capacitación</string>
 	<string name="poi_university">Universidad</string>
@@ -661,7 +661,7 @@
 	<string name="poi_craft_scaffolder">Montador de andamios</string>
 	<string name="poi_craft_sculptor">Escultor</string>
 	<string name="poi_craft_shoemaker">Zapatero</string>
-	<string name="poi_craft_stand_builder">Diseño de stands</string>
+	<string name="poi_craft_stand_builder">Creador de estand</string>
 	<string name="poi_craft_stonemason">Albañil</string>
 	<string name="poi_craft_sun_protection">Fábrica de toldos</string>
 	<string name="poi_craft_sweep">Deshollinador</string>
@@ -2067,19 +2067,19 @@
 	<string name="poi_surveillance_outdoor">Vigilancia exterior</string>
 	<string name="poi_surveillance_public">Vigilancia pública</string>
 
-	<string name="poi_clothes_women">De mujer</string>
-	<string name="poi_clothes_underwear">Ropa interior</string>
-	<string name="poi_clothes_men">De hombre</string>
+	<string name="poi_clothes_women">Femenina</string>
+	<string name="poi_clothes_underwear">Íntima</string>
+	<string name="poi_clothes_men">Masculina</string>
 	<string name="poi_clothes_wedding">Vestidos de novia</string>
 	<string name="poi_clothes_sports">Deportiva</string>
 	<string name="poi_clothes_babies">De bebes</string>
-	<string name="poi_clothes_workwear">Ropa de trabajo</string>
+	<string name="poi_clothes_workwear">De trabajo</string>
 	<string name="poi_clothes_hats">Sombreros</string>
-	<string name="poi_clothes_fur">Ropa de piel</string>
-	<string name="poi_clothes_leather">Ropa de cuero</string>
+	<string name="poi_clothes_fur">De piel</string>
+	<string name="poi_clothes_leather">De cuero</string>
 	<string name="poi_clothes_costumes">Disfraces</string>
 	<string name="poi_clothes_traditional">Tradicional</string>
-	<string name="poi_clothes_suits">Trajes</string>
+	<string name="poi_clothes_suits">Trajes de vestir</string>
 	<string name="poi_clothes_maternity">De maternidad</string>
 	<string name="poi_clothes_vintage">Antigua</string>
 	<string name="poi_clothes_oversize">De gran tamaño</string>
@@ -2094,9 +2094,9 @@
 	<string name="poi_historic_milestone">Hito histórico</string>
 
 	<string name="poi_shoes_children">De niños</string>
-	<string name="poi_shoes_women">De mujer</string>
-	<string name="poi_shoes_sport">Deportivas</string>
-	<string name="poi_shoes_men">De hombres</string>
+	<string name="poi_shoes_women">Femenino</string>
+	<string name="poi_shoes_sport">Deportivo</string>
+	<string name="poi_shoes_men">Masculino</string>
 	<string name="poi_shoes_orthopedic">Ortopédico</string>
 
 	<string name="poi_historic_manor">Mansión histórica</string>
@@ -2288,7 +2288,7 @@
 	<string name="poi_historic_period_old_kingdom">Período histórico: Antiguo reinado (2686 – 2181 aC)</string>
 	<string name="poi_historic_period_first_intermediate_period">Período histórico: Primer período intermedio (2181 – 2055 aC)</string>
 	<string name="poi_historic_period_second_intermediate_period">Período histórico: Segundo período intermedio (1650 – 1550 aC)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Período histórico: Tercer período intermedio (1069 – 664 aC) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Período histórico: Tercer período intermedio (1069 – 664 aC)</string>
 	<string name="poi_historic_period_first_persian_period">Período histórico: Primer período persa</string>
 	<string name="poi_historic_period_late_period">Período histórico: Último período (664 – 332 aC)</string>
 	<string name="poi_historic_period_second_persian_period">Período histórico: Segundo período persa</string>
@@ -2421,7 +2421,7 @@
 
 <string name="poi_wiki_lang_af">Wiki en Afrikáans</string>
 	<string name="poi_wiki_lang_als">Wiki en alsaciano</string>
-	<string name="poi_wiki_lang_az">Wiki en azerí</string>
+	<string name="poi_wiki_lang_az">Wiki en azerí (Azerbaiyán)</string>
 	<string name="poi_wiki_lang_bn">Wiki en bengalí</string>
 	<string name="poi_wiki_lang_bpy">Wiki en bishnupriya</string>
 	<string name="poi_wiki_lang_br">Wiki en bretón</string>
@@ -3075,7 +3075,7 @@
 	<string name="poi_internet_access_type">Tipo de acceso a Internet</string>
 	<string name="poi_vending_type">Tipo de expendio</string>
 	<string name="poi_bicycle_service">Servicio para bicicleta</string>
-	<string name="poi_clothes_type">Tipo de ropa</string>
+	<string name="poi_clothes_type">Tipo de prenda</string>
 	<string name="poi_shoes_type">Tipo de calzado</string>
 	<string name="poi_fire_hydrant_type">Tipo de hidrante</string>
 	<string name="poi_fire_hydrant_position">Ubicación del hidrante</string>
@@ -3417,5 +3417,42 @@
 	<string name="poi_language_school">Escuela de idiomas</string>
 
 <string name="poi_life_ring">Salvavidas</string>
+
+<string name="poi_zoo_type">Tipo de zoológico</string>
+
+<string name="poi_zoo_petting_zoo">Zoológico interactivo</string>
+	<string name="poi_zoo_wildlife_park">Reserva natural</string>
+	<string name="poi_zoo_enclosure">Recinto</string>
+	<string name="poi_zoo_safari_park">Parque safari</string>
+	<string name="poi_zoo_birds">Aves</string>
+	<string name="poi_zoo_aviary">Pajarera</string>
+	<string name="poi_zoo_falconry">Cetrería</string>
+	<string name="poi_zoo_reptile">Reptiles</string>
+
+<string name="poi_stands">Tribunas</string>
+
+<string name="poi_motorcycle_services">Servicios</string>
+	<string name="poi_motorcycle_type">Tipo de motocicleta</string>
+
+<string name="poi_motorcycle_sales_yes">Ventas</string>
+	<string name="poi_motorcycle_sales_no">Venden motocicletas: no</string>
+	<string name="poi_motorcycle_sales_yes_used">Venden motocicletas: si; usadas</string>
+	<string name="poi_motorcycle_sales_used">Venden motocicletas: usadas</string>
+	<string name="poi_motorcycle_rental_yes">Alquiler</string>
+	<string name="poi_motorcycle_rental_no">Alquilan motocicletas: no</string>
+	<string name="poi_motorcycle_repair_yes">Reparación</string>
+	<string name="poi_motorcycle_repair_no">Reparan motocicletas: no</string>
+	<string name="poi_motorcycle_parts_yes">Repuestos para motocicletas</string>
+	<string name="poi_motorcycle_parts_no">Repuestos para motocicletas: no</string>
+	<string name="poi_motorcycle_tyres_yes">Neumáticos</string>
+	<string name="poi_motorcycle_tyres_no">Neumáticos: no</string>
+	<string name="poi_motorcycle_clothes_yes">Ropa de motocicleta</string>
+	<string name="poi_motorcycle_clothes_no">Ropa de motocicleta: no</string>
+	<string name="poi_motorcycle_type_scooter">Scooter (motoneta)</string>
+	<string name="poi_motorcycle_type_sportbike">Deportiva</string>
+	<string name="poi_motorcycle_type_chopper">Chopper</string>
+	<string name="poi_motorcycle_type_offroad">Todo terreno</string>
+	<string name="poi_motorcycle_type_dualsport">Doble propósito</string>
+	<string name="poi_motorcycle_type_standard">Estándar</string>
 
 </resources>

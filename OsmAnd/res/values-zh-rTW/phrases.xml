@@ -336,9 +336,9 @@
 	<string name="poi_office_administrative">行政辦公室</string>
 	<string name="poi_customs">海關</string>
 	<string name="poi_city">城市</string>
-	<string name="poi_town">鎮</string>
-	<string name="poi_village">村鎮</string>
-	<string name="poi_hamlet">村莊</string>
+	<string name="poi_town">鄉鎮</string>
+	<string name="poi_village">村落</string>
+	<string name="poi_hamlet">村鎮</string>
 	<string name="poi_isolated_dwelling">孤立民居</string>
 	<string name="poi_suburb">市郊</string>
 	<string name="poi_quarter">區</string>
@@ -1565,7 +1565,7 @@
 	<string name="poi_payment_gift_card_no">不接受禮品卡</string>
 	<string name="poi_payment_golden_crown_yes">接受 Golden Crown 卡</string>
 	<string name="poi_payment_golden_crown_no">不接受 Golden Crown 卡</string>
-	<string name="poi_payment_pro100_yes">接受 PRO100</string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
 	<string name="poi_payment_pro100_no">不接受 PRO100</string>
 	<string name="poi_payment_union_card_yes">接受 Union 卡</string>
 	<string name="poi_payment_union_card_no">不接受 Union 卡</string>
@@ -1951,8 +1951,8 @@
 	<string name="poi_service_bicycle_repair_no">自行車維修：無</string>
 	<string name="poi_service_bicycle_rental_yes">自行車租賃：有</string>
 	<string name="poi_service_bicycle_rental_no">自行車租賃：無</string>
-	<string name="poi_service_bicycle_pump_yes">自行車灌氣泵浦：有</string>
-	<string name="poi_service_bicycle_pump_no">自行車灌氣泵浦：無</string>
+	<string name="poi_service_bicycle_pump_yes">泵浦</string>
+	<string name="poi_service_bicycle_pump_no">自行車打氣筒：無</string>
 	<string name="poi_service_bicycle_diy_yes">自行車 DIY 維修工具：有</string>
 	<string name="poi_service_bicycle_diy_no">自行車 DIY 維修工具：無</string>
 	<string name="poi_service_bicycle_cleaning_yes">自行車清洗：有</string>
@@ -2387,7 +2387,7 @@
 	<string name="poi_historic_period_old_kingdom">歷史時期：古王國 (西元前2686年 – 2181年)</string>
 	<string name="poi_historic_period_first_intermediate_period">歷史時期：第一中間期 (西元前2181年 - 2055年)</string>
 	<string name="poi_historic_period_second_intermediate_period">歷史時期：第二中間期 (西元前1650年 - 1550年)</string>
-	<string name="poi_historic_period_third_intermediate_period">"歷史時期：第三中間期 (西元前1069年 - 664年) "</string>
+	<string name="poi_historic_period_third_intermediate_period">歷史時期：第三中間期 (西元前1069年 - 664年)</string>
 	<string name="poi_historic_period_first_persian_period">歷史時期：第一波斯時期</string>
 	<string name="poi_historic_period_late_period">歷史時期：後期 (西元前664 - 332年)</string>
 	<string name="poi_historic_period_second_persian_period">歷史時期：第二波斯時期</string>
@@ -3072,4 +3072,322 @@
 
 	<string name="poi_salt_yes">鹽</string>
 	<string name="poi_salt_no">鹽︰無</string>
+	<string name="poi_spoil_heap">廢石堆</string>
+	
+	<string name="poi_wheelchair_designated">標示</string>
+	<string name="poi_summer_camp">夏令營</string>
+	<string name="poi_recreation_center">休憩中心</string>
+
+	<string name="poi_crossing_activation_automatic">平交道啓動︰自動</string>
+	<string name="poi_crossing_activation_local">平交道啓動︰現地</string>
+	<string name="poi_crossing_activation_remote">平交道啓動︰遠端</string>
+	<string name="poi_crossing_barrier_no">平交道柵欄︰無</string>
+	<string name="poi_crossing_barrier_yes">平交道柵欄</string>
+	<string name="poi_crossing_barrier_full">平交道柵欄︰完整的</string>
+	<string name="poi_crossing_barrier_half">平交道柵欄︰一半的</string>
+	<string name="poi_crossing_barrier_double_half">平交道柵欄︰雙一半的</string>
+	<string name="poi_crossing_bell_yes">平交道警鐘</string>
+	<string name="poi_crossing_bell_no">平交道警鐘︰無</string>
+	<string name="poi_crossing_light_yes">平交道燈號</string>
+	<string name="poi_crossing_light_no">平交道燈號︰無</string>
+	<string name="poi_crossing_on_demand_yes">平交道長閉遮斷器</string>
+	<string name="poi_zoo_type">類型</string>
+
+<string name="poi_crossing_on_demand_no">平交道長閉遮斷器︰無</string>
+	<string name="poi_crossing_saltire_yes">平交道X形警示</string>
+	<string name="poi_crossing_saltire_no">平交道X形警示︰無</string>
+	<string name="poi_crossing_supervision_yes">平交道管理</string>
+	<string name="poi_crossing_supervision_no">平交道管理︰無</string>
+	<string name="poi_crossing_supervision_attendant">平交道管理︰值班員</string>
+	<string name="poi_crossing_supervision_camera">平交道管理︰攝影機</string>
+
+	<string name="poi_dispensing_yes">是的</string>
+	<string name="poi_dispensing_no">配藥︰無</string>
+
+	<string name="poi_aerodrome_type_international">國際性的</string>
+	<string name="poi_aerodrome_type_regional">區域性的</string>
+	<string name="poi_aerodrome_type_public">民用</string>
+	<string name="poi_aerodrome_type_military">軍用</string>
+	<string name="poi_aerodrome_type_military_public">軍/民共用</string>
+	<string name="poi_aerodrome_type_private">私人</string>
+
+	<string name="poi_motorcycle_services">服務</string>
+	<string name="poi_motorcycle_type">摩托車類型</string>
+
+<string name="poi_valley_balka">平谷</string>
+
+	<string name="poi_ventilation_shaft">通風井</string>
+
+	<string name="poi_pump_style_modern">泵浦類型︰現代的</string>
+	<string name="poi_pump_style_historic">泵浦類型︰古蹟</string>
+	<string name="poi_pump_status_ok">泵浦狀態︰良好</string>
+	<string name="poi_pump_status_broken">泵浦狀態︰損壞</string>
+	<string name="poi_pump_status_locked">泵浦狀態︰上鎖</string>
+
+	<string name="poi_pumping_station">抽水站</string>
+
+	<string name="poi_generator_output_electricity">輸出功率</string>
+	<string name="poi_generator_output_electricity_yes">輸出︰電力</string>
+	<string name="poi_generator_output_hot_water_yes">輸出︰熱水</string>
+	<string name="poi_generator_output_steam_yes">輸出︰蒸汽</string>
+	<string name="poi_generator_output_hot_air_yes">輸出︰熱空氣</string>
+	<string name="poi_generator_output_cold_water_yes">輸出︰冷水</string>
+	<string name="poi_generator_output_compressed_air_yes">輸出︰壓縮空氣</string>
+	<string name="poi_generator_output_vacuum_yes">輸出︰真空</string>
+	<string name="poi_generator_output_biogas_yes">輸出︰沼氣</string>
+
+	<string name="poi_payment_troika_yes">Troika</string>
+	<string name="poi_payment_troika_no">不接受 Troika 卡</string>
+
+	<string name="poi_telescope">望遠鏡</string>
+	<string name="poi_telescope_type_optical">望遠鏡︰光學</string>
+	<string name="poi_telescope_type_radio">望遠鏡︰無線電</string>
+	<string name="poi_telescope_type_gamma">望遠鏡︰伽瑪</string>
+	<string name="poi_telescope_diameter">直徑</string>
+	<string name="poi_telescope_spectrum">光譜</string>
+	<string name="poi_telescope_usage_education">運用︰教育</string>
+	<string name="poi_telescope_usage_espionage">運用︰刺探</string>
+	<string name="poi_telescope_usage_research">運用︰研究</string>
+
+	<string name="poi_observatory_type_espionage">運用︰刺探</string>
+	<string name="poi_observatory_type_meteorological">氣象</string>
+	<string name="poi_observatory_type_gravitational">引力</string>
+
+	<string name="poi_greenhouse_horticulture">溫室栽培</string>
+
+	<string name="poi_voltage">電壓</string>
+	<string name="poi_display_yes">顯示︰是的</string>
+	<string name="poi_display_no">顯示︰無</string>
+	<string name="poi_display_analog_yes">類比顯示</string>
+	<string name="poi_display_digital_yes">數位顯示</string>
+	<string name="poi_display_sundial_yes">日規</string>
+
+	<string name="poi_barometer_yes">氣壓計</string>
+	<string name="poi_barometer_no">氣壓計︰無</string>
+	<string name="poi_thermometer_yes">溫度計</string>
+	<string name="poi_thermometer_no">溫度計︰無</string>
+	<string name="poi_hygrometer_yes">濕度計</string>
+	<string name="poi_hygrometer_no">濕度計︰無</string>
+	<string name="poi_date_yes">日期顯示</string>
+	<string name="poi_date_no">日期顯示︰無</string>
+
+	<string name="poi_support_pole">支撐︰電線桿</string>
+	<string name="poi_support_wall_mounted">支撐︰牆</string>
+	<string name="poi_support_tree">支撐︰樹</string>
+	<string name="poi_support_pedestal">支撐︰基座</string>
+	<string name="poi_support_ground">支撐︰地面</string>
+	<string name="poi_support_billboard">支撐︰看板</string>
+	<string name="poi_support_ceiling">支撐︰頂棚</string>
+	<string name="poi_support_suspended">支撐︰懸掛</string>
+	<string name="poi_support_roof">支撐︰屋頂</string>
+	<string name="poi_support_tower">支撐︰塔樓</string>
+
+	<string name="poi_mdf">主要配電架</string>
+	<string name="poi_fire_operator">消防員</string>
+
+	<string name="poi_water_tank">水箱</string>
+
+	<string name="poi_toilets_disposal_flush">廁所處理：沖洗</string>
+	<string name="poi_toilets_disposal_pitlatrine">廁所處理：坑廁</string>
+	<string name="poi_toilets_disposal_chemical">廁所處理：化學式</string>
+	<string name="poi_toilets_disposal_bucket">廁所處理：存儲桶</string>
+
+	<string name="poi_length">長度</string>
+
+	<string name="poi_wiki_link">維基百科</string>
+
+	<string name="poi_xmas">聖誕節</string>
+	<string name="poi_xmas_tree">聖誕樹</string>
+	<string name="poi_xmas_market">聖誕市集</string>
+	<string name="poi_xmas_pyramid">聖誕樹</string>
+	<string name="poi_xmas_shop">聖誕商店</string>
+	<string name="poi_xmas_event">聖誕活動</string>
+	<string name="poi_xmas_opening_hours">聖誕節：營業時間</string>
+	<string name="poi_xmas_location">聖誕節：位置</string>
+	<string name="poi_xmas_url">聖誕節：網站</string>
+
+	<string name="poi_public_bookcase">公共書架</string>
+	<string name="poi_cuisine_pizza">披薩</string>
+	<string name="poi_cuisine_burger">漢堡</string>
+	<string name="poi_cuisine_coffee">咖啡</string>
+	<string name="poi_cuisine_sandwich">三明治</string>
+	<string name="poi_cuisine_kebab">中東烤肉</string>
+	<string name="poi_cuisine_doner">土耳其烤肉 (沙威瑪)</string>
+	<string name="poi_cuisine_chicken">雞肉</string>
+	<string name="poi_cuisine_ice_cream">冰淇淋</string>
+	<string name="poi_cuisine_sushi">壽司</string>
+	<string name="poi_cuisine_fish_and_chips">炸魚和薯條</string>
+	<string name="poi_cuisine_seafood">海鮮</string>
+	<string name="poi_cuisine_barbecue">燒烤</string>
+	<string name="poi_cuisine_noodle">麵</string>
+	<string name="poi_cuisine_donut">甜甜圈</string>
+	<string name="poi_cuisine_ramen">拉麵</string>
+	<string name="poi_cuisine_crepe">可麗餅</string>
+	<string name="poi_cuisine_breakfast">早餐</string>
+	<string name="poi_cuisine_beef_bowl">牛丼</string>
+	<string name="poi_cuisine_steak">牛排</string>
+	<string name="poi_cuisine_tapas">西班牙小菜</string>
+	<string name="poi_cuisine_gastropub">餐酒館</string>
+	<string name="poi_cuisine_heuriger">Heuriger</string>
+	<string name="poi_cuisine_curry">咖哩</string>
+	<string name="poi_xmas_shop_christmas_tree">樹商店</string>
+	<string name="poi_xmas_note">聖誕節：註解</string>
+	<string name="poi_cuisine_grill">烤架</string>
+	<string name="poi_cuisine_bagel">貝果</string>
+	<string name="poi_cuisine_pancake">鬆餅</string>
+	<string name="poi_cuisine_pasta">義大利麵</string>
+	<string name="poi_cuisine_fast_food">速食</string>
+	<string name="poi_cuisine_juice">果汁</string>
+	<string name="poi_cuisine_soba">蕎麥麵</string>
+	<string name="poi_cuisine_tea">茶</string>
+	<string name="poi_cuisine_tea_shop">茶飲店</string>
+	<string name="poi_cuisine_soup">湯</string>
+	<string name="poi_cuisine_pie">派</string>
+	<string name="poi_cuisine_hotdog">熱狗</string>
+	<string name="poi_cuisine_deli">熟食店</string>
+	<string name="poi_cuisine_salad">沙拉</string>
+	<string name="poi_cuisine_frozen_yogurt">霜凍優格</string>
+	<string name="poi_cuisine_fried_food">油炸食品</string>
+	<string name="poi_cuisine_fine_dining">好的美食</string>
+	<string name="poi_cuisine_savory_pancakes">鹹味煎餅</string>
+	<string name="poi_cuisine_bistro">小餐館</string>
+	<string name="poi_cuisine_bakery">麵包店</string>
+	<string name="poi_cuisine_couscous">古斯米</string>
+	<string name="poi_cuisine_fried_chicken">炸雞</string>
+	<string name="poi_cuisine_dessert">甜點</string>
+	<string name="poi_cuisine_canteen">食堂</string>
+	<string name="poi_cuisine_tacos">玉米餅</string>
+	<string name="poi_cuisine_piadina">義大利風味餅</string>
+	<string name="poi_cuisine_falafel">中東蔬菜球</string>
+	<string name="poi_cuisine_smoothie">冰沙</string>
+	<string name="poi_cuisine_souvlaki">希臘串烤</string>
+	<string name="poi_cuisine_snack">小吃</string>
+	<string name="poi_cuisine_yogurt">優格</string>
+	<string name="poi_cuisine_gyros">希臘旋轉烤肉</string>
+	<string name="poi_cuisine_empanada">拉丁餡餅</string>
+	<string name="poi_cuisine_crepes">可麗餅</string>
+	<string name="poi_cuisine_yakiniku">烤肉</string>
+	<string name="poi_cuisine_suki">泰式火鍋</string>
+	<string name="poi_cuisine_udon">烏龍麵</string>
+	<string name="poi_cuisine_brasserie">啤酒店</string>
+	<string name="poi_cuisine_bubble_tea">珍珠奶茶</string>
+	<string name="poi_cuisine_yakitori">日式烤雞肉串</string>
+	<string name="poi_cuisine_sagardotegia">蘋果酒</string>
+	<string name="poi_cuisine_meat">肉類食物</string>
+	<string name="poi_cuisine_wings">雞翅膀</string>
+	<string name="poi_cuisine_waffle">格子鬆餅</string>
+	<string name="poi_cuisine_chocolate">巧克力</string>
+	<string name="poi_cuisine_wine">葡萄酒</string>
+	<string name="poi_cuisine_potato">馬鈴薯</string>
+	<string name="poi_cuisine_brunch">早午餐</string>
+	<string name="poi_cuisine_sub">潛艇三明治</string>
+	<string name="poi_cuisine_pita">口袋餅</string>
+	<string name="poi_cuisine_pastel">葡式蛋塔</string>
+	<string name="poi_cuisine_burrito">墨西哥捲餅</string>
+	<string name="poi_cuisine_teriyaki">照燒</string>
+	<string name="poi_cuisine_shawarma">沙威瑪</string>
+
+	<string name="poi_cuisine_regional">區域性的</string>
+	<string name="poi_cuisine_italian">意大利料理</string>
+	<string name="poi_cuisine_chinese">中式料理</string>
+	<string name="poi_cuisine_mexican">墨西哥料理</string>
+	<string name="poi_cuisine_japanese">日本料理</string>
+	<string name="poi_cuisine_german">德國料理</string>
+	<string name="poi_cuisine_indian">印度料理</string>
+	<string name="poi_cuisine_american">美式料理</string>
+	<string name="poi_cuisine_asian">亞洲料理</string>
+	<string name="poi_cuisine_french">法式料理</string>
+	<string name="poi_cuisine_greek">希臘料理</string>
+	<string name="poi_cuisine_thai">泰式料理</string>
+	<string name="poi_cuisine_international">多國式料理</string>
+	<string name="poi_cuisine_turkish">土耳其料理</string>
+	<string name="poi_cuisine_spanish">西班牙料理</string>
+	<string name="poi_cuisine_vietnamese">越南料理</string>
+	<string name="poi_cuisine_korean">韓國料理</string>
+	<string name="poi_cuisine_mediterranean">地中海料理</string>
+	<string name="poi_cuisine_bavarian">巴伐利亞料理</string>
+	<string name="poi_cuisine_lebanese">黎巴嫩料理</string>
+	<string name="poi_cuisine_russian">俄式料理</string>
+	<string name="poi_cuisine_filipino">菲律賓料理</string>
+	<string name="poi_cuisine_portuguese">葡萄牙料理</string>
+	<string name="poi_cuisine_georgian">喬治亞料理</string>
+	<string name="poi_cuisine_polish">波蘭料理</string>
+	<string name="poi_cuisine_brazilian">巴西料理</string>
+	<string name="poi_cuisine_arab">阿拉伯料理</string>
+	<string name="poi_cuisine_danish">丹麥料理</string>
+	<string name="poi_cuisine_indonesian">印尼料理</string>
+	<string name="poi_cuisine_african">非洲料理</string>
+	<string name="poi_cuisine_caribbean">加勒比海料理</string>
+	<string name="poi_cuisine_argentinian">阿根廷料理</string>
+	<string name="poi_cuisine_balkan">巴爾幹料理</string>
+	<string name="poi_cuisine_peruvian">秘魯料理</string>
+	<string name="poi_cuisine_croatian">克羅埃西亞料理</string>
+	<string name="poi_cuisine_bolivian">玻利維亞料理</string>
+	<string name="poi_cuisine_malagasy">馬拉加斯料理</string>
+	<string name="poi_cuisine_persian">波斯料理</string>
+	<string name="poi_cuisine_moroccan">摩洛哥料理</string>
+	<string name="poi_cuisine_austrian">奧地利料理</string>
+	<string name="poi_cuisine_malaysian">馬來西亞料理</string>
+	<string name="poi_cuisine_irish">愛爾蘭料理</string>
+	<string name="poi_cuisine_buschenschank">餐酒吧</string>
+	<string name="poi_cuisine_ethiopian">衣索比亞料理</string>
+	<string name="poi_cuisine_hungarian">匈牙利料理</string>
+	<string name="poi_cuisine_lao">寮國料理</string>
+	<string name="poi_cuisine_european">歐洲料理</string>
+	<string name="poi_cuisine_uzbek">烏玆別克料理</string>
+	<string name="poi_cuisine_czech">捷克料理</string>
+	<string name="poi_cuisine_cuban">古巴料理</string>
+	<string name="poi_cuisine_british">英國料理</string>
+	<string name="poi_cuisine_latin_american">拉丁美洲料理</string>
+	<string name="poi_cuisine_nepalese">尼泊爾料理</string>
+	<string name="poi_cuisine_mongolian">蒙古料理</string>
+	<string name="poi_cuisine_middle_eastern">中東料理</string>
+	<string name="poi_cuisine_ukrainian">烏克蘭料理</string>
+	<string name="poi_cuisine_afghan">阿富汗料理</string>
+	<string name="poi_cuisine_belgian">比利時料理</string>
+	<string name="poi_cuisine_basque">巴斯克料理</string>
+	<string name="poi_cuisine_swiss">瑞士料理</string>
+	<string name="poi_cuisine_cantonese">廣式料理</string>
+	<string name="poi_cuisine_swedish">瑞典料理</string>
+	<string name="poi_cuisine_jamaican">牙買加料理</string>
+	<string name="poi_cuisine_armenian">亞美尼亞料理</string>
+	<string name="poi_cuisine_hawaiian">夏威夷料理</string>
+	<string name="poi_cuisine_pakistani">巴基斯坦料理</string>
+	<string name="poi_cuisine_taiwanese">臺灣料理</string>
+	<string name="poi_cuisine_english">英格蘭料理</string>
+	<string name="poi_cuisine_tex_mex">德-墨料理</string>
+	<string name="poi_cuisine_dutch">荷蘭料理</string>
+	<string name="poi_cuisine_syrian">敘利亞料理</string>
+	<string name="poi_cuisine_australian">澳洲料理</string>
+	<string name="poi_cuisine_cajun">卡郡料理</string>
+	<string name="poi_cuisine_egyptian">埃及料理</string>
+	<string name="poi_cuisine_senegalese">塞內加爾料理</string>
+	<string name="poi_cuisine_jewish">猶太料理</string>
+	<string name="poi_cuisine_bulgarian">保加利亞料理</string>
+	<string name="poi_cuisine_tibetan">西藏料理</string>
+
+	<string name="poi_party">派對用品</string>
+	<string name="poi_electrical">電器產品店</string>
+	<string name="poi_locksmith">鎖匠店</string>
+	<string name="poi_lighting">照明燈具</string>
+	<string name="poi_lottery">樂透彩票</string>
+	<string name="poi_gambling">賭博場地</string>
+
+	<string name="poi_gambling_lottery">樂透</string>
+	<string name="poi_gambling_pachinko">小鋼珠</string>
+	<string name="poi_gambling_slot_machines">吃角子老虎</string>
+	<string name="poi_gambling_betting">投注</string>
+	<string name="poi_gambling_bingo">賓果</string>
+
+	<string name="poi_locomotive">鐵路機車</string>
+
+	<string name="poi_nutrition_supplements">營養補充品</string>
+	<string name="poi_photo_studio">照相館</string>
+
+	<string name="poi_animal_keeping">動物飼養</string>
+	<string name="poi_animal_keeping_horse">動物飼養：馬</string>
+	<string name="poi_animal_keeping_sheep">動物飼養：羊</string>
+	<string name="poi_tower_construction_lattice">施工：格構式</string>
+	<string name="poi_motorcycle_type_offroad">越野</string>
+	<string name="poi_motorcycle_type_dualsport">Dualsport</string>
 	</resources>

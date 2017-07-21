@@ -28,6 +28,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -47,6 +48,7 @@ import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
@@ -107,6 +109,7 @@ import net.osmand.plus.views.OsmAndMapLayersView;
 import net.osmand.plus.views.OsmAndMapSurfaceView;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.RulerControlLayer;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
@@ -119,6 +122,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -842,6 +846,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					mapContextMenu.showMinimized(latLonToShow, mapLabelToShow, toShow);
 					mapLayers.getMapControlsLayer().getMapRouteInfoMenu().updateMenu();
 					MapRouteInfoMenu.showLocationOnMap(this, latLonToShow.getLatitude(), latLonToShow.getLongitude());
+				} else if (toShow instanceof QuadRect) {
+					QuadRect qr = (QuadRect) toShow;
+					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
 				} else {
 					mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
 				}
@@ -1089,6 +1096,48 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode==KeyEvent.KEYCODE_BUTTON_X){
+			RoutingHelper rh = getRoutingHelper();
+			if(rh!=null){
+				rh.setManualMaxSpeed(50/3.6f);
+			}
+		}
+		if(keyCode==KeyEvent.KEYCODE_BUTTON_Y){
+			RoutingHelper rh = getRoutingHelper();
+			if(rh!=null){
+				rh.changeManualMaxSpeed(10/3.6f);
+			}
+		}
+		if(keyCode==KeyEvent.KEYCODE_BUTTON_A){
+			RoutingHelper rh = getRoutingHelper();
+			if(rh!=null){
+				rh.changeManualMaxSpeed(-10/3.6f);
+			}
+		}
+		if(keyCode==KeyEvent.KEYCODE_BUTTON_B){
+			RoutingHelper rh = getRoutingHelper();
+			if(rh!=null){
+				rh.setManualMaxSpeed(80/3.6f);
+			}
+		}
+		if(keyCode==KeyEvent.KEYCODE_BUTTON_START){
+			RoutingHelper rh = getRoutingHelper();
+			if(rh!=null){
+				rh.setManualMaxSpeed(0);
+			}
+		}
+		if(keyCode==KeyEvent.KEYCODE_BUTTON_SELECT){
+			RoutingHelper rh = getRoutingHelper();
+			if(rh!=null){
+				rh.changeManualMaxSpeed(0);
+			}
+		}
+
+		if(((event.getDevice().getSources() & InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD)
+				|| ((event.getDevice().getSources() & InputDevice.SOURCE_JOYSTICK)
+				== InputDevice.SOURCE_JOYSTICK)&&(keyCode==KeyEvent.KEYCODE_SPACE || keyCode==KeyEvent.KEYCODE_DEL||keyCode == KeyEvent.KEYCODE_BACK)){
+			return true;
+		}
 		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER && app.accessibilityEnabled()) {
 			if (!uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
 				Message msg = Message.obtain(uiHandler, new Runnable() {
@@ -1445,7 +1494,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			OsmandPlugin.onMapActivityScreenOff(MapActivity.this);
+			try {
+				OsmandPlugin.onMapActivityScreenOff(MapActivity.this);
+			}catch(Exception e){
+				LOG.error(e);
+			}
 		}
 
 	}
