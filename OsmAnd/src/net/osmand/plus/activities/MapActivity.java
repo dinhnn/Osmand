@@ -1211,6 +1211,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}.execute((Void) null);
 
 	}
+	private boolean hud = false;
+	@Override
+	public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK){
+			hud = !hud;
+			drawerLayout.setScaleY(hud?-1:1);
+			return true;
+		}
+		return super.onKeyLongPress(keyCode,event);
+	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
