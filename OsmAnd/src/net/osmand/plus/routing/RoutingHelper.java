@@ -723,7 +723,7 @@ public class RoutingHelper {
 		}
 		return i;
 	}
-<<<<<<< HEAD
+
 	private float manualMaxSpeed;
 	private float currentSpeed;
 
@@ -747,9 +747,9 @@ public class RoutingHelper {
 			manualMaxSpeed = speed;
 		}
 	}
-=======
 
->>>>>>> 2b0f264851ddde71b8d25bbc080b14c1b4262b8b
+
+
 	public synchronized float getCurrentMaxSpeed() {
 		if(manualMaxSpeed>0)return manualMaxSpeed;
 		return route.getCurrentMaxSpeed();
