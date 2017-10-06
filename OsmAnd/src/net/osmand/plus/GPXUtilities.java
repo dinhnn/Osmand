@@ -39,6 +39,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -745,7 +746,7 @@ public class GPXUtilities {
 	public static class GPXFile extends GPXExtensions {
 		public String author;
 		public List<Track> tracks = new ArrayList<>();
-		public List<WptPt> points = new ArrayList<>();
+		private List<WptPt> points = new ArrayList<>();
 		public List<Route> routes = new ArrayList<>();
 
 		public String warning = null;
@@ -755,6 +756,37 @@ public class GPXUtilities {
 
 		private Track generalTrack;
 		private TrkSegment generalSegment;
+
+		public List<WptPt> getPoints() {
+			return Collections.unmodifiableList(points);
+		}
+
+		public boolean isPointsEmpty() {
+			return points.isEmpty();
+		}
+
+		int getPointsSize() {
+			return points.size();
+		}
+
+		boolean containsPoint(WptPt point) {
+			return points.contains(point);
+		}
+
+		void clearPoints() {
+			points.clear();
+			modifiedTime = System.currentTimeMillis();
+		}
+
+		public void addPoint(WptPt point) {
+			points.add(point);
+			modifiedTime = System.currentTimeMillis();
+		}
+
+		void addPoints(Collection<? extends WptPt> collection) {
+			points.addAll(collection);
+			modifiedTime = System.currentTimeMillis();
+		}
 
 		public boolean isCloudmadeRouteFile() {
 			return "cloudmade".equalsIgnoreCase(author);
@@ -980,7 +1012,6 @@ public class GPXUtilities {
 		}
 
 		private void removeGeneralTrackIfExists() {
-			Track generalTrack = getGeneralTrack();
 			if (generalTrack != null) {
 				tracks.remove(generalTrack);
 				this.generalTrack = null;
@@ -1170,20 +1201,22 @@ public class GPXUtilities {
 					"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
 
 			for (Track track : file.tracks) {
-				serializer.startTag(null, "trk"); //$NON-NLS-1$
-				writeNotNullText(serializer, "name", track.name);
-				writeNotNullText(serializer, "desc", track.desc);
-				for (TrkSegment segment : track.segments) {
-					serializer.startTag(null, "trkseg"); //$NON-NLS-1$
-					for (WptPt p : segment.points) {
-						serializer.startTag(null, "trkpt"); //$NON-NLS-1$
-						writeWpt(format, serializer, p);
-						serializer.endTag(null, "trkpt"); //$NON-NLS-1$
+				if (!track.generalTrack) {
+					serializer.startTag(null, "trk"); //$NON-NLS-1$
+					writeNotNullText(serializer, "name", track.name);
+					writeNotNullText(serializer, "desc", track.desc);
+					for (TrkSegment segment : track.segments) {
+						serializer.startTag(null, "trkseg"); //$NON-NLS-1$
+						for (WptPt p : segment.points) {
+							serializer.startTag(null, "trkpt"); //$NON-NLS-1$
+							writeWpt(format, serializer, p);
+							serializer.endTag(null, "trkpt"); //$NON-NLS-1$
+						}
+						serializer.endTag(null, "trkseg"); //$NON-NLS-1$
 					}
-					serializer.endTag(null, "trkseg"); //$NON-NLS-1$
+					writeExtensions(serializer, track);
+					serializer.endTag(null, "trk"); //$NON-NLS-1$
 				}
-				writeExtensions(serializer, track);
-				serializer.endTag(null, "trk"); //$NON-NLS-1$
 			}
 
 			for (Route track : file.routes) {

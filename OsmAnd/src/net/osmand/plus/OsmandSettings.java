@@ -713,6 +713,9 @@ public class OsmandSettings {
 
 	public final CommonPreference<RulerMode> RULER_MODE = new EnumIntPreference<>("ruler_mode", RulerMode.FIRST, RulerMode.values()).makeGlobal();
 
+	public final CommonPreference<Boolean> SHOW_LINES_TO_FIRST_MARKERS = new BooleanPreference("show_lines_to_first_markers", false).makeGlobal();
+	public final CommonPreference<Boolean> SHOW_ARROWS_TO_FIRST_MARKERS = new BooleanPreference("show_arrows_to_first_markers", false).makeGlobal();
+
 	public final CommonPreference<Boolean> USE_MAPILLARY_FILTER = new BooleanPreference("use_mapillary_filters", false).makeGlobal();
 	public final CommonPreference<String> MAPILLARY_FILTER_USER_KEY = new StringPreference("mapillary_filter_user_key", "").makeGlobal();
 	public final CommonPreference<String> MAPILLARY_FILTER_USERNAME = new StringPreference("mapillary_filter_username", "").makeGlobal();
@@ -854,6 +857,9 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Float> SPEED_LIMIT_EXCEED =
 			new FloatPreference("speed_limit_exceed", 5f).makeProfile();
+
+	public final OsmandPreference<Float> SWITCH_MAP_DIRECTION_TO_COMPASS =
+			new FloatPreference("speed_for_map_to_direction_of_movement", 0f).makeProfile();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_TRACKBALL_FOR_MOVEMENTS =
@@ -1316,6 +1322,9 @@ public class OsmandSettings {
 
 	public final CommonPreference<MapMarkersMode> MAP_MARKERS_MODE =
 			new EnumIntPreference<>("map_markers_mode", MapMarkersMode.TOOLBAR, MapMarkersMode.values());
+
+	public final CommonPreference<MapMarkersOrderByMode> MAP_MARKERS_ORDER_BY_MODE =
+			new EnumIntPreference<>("map_markers_order_by_mode", MapMarkersOrderByMode.DATE_ADDED_DESC, MapMarkersOrderByMode.values());
 
 	{
 		MAP_MARKERS_MODE.makeProfile().cache();
@@ -2962,7 +2971,7 @@ public class OsmandSettings {
 		return customBooleanRoutingProps.get(attrName);
 	}
 
-	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_ROUTING = new BooleanPreference("enable_osmc_routing", false).makeGlobal();
+	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_ROUTING = new BooleanPreference("enable_osmc_routing", true).makeGlobal();
 	
 	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference("voice_mute", false).makeGlobal();
 
@@ -3145,6 +3154,39 @@ public class OsmandSettings {
 
 		public String toHumanString(Context ctx) {
 			return ctx.getString(key);
+		}
+	}
+
+	public enum MapMarkersOrderByMode {
+		CUSTOM,
+		DISTANCE_DESC,
+		DISTANCE_ASC,
+		NAME,
+		DATE_ADDED_DESC,
+		DATE_ADDED_ASC;
+
+		public boolean isCustom() {
+			return this == CUSTOM;
+		}
+
+		public boolean isDistanceDescending() {
+			return this == DISTANCE_DESC;
+		}
+
+		public boolean isDistanceAscending() {
+			return this == DISTANCE_ASC;
+		}
+
+		public boolean isName() {
+			return this == NAME;
+		}
+
+		public boolean isDateAddedDescending() {
+			return this == DATE_ADDED_DESC;
+		}
+
+		public boolean isDateAddedAscending() {
+			return this == DATE_ADDED_ASC;
 		}
 	}
 

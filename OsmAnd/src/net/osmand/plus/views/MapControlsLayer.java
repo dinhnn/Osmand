@@ -725,11 +725,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
 		boolean routeDialogOpened = MapRouteInfoMenu.isVisible();
 		boolean trackDialogOpened = TrackDetailsMenu.isVisible();
+		boolean contextMenuOpened = mapActivity.getContextMenu().isVisible();
 		boolean showRouteCalculationControls = routePlanningMode ||
 				((app.accessibilityEnabled() || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS)) && routeFollowingMode);
-		updateMyLocation(rh, routeDialogOpened || trackDialogOpened);
+		updateMyLocation(rh, routeDialogOpened || trackDialogOpened || contextMenuOpened);
 		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode)
-				&& !isInMovingMarkerMode() && !isInGpxDetailsMode() && !isInMeasurementToolMode();
+				&& !isInMovingMarkerMode() && !isInGpxDetailsMode() && !isInMeasurementToolMode() && !isInPlanRouteMode() && !contextMenuOpened;
 		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
 		if (rh.isFollowingMode()) {
 			routePlanningBtn.setIconResId(R.drawable.map_start_navigation);
@@ -744,16 +745,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 		routePlanningBtn.updateVisibility(showButtons);
 		menuControl.updateVisibility(showButtons);
 
-		mapZoomIn.updateVisibility(!routeDialogOpened);
-		mapZoomOut.updateVisibility(!routeDialogOpened);
-		compassHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && shouldShowCompass() &&
-				!isInMeasurementToolMode());
+		mapZoomIn.updateVisibility(!routeDialogOpened && !contextMenuOpened);
+		mapZoomOut.updateVisibility(!routeDialogOpened && !contextMenuOpened);
+		compassHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && shouldShowCompass()
+				&& !isInMeasurementToolMode() && !isInPlanRouteMode() && !contextMenuOpened);
 
 		if (layersHud.setIconResId(settings.getApplicationMode().getMapIconId())) {
 			layersHud.update(app, isNight);
 		}
-		layersHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && !isInMeasurementToolMode());
-		quickSearchHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && !isInMeasurementToolMode());
+		layersHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && !isInMeasurementToolMode() && !isInPlanRouteMode() && !contextMenuOpened);
+		quickSearchHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && !isInMeasurementToolMode() && !isInPlanRouteMode() && !contextMenuOpened);
 
 		if (!routePlanningMode && !routeFollowingMode) {
 			if (mapView.isZooming()) {
@@ -814,7 +815,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void updateMyLocation(RoutingHelper rh, boolean dialogOpened) {
 		Location lastKnownLocation = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
-		boolean enabled = lastKnownLocation != null && !isLocationOutdated(lastKnownLocation);
+		boolean enabled = lastKnownLocation != null;
 		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
 
 		if (!enabled) {
@@ -1147,6 +1148,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private boolean isInMeasurementToolMode() {
 		return mapActivity.getMapLayers().getMeasurementToolLayer().isInMeasurementMode();
+	}
+
+	private boolean isInPlanRouteMode() {
+		return mapActivity.getMapLayers().getMapMarkersLayer().isInPlanRouteMode();
 	}
 
 	public static View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {

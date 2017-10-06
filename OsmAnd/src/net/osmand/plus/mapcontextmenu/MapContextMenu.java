@@ -50,6 +50,7 @@ import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.lang.ref.WeakReference;
@@ -367,6 +368,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				fragmentRef.get().centerMarkerLocation();
 			}
 		}
+		updateWidgetsVisibility(false);
 	}
 
 	public void show(@NonNull LatLon latLon,
@@ -387,6 +389,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 		centerMarker = false;
 		autoHide = false;
+		updateWidgetsVisibility(false);
 	}
 
 	public void update(LatLon latLon, PointDescription pointDescription, Object object) {
@@ -445,6 +448,15 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (fragmentRef != null) {
 			fragmentRef.get().dismissMenu();
 		}
+		updateWidgetsVisibility(true);
+	}
+
+	private void updateWidgetsVisibility(boolean visible) {
+		int visibility = visible ? View.VISIBLE : View.GONE;
+		mapActivity.findViewById(R.id.map_center_info).setVisibility(visibility);
+		mapActivity.findViewById(R.id.map_left_widgets_panel).setVisibility(visibility);
+		mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
+		mapActivity.refreshMap();
 	}
 
 	// timeout in msec
@@ -637,15 +649,15 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 
 		if (searchDoneAction != null) {
-				if (searchDoneAction.dlg != null) {
-					try {
-						searchDoneAction.dlg.dismiss();
-					} catch (Exception e) {
-						// ignore
-					} finally {
-						searchDoneAction.dlg = null;
-					}
+			if (searchDoneAction.dlg != null) {
+				try {
+					searchDoneAction.dlg.dismiss();
+				} catch (Exception e) {
+					// ignore
+				} finally {
+					searchDoneAction.dlg = null;
 				}
+			}
 			searchDoneAction.run();
 			searchDoneAction = null;
 		}
@@ -702,7 +714,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS);
 			} else {
 				mapActivity.getMapActions().addMapMarker(latLon.getLatitude(), latLon.getLongitude(),
-						getPointDescriptionForTarget());
+						getPointDescriptionForMarker());
 			}
 		} else {
 			mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),
@@ -710,7 +722,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 		close();
 	}
-
 
 
 	public void buttonFavoritePressed() {
@@ -814,7 +825,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void addWptPt(LatLon latLon, String  title, String categoryName, int categoryColor, boolean skipDialog){
+	public void addWptPt(LatLon latLon, String title, String categoryName, int categoryColor, boolean skipDialog) {
 
 		final List<SelectedGpxFile> list
 				= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
@@ -832,7 +843,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public AlertDialog addNewWptToGPXFile(final LatLon latLon, final String  title,
+	public AlertDialog addNewWptToGPXFile(final LatLon latLon, final String title,
 										  final String categoryName,
 										  final int categoryColor, final boolean skipDialog) {
 		CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
@@ -876,6 +887,15 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			return new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
 		} else {
 			return pointDescription;
+		}
+	}
+
+	public PointDescription getPointDescriptionForMarker() {
+		PointDescription pd = getPointDescriptionForTarget();
+		if (Algorithms.isEmpty(pd.getName()) && !nameStr.equals(PointDescription.getAddressNotFoundStr(mapActivity))) {
+			return new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, nameStr);
+		} else {
+			return pd;
 		}
 	}
 

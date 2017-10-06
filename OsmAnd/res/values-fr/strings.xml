@@ -50,7 +50,7 @@
 
 
     <string name="routing_settings">Navigation</string>
-    <string name="routing_settings_descr">Configurer les options de navigation</string>
+    <string name="routing_settings_descr">Paramétrer les options de navigation</string>
     <string name="global_settings">Paramètres globaux</string>
     <string name="index_settings">Gérer les données hors-ligne</string>
     <string name="index_settings_descr">Obtenir ou mettre à jour les données pour l\'utilisation hors-ligne</string>
@@ -76,7 +76,7 @@
     <string name="native_library_not_supported">Rendu natif non supporté sur cet appareil.</string>
     <string name="init_native_library">Chargement …</string>
     <string name="choose_auto_follow_route">Centrer automatiquement la carte</string>
-    <string name="choose_auto_follow_route_descr">Temps avant que la carte se recentre sur la position actuelle</string>
+    <string name="choose_auto_follow_route_descr">Délai avant de centrer la carte sur la position actuelle</string>
     
     <string name="auto_follow_route_navigation">Recentrage automatique navigation</string>
     <string name="auto_follow_route_navigation_descr">Recentrage automatique uniquement pendant la navigation.</string>
@@ -313,8 +313,8 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="shared_string_select_all">Sélectionner tout</string>
     <string name="shared_string_refresh">Recharger</string>
     <string name="fast_route_mode">Itinéraire le plus rapide</string>
-    <string name="fast_route_mode_descr">Activer pour calculer l\'itinéraire le plus rapide ou désactiver pour calculer l\'itinéraire le plus économe en carburant</string>
-    <string name="tiles_to_download_estimated_size">Le zoom {0} télécharge {1} carreaux ({2} Mb )</string>
+    <string name="fast_route_mode_descr">Activer pour calculer l\'itinéraire le plus rapide ou Désactiver pour calculer l\'itinéraire le plus économe en carburant</string>
+    <string name="tiles_to_download_estimated_size">Le zoom {0} télécharge {1} tuiles ({2} Mb)</string>
     <string name="shared_string_download_map">Télécharger la carte</string>
     <string name="select_max_zoom_preload_area">Sélectionnez le zoom maximum pour précharger la zone visible</string>
     <string name="maps_could_not_be_downloaded">Impossible de télécharger cette carte</string>
@@ -540,7 +540,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="data_settings">Données</string>
 
     <string name="osm_settings">Contribuer à OSM</string>
-    <string name="auto_zoom_map_descr">Zoom automatique sur la carte en fonction de la vitesse</string>
+    <string name="auto_zoom_map_descr">Zoom de la carte adapté à la vitesse (lorsque que votre position figure sur la carte)</string>
     <string name="auto_zoom_map">Zoom automatique de la carte</string>
     <string name="additional_settings">Paramètres supplémentaires</string>
     <string name="shared_string_settings">Paramètres</string>
@@ -881,9 +881,9 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="avoid_unpaved">Éviter les voies non revêtues</string>
     <string name="avoid_ferries">Éviter les ferries</string>
     <string name="avoid_in_routing_title">Éviter</string>
-    <string name="avoid_in_routing_descr">Éviter péages, voies non revêtues, ferries, autoroutes</string>
+    <string name="avoid_in_routing_descr">Éviter les routes à péage, les voies non revêtues, les ferries</string>
     <string name="show_warnings_title">Annonces visuelles…</string>
-    <string name="show_warnings_descr">Afficher les avertissements (limitations de vitesse, stops, ralentisseurs, radars), les voies de circulation</string>
+    <string name="show_warnings_descr">Paramétrer les avertissements de circulation (limites de vitesse, stops, ralentisseurs), les radars et les informations sur les voies de circulation</string>
     <string name="map_widget_fluorescent">Itinéraires fluorescents</string>
     <string name="map_widget_show_ruler">Échelle</string>
 
@@ -907,7 +907,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="osmand_short_description_80_chars">OsmAnd est un logiciel libre de navigation pouvant fonctionner avec des cartes hors-ligne ou en ligne.</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd est un logiciel libre de navigation pouvant fonctionner avec des cartes hors-ligne ou en ligne</string>
 
-    <string name="snap_to_road_descr">Déplacer la position sur la route pendant la navigation</string>
+    <string name="snap_to_road_descr">Déplacer la position sur la route en cours de navigation</string>
     <string name="snap_to_road">Déplacer sur la route</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) OsmAnd est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors-ligne. OsmAnd permet également le routage en ligne et hors-ligne avec des instructions vocales pas à pas. Fonctionnalités principales : - Fonctionne complètement hors-ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans le périphérique de stockage) - Cartes hors-lignes compactes disponibles pour le monde entier - Téléchargement des cartes pour un pays ou une région directement depuis l\'application - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt (PI), des favoris, des courbes de niveau, les arrêts de transport public, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors-ligne d\'adresses et de lieux (PI) - Navigation hors-ligne pour distances moyennes - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap) Limitations de la version gratuite de OsmAnd : - Nombre de téléchargement de cartes limité - Pas d\'accès aux points d\'intérêt Wikipédia hors-ligne. OsmAnd est activement développé et notre projet et ses progrès futurs dépendent des contributions financières pour financer le développement et le test de nouvelles fonctionnalités. Veuillez considérer l\'achat d\'OsmAnd+, le financement d\'une fonctionnalité spécifique ou une donation sur osmand.net.</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OpenStreetMap Automated Navigation and Directions) est un logiciel open source de navigation basé sur les données cartographiques d\'OpenStreetMap. Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées sur l\'appareil pour un usage hors-ligne. En plus de la consultation des cartes, OsmAnd permet la navigation grâce à des instructions détaillées à l\'écran et à un guidage vocal.
@@ -1136,7 +1136,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="intermediate_items_sort_by_distance">Optimiser</string>
     <string name="please_select_address">Sélectionnez d\'abord une ville ou une rue</string>
     <string name="context_menu_item_destination_point">Définir comme destination</string>
-    <string name="speak_street_names">Noms de rues (TTS)</string>
+    <string name="speak_street_names">Noms des rues (TTS)</string>
     <string name="about_version">Version :</string>
     <string name="driving_region_japan">Japon</string>
     <string name="driving_region_us">États-Unis d\'Amérique</string>
@@ -1161,7 +1161,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="driving_region_uk">Royaume-Uni, Inde et équivalents</string>
 
 
-    <string name="speak_title">Annonces vocale</string>
+    <string name="speak_title">Annonce…</string>
     <string name="speak_cameras">Radars</string>
     <string name="speak_traffic_warnings">Alertes de trafic</string>
     <string name="osb_author_or_password_not_specified">Merci de spécifier votre nom d\'utilisateur et mot de passe OSM dans les paramètres</string>
@@ -1173,7 +1173,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="edit_tilesource_choose_existing">Sélectionner existant…</string>
     <string name="maps_define_edit">Définir/Éditer…</string>
     <string name="announce_gpx_waypoints">Points de passage GPX</string>
-    <string name="speak_descr">Annoncer les noms de rue, les avertissements (stops, ralentisseurs, radars), les limitations de vitesse</string>
+    <string name="speak_descr">Annoncer les noms de rue, les avertissements (stops, ralentisseurs, radars), les limites de vitesse</string>
     <string name="new_directions_point_dialog">Vous avez déjà défini des étapes intermédiaires.</string>
     <string name="context_menu_item_directions_to">Itinéraire vers</string>
     <string name="context_menu_item_directions_from">Itinéraire depuis</string>
@@ -1205,7 +1205,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="shared_string_and">et</string>
     <string name="shared_string_or">ou</string>
     
-    <string name="auto_zoom_none">Pas de zoom automatique</string>
+    <string name="auto_zoom_none">Aucun zoom automatique</string>
     <string name="auto_zoom_close">Pour agrandir</string>
     <string name="auto_zoom_far">Modéré</string>
     <string name="auto_zoom_farthest">Éloigné</string>
@@ -1573,8 +1573,8 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="waypoints">Itinéraire</string>
     <string name="targets">Itinéraire</string>
     <string name="way_alarms">Alertes de circulation</string>
-    <string name="speak_favorites">Favoris proches</string>
-    <string name="speak_poi">Points d\'intérêt proches</string>
+    <string name="speak_favorites">Favoris à proximité</string>
+    <string name="speak_poi">Points d\'intérêt à proximité</string>
     <string name="shared_string_all">Tout</string>
     <string name="index_tours">Tours</string>
     <string name="record_plugin_description">Ce greffon permet d\'enregistrer vos itinéraires dans un fichier au format GPX : soit automatiquement soit manuellement grâce à un bouton supplémentaire affiché sur la carte.
@@ -2228,7 +2228,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="show_transparency_seekbar">Afficher la barre de recherche transparente</string>
     <string name="recalculate_route">Recalculer l\'itinéraire</string>
     <string name="storage_directory_shared">Mémoire partagée</string>
-    <string name="shared_string_topbar">Menu supérieur</string>
+    <string name="shared_string_topbar">Barre supérieure</string>
     <string name="osm_live_ask_for_purchase">Au préalable achetez un abonnement à OSM Live</string>
 
     <string name="osm_live_region_desc">Une partie de vos dons seront distribués aux utilisateurs OSM ayant soumis des mises à jour dans cette région</string>
@@ -2877,7 +2877,7 @@ représentant la zone : %1$s x %2$s</string>
 \n• Vous pouvez charger et suivre une trace GPX existante; enregistrer et partager un nouvel itinéraire GPX</string>
     <string name="move_all_to_history">Déplacer tout dans l\'historique</string>
     <string name="build_route">Calculer l\'itinéraire</string>
-    <string name="show_direction">Afficher les indications de direction</string>
+    <string name="show_direction">Indication de distance</string>
     <string name="sort_by">Trier par</string>
     <string name="marker_options">Options de la marque</string>
     <string name="osmand_extended_description_part8">OsmAnd est un projet open source très actif. Tout le monde peut contribuer à l\'application en signalant des bugs, en améliorant les traductions ou en développant de nouvelles fonctionnalités. Les nombreux échanges entre développeurs et utilisateurs permettent d\'améliorer régulièrement OsmAnd et les contributions financières permettent de développer de nouvelles fonctionnalités.
@@ -2916,4 +2916,47 @@ représentant la zone : %1$s x %2$s</string>
 \n• Téléchargements gratuits illimités, directement à partir de l\'application
 \n• Cartes vectorielles compactes et mises à jour au moins une fois par mois
 \n• Sélection entre les données régionales complètes ou le réseau routier uniquement (par exemple: 700 Mo pour la carte intégrale du Japon et 200 Mo uniquement pour la carte du réseau routier japonnais).</string>
+    <string name="today">Aujourd\'hui</string>
+    <string name="yesterday">Hier</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Pilotage de l\'orientation de la carte</string>
+    <string name="all_markers_moved_to_history">Toutes les marques ont été déplacées vers l\'Historique</string>
+    <string name="marker_moved_to_history">Marque déplacée vers l\'Historique</string>
+    <string name="shared_string_list">Liste</string>
+    <string name="shared_string_groups">Groupes</string>
+    <string name="last_seven_days">Ces 7 derniers jours</string>
+    <string name="this_year">Cette année</string>
+    <string name="make_active">Marquer comme actif</string>
+    <string name="top_bar">Barre supérieure</string>
+    <string name="remove_from_map_markers">Supprimer des marques</string>
+    <string name="descendingly">Ordre décroissant</string>
+    <string name="ascendingly">Ordre croissant</string>
+    <string name="date_added">Date ajoutée</string>
+    <string name="order_by">Trier par :</string>
+    <string name="marker_show_distance_descr">Sélectionnez comment indiquer sur la carte la distance et la direction des marques :</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Indiquez ci-dessous à quelle vitesse l\'orientation de la carte doit basculer de \'Sens du déplacement\' à \'Boussole\'</string>
+    <string name="passed">Date de dernière utilisation : %1$s</string>
+    <string name="show_guide_line">Afficher les lignes de guidage</string>
+    <string name="show_arrows_on_the_map">Afficher les flèches sur la carte</string>
+    <string name="show_passed">Afficher Date de dernière utilisation</string>
+    <string name="hide_passed">Masquer Date de dernière utilisation</string>
+    <string name="marker_moved_to_active">Marque activée</string>
+    <string name="use_location">Utiliser ma position</string>
+    <string name="add_location_as_first_point_descr">Ajouter ma position comme point de départ.</string>
+    <string name="my_location">Ma position</string>
+    <string name="shared_string_finish">Terminer</string>
+    <string name="plan_route">Itinéraire planifié</string>
+    <string name="shared_string_sort">Trier</string>
+    <string name="coordinate_input">Saisie des coordonnées</string>
+    <string name="is_saved">a été enregistré</string>
+    <string name="marker_save_as_track_descr">Exporte vos marques dans un fichier portant le nom :</string>
+    <string name="marker_save_as_track">Enregistrer comme trace</string>
+    <string name="move_to_history">Déplacer vers l\'historique</string>
+    <string name="group_will_be_removed_after_restart">Le groupe sera supprimé au prochain démarrage</string>
+    <string name="shared_string_markers">Marques</string>
+    <string name="coordinates_format">Format des coordonnées</string>
+    <string name="use_system_keyboard">Utiliser le clavier système</string>
+    <string name="fast_coordinates_input_descr">Définissez le format des coordonnées (ce format est modifiable plus tard dans Options).</string>
+    <string name="fast_coordinates_input">Saisie rapide des coordonnées</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Éviter les routes sur glace, les fjords</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Éviter les routes sur glace et les fjords</string>
     </resources>

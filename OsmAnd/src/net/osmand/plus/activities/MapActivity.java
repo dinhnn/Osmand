@@ -60,6 +60,7 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
@@ -98,6 +99,8 @@ import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
+import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
+import net.osmand.plus.mapmarkers.PlanRouteFragment;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
@@ -505,6 +508,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (prevActivityIntent == null) {
 				return;
 			}
+		}
+		if (getPlanRouteFragment() != null) {
+			if (getPlanRouteFragment().quit(true)) {
+				MapMarkersDialogFragment.showInstance(this);
+			}
+			return;
 		}
 		if (getMeasurementToolFragment() != null) {
 			getMeasurementToolFragment().quit(true);
@@ -1775,6 +1784,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public QuickSearchDialogFragment getQuickSearchDialogFragment() {
 		Fragment fragment = getSupportFragmentManager().findFragmentByTag(QuickSearchDialogFragment.TAG);
 		return fragment!= null && !fragment.isDetached() && !fragment.isRemoving() ? (QuickSearchDialogFragment) fragment : null;
+	}
+
+	public PlanRouteFragment getPlanRouteFragment() {
+		Fragment fragment = getSupportFragmentManager().findFragmentByTag(PlanRouteFragment.TAG);
+		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (PlanRouteFragment) fragment : null;
 	}
 
 	public MeasurementToolFragment getMeasurementToolFragment() {

@@ -471,7 +471,7 @@
 	<string name="poi_fountain">Fuente</string>
 	<string name="poi_historic_ruins">Ruinas históricas</string>
 	<string name="poi_rune_stone">Piedra rúnica</string>
-	<string name="poi_wreck">Naufragio</string>
+	<string name="poi_wreck">Pecio/naufragio</string>
 	<string name="poi_historic_ship">Barco histórico</string>
 	<string name="poi_historic_mine">Mina histórica</string>
 	<string name="poi_monument">Monumento</string>
@@ -697,7 +697,7 @@
 	<string name="poi_amenity_atm">Cajero automático</string>
 	<string name="poi_payment_terminal">Terminal de pago</string>
 	<string name="poi_money_lender">Prestamista</string>
-	<string name="poi_pawnbroker">Prestamista (empeños)</string>
+	<string name="poi_pawnbroker">Casa de empeños</string>
 	<string name="poi_bureau_de_change">Casa de cambio</string>
 	<string name="poi_accountant">Contador</string>
 	<string name="poi_bitcoin_yes">Pago de Bitcoin</string>
@@ -1295,9 +1295,9 @@
 	<string name="poi_covered_yes">Sí</string>
 	<string name="poi_covered_no">Al descubierto</string>
 
-	<string name="poi_smoking_no">Prohibido</string>
+	<string name="poi_smoking_no">No</string>
 	<string name="poi_smoking_outside">Sólo afuera</string>
-	<string name="poi_smoking_yes">Permitido</string>
+	<string name="poi_smoking_yes">Sí</string>
 	<string name="poi_smoking_separated">En sala separada</string>
 	<string name="poi_smoking_isolated">En sala aislada</string>
 	<string name="poi_smoking_dedicated">Sólo fumadores</string>
@@ -3121,7 +3121,7 @@
 	<string name="poi_piste_grooming">Estado de la pista</string>
 	<string name="poi_theatre_genre">Género</string>
 	<string name="poi_outdoor_seating">Asientos exteriores</string>
-	<string name="poi_smoking">Permiso para fumar</string>
+	<string name="poi_smoking">Permitido fumar</string>
 	<string name="poi_delivery">Servicio a domicilio</string>
 	<string name="poi_drive_in">Conducir por dentro</string>
 	<string name="poi_drive_through">Servicio en el automóvil</string>
@@ -3532,5 +3532,21 @@
 	<string name="poi_boat_canoe_rental_rental_no">Canoas: No</string>
 
 <string name="poi_network">Red</string>
+
+<string name="poi_government_archive">Archivos gubernamentales</string>
+	<string name="poi_government_ministry">Ministerio</string>
+	<string name="poi_government_public_service">Servicio público</string>
+	<string name="poi_government_social_security">Seguridad social</string>
+	<string name="poi_government_social_services">Servicios sociales</string>
+	<string name="poi_government_treasury">Hacienda pública</string>
+	<string name="poi_government_transportation">Institución de transporte</string>
+	<string name="poi_government_legislative">Institución legislativa</string>
+
+<string name="poi_seamark_clearance_height">Altura de seguridad</string>
+	<string name="poi_seamark_clearance_height_closed">Altura de seguridad (cerrado)</string>
+	<string name="poi_seamark_clearance_height_open">Altura de seguridad (abierto)</string>
+	<string name="poi_seamark_clearance_width">Anchura de seguridad</string>
+
+	<string name="poi_vhf">Canal VHF</string>
 
 </resources>

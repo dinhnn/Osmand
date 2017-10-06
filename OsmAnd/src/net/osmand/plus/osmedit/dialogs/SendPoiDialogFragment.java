@@ -76,11 +76,13 @@ public class SendPoiDialogFragment extends DialogFragment {
 				break;
 			}
 		}
-		messageEditText.setText(createDefaultChangeSet());
+		String defaultChangeSet = createDefaultChangeSet();
+		messageEditText.setText(defaultChangeSet);
 		final boolean hasPOI = hasPoiGroup;
 		messageLabel.setVisibility(hasPOI ? View.VISIBLE : View.GONE);
 		messageEditText.setVisibility(hasPOI ? View.VISIBLE : View.GONE);
 		closeChangeSetCheckBox.setVisibility(hasPOI ? View.VISIBLE : View.GONE);
+		closeChangeSetCheckBox.setChecked(hasPOI && !defaultChangeSet.equals(""));
 		view.findViewById(R.id.osm_note_header).setVisibility(hasPOI ? View.GONE : View.VISIBLE);
 		uploadAnonymously.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
@@ -218,9 +220,9 @@ public class SendPoiDialogFragment extends DialogFragment {
 						modifiedItemsOutOfLimit += quantity;
 					} else {
 						if (pos == 0) {
-							comment = comment.concat(comment.length() == 0 ? "" : "; ").concat(action).concat(" ").concat(quantity == 1 ? "" : quantity + "").concat(type);
+							comment = comment.concat(comment.length() == 0 ? "" : "; ").concat(action).concat(" ").concat(quantity == 1 ? "" : quantity + " ").concat(type);
 						} else {
-							comment = comment.concat(", ").concat(quantity == 1 ? "" : quantity + "").concat(type);
+							comment = comment.concat(", ").concat(quantity == 1 ? "" : quantity + " ").concat(type);
 						}
 					}
 					pos++;

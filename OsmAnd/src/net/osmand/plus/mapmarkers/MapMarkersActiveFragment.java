@@ -11,12 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashLocationFragment;
@@ -31,16 +33,20 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 	private Location location;
 	private Float heading;
 	private boolean locationUpdateStarted;
+	private boolean compassUpdateAllowed = true;
 
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final RecyclerView recyclerView = new RecyclerView(getContext());
-		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		final MapActivity mapActivity = (MapActivity) getActivity();
+		boolean isSmartphone = getResources().getConfiguration().smallestScreenWidthDp < 600;
+		recyclerView.setPadding(0, 0, 0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 72 : 108));
+		recyclerView.setClipToPadding(false);
+		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		adapter = new MapMarkersActiveAdapter(mapActivity);
-		final ItemTouchHelper touchHelper = new ItemTouchHelper(new MapMarkersItemTouchHelperCallback(adapter));
+		final ItemTouchHelper touchHelper = new ItemTouchHelper(new MapMarkersItemTouchHelperCallback(mapActivity, adapter));
 		touchHelper.attachToRecyclerView(recyclerView);
 		adapter.setAdapterListener(new MapMarkersActiveAdapterListener() {
 
@@ -49,7 +55,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 
 			@Override
 			public void onItemClick(View view) {
-				int pos = recyclerView.indexOfChild(view);
+				int pos = recyclerView.getChildAdapterPosition(view);
 				MapMarker marker = adapter.getItem(pos);
 				mapActivity.getMyApplication().getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
 						15, marker.getPointDescription(mapActivity), true, marker);
@@ -59,20 +65,36 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 
 			@Override
 			public void onDragStarted(RecyclerView.ViewHolder holder) {
+				compassUpdateAllowed = false;
 				fromPosition = holder.getAdapterPosition();
 				touchHelper.startDrag(holder);
 			}
 
 			@Override
-			public void onDragEnded(RecyclerView.ViewHolder holder) {
+			public void onDragOrSwipeEnded(RecyclerView.ViewHolder holder) {
+				compassUpdateAllowed = true;
 				toPosition = holder.getAdapterPosition();
 				if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
-					mapActivity.getMyApplication().getMapMarkersHelper().saveMapMarkers(adapter.getItems(), null);
+					hideSnackbar();
+					mapActivity.getMyApplication().getMapMarkersHelper().reorderActiveMarkersIfNeeded();
+					adapter.notifyDataSetChanged();
+					mapActivity.getMyApplication().getSettings().MAP_MARKERS_ORDER_BY_MODE.set(OsmandSettings.MapMarkersOrderByMode.CUSTOM);
 				}
+			}
+
+			@Override
+			public void onSwipeStarted() {
+				compassUpdateAllowed = false;
 			}
 		});
 		recyclerView.setAdapter(adapter);
-
+		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+				super.onScrollStateChanged(recyclerView, newState);
+				compassUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE;
+			}
+		});
 		return recyclerView;
 	}
 
@@ -121,15 +143,30 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 		return null;
 	}
 
+	void setShowDirectionEnabled(boolean showDirectionEnabled) {
+		if (adapter != null) {
+			adapter.setShowDirectionEnabled(showDirectionEnabled);
+		}
+	}
+
 	void updateAdapter() {
 		if (adapter != null) {
 			adapter.notifyDataSetChanged();
 		}
 	}
 
+	void hideSnackbar() {
+		if (adapter != null) {
+			adapter.hideSnackbar();
+		}
+	}
+
 	private void updateLocationUi() {
+		if (!compassUpdateAllowed) {
+			return;
+		}
 		final MapActivity mapActivity = (MapActivity) getActivity();
-		if (mapActivity != null) {
+		if (mapActivity != null && adapter != null) {
 			mapActivity.getMyApplication().runInUIThread(new Runnable() {
 				@Override
 				public void run() {
@@ -141,7 +178,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 
 					adapter.setUseCenter(useCenter);
 					adapter.setLocation(useCenter ? mapActivity.getMapLocation() : new LatLon(location.getLatitude(), location.getLongitude()));
-					adapter.setHeading(useCenter ? -mapActivity.getMapRotate() : heading);
+					adapter.setHeading(useCenter ? -mapActivity.getMapRotate() : heading != null ? heading : 99);
 					adapter.notifyDataSetChanged();
 				}
 			});

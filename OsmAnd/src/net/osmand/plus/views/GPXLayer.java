@@ -20,6 +20,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -34,6 +35,7 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
@@ -463,31 +465,44 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private void drawSelectedFilesSegments(Canvas canvas, RotatedTileBox tileBox,
 										   List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
 
+		SelectedGpxFile currentTrack = null;
 		for (SelectedGpxFile g : selectedGPXFiles) {
-			GpxDataItem gpxDataItem = null;
-			if (!g.isShowCurrentTrack()) {
-				gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(g.getGpxFile().path));
+			if (g.isShowCurrentTrack()) {
+				currentTrack = g;
+			} else {
+				drawSelectedFileSegments(g, false, canvas, tileBox, settings);
 			}
-			List<TrkSegment> segments = g.getPointsToDisplay();
-			for (TrkSegment ts : segments) {
-				int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
-				if (g.isShowCurrentTrack()) {
-					color = currentTrackColor;
-				}
-				if (color == 0) {
-					color = ts.getColor(cachedColor);
-				}
-				if (ts.renders.isEmpty()                // only do once (CODE HERE NEEDS TO BE UI INSTEAD)
-						&& !ts.points.isEmpty()) {        // hmmm. 0-point tracks happen, but.... how?
-					if (g.isShowCurrentTrack()) {
-						ts.renders.add(new Renderable.CurrentTrack(ts.points));
-					} else {
-						ts.renders.add(new Renderable.StandardTrack(ts.points, 17.2));
-					}
-				}
-				updatePaints(color, g.isRoutePoints(), g.isShowCurrentTrack(), settings, tileBox);
-				ts.drawRenderers(view.getZoom(), paint, canvas, tileBox);
+		}
+		if (currentTrack != null) {
+			drawSelectedFileSegments(currentTrack, true, canvas, tileBox, settings);
+		}
+	}
+
+	private void drawSelectedFileSegments(SelectedGpxFile selectedGpxFile, boolean currentTrack, Canvas canvas,
+										  RotatedTileBox tileBox, DrawSettings settings) {
+		GpxDataItem gpxDataItem = null;
+		if (!currentTrack) {
+			gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(selectedGpxFile.getGpxFile().path));
+		}
+		List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
+		for (TrkSegment ts : segments) {
+			int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
+			if (currentTrack) {
+				color = currentTrackColor;
 			}
+			if (color == 0) {
+				color = ts.getColor(cachedColor);
+			}
+			if (ts.renders.isEmpty()                // only do once (CODE HERE NEEDS TO BE UI INSTEAD)
+					&& !ts.points.isEmpty()) {        // hmmm. 0-point tracks happen, but.... how?
+				if (currentTrack) {
+					ts.renders.add(new Renderable.CurrentTrack(ts.points));
+				} else {
+					ts.renders.add(new Renderable.StandardTrack(ts.points, 17.2));
+				}
+			}
+			updatePaints(color, selectedGpxFile.isRoutePoints(), currentTrack, settings, tileBox);
+			ts.drawRenderers(view.getZoom(), paint, canvas, tileBox);
 		}
 	}
 
@@ -501,7 +516,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	private List<WptPt> getListStarPoints(SelectedGpxFile g) {
-		return g.getGpxFile().points;
+		return g.getGpxFile().getPoints();
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
@@ -619,8 +634,17 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					position.getLongitude(), System.currentTimeMillis(), objectInMotion.desc,
 					objectInMotion.name, objectInMotion.category, objectInMotion.getColor());
 			new SaveGpxFileAsyncTask(view.getApplication(), callback, objectInMotion).execute(gpxFile);
+			syncGpx(gpxFile);
 		} else if (callback != null) {
 			callback.onApplyMovedObject(false, o);
+		}
+	}
+
+	private void syncGpx(GPXFile gpxFile) {
+		File gpx = new File(gpxFile.path);
+		if (gpx.exists()) {
+			view.getApplication().getMapMarkersHelper().syncGroup(new MarkersSyncGroup(gpx.getAbsolutePath(),
+					AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE));
 		}
 	}
 

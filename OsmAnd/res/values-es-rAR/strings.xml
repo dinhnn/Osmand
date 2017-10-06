@@ -207,7 +207,7 @@ Lon %2$s</string>
     <string name="osmo_no_connection_msg">No se pudo conectar con el servicio OsMo:\n- comprueba tu conexión a Internet;\n- comprueba los ajustes;\n- visita nuestro Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user">Usuario anónimo</string>
     <string name="logged_as">Conectado como «%1$s»</string>
-    <string name="speed_limit_exceed">Tolerancia de límite de velocidad</string>
+    <string name="speed_limit_exceed">Tolerancia del límite de velocidad</string>
     <string name="print_route">Imprimir ruta</string>
     <string name="text_size">Tamaño del texto</string>
     <string name="traffic_warning_speed_limit">Límite de velocidad</string>
@@ -668,7 +668,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="speak_title">Anunciar…</string>
     <string name="speak_descr">Configura el anuncio de nombres de calles, avisos de tráfico (paradas, lomadas), radares y límites de velocidad</string>
     <string name="speak_street_names">Nombres de calles (TTS)</string>
-    <string name="speak_speed_limit">Límites de velocidad</string>
+    <string name="speak_speed_limit">Límite de velocidad</string>
     <string name="speak_cameras">Radares de velocidad</string>
     <string name="speak_traffic_warnings">Avisos de tráfico</string>
     <string name="osb_author_or_password_not_specified">Indica el usuario y contraseña de OSM en los ajustes</string>
@@ -766,8 +766,8 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="av_def_action_choose">Elegir a petición</string>
     <string name="av_def_action_video">Grabar video</string>
     <string name="av_def_action_audio">Grabar audio</string>
-    <string name="av_widget_action_descr">Elige la acción predeterminada</string>
-    <string name="av_widget_action">Acción predeterminada</string>
+    <string name="av_widget_action_descr">Elige la acción predefinida</string>
+    <string name="av_widget_action">Acción predefinida</string>
     <string name="av_video_format_descr">Elige el formato de salida del video</string>
     <string name="av_video_format">Formato de salida del video</string>
     <string name="av_use_external_recorder_descr">Usa la grabadora de video del sistema</string>
@@ -857,7 +857,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="poi_filter_for_tourists">Para turistas</string>
     <string name="poi_filter_fuel">Combustible</string>
     <string name="show_warnings_title">Mostrar alertas…</string>
-    <string name="show_warnings_descr">Configura avisos de tráfico (límites de velocidad, paradas forzosas, badenes), radares de velocidad, e información de carriles</string>
+    <string name="show_warnings_descr">Configura avisos de tráfico (límites de velocidad, paradas forzosas, lomadas), radares de velocidad, e información de carriles</string>
     <string name="use_compass_navigation_descr">Usa la brújula cuando no se detecta la dirección</string>
     <string name="use_compass_navigation">Usar brújula</string>
     <string name="avoid_motorway">Evitar autopistas</string>
@@ -935,7 +935,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="int_continuosly">Continuamente</string>
     <string name="screen_is_locked">Para desbloquear la pantalla pulsa el icono del candado</string>
     <string name="map_widget_top_text">Nombre de calle</string>
-    <string name="map_widget_config">Configuración</string>
+    <string name="map_widget_config">Configurar pantalla</string>
     <string name="map_widget_back_to_loc">Dónde estoy</string>
     <string name="map_widget_lock_screen">Bloquear pantalla</string>
     <string name="map_widget_compass">Brújula</string>
@@ -955,7 +955,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="bg_service_screen_lock_toast">Pantalla bloqueada</string>
     <string name="bg_service_interval">Definir intervalo de activación:</string>
     <string name="show_cameras">Radares de velocidad</string>
-    <string name="show_traffic_warnings">Límites de velocidad</string>
+    <string name="show_traffic_warnings">Avisos de tráfico</string>
     <string name="avoid_toll_roads">Evitar peajes</string>
     <string name="continue_follow_previous_route_auto">La navegación anterior no finalizó. ¿Continuar siguiéndola? (%1$s segundos)</string>
     <string name="route_updated_loc_found">La ruta será calculada cuando se encuentre la ubicación</string>
@@ -1146,11 +1146,11 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="fav_export_confirmation">Ya existe un archivo anterior con favoritos exportados. ¿Quieres sustituirlo?</string>
     <string name="profile_settings">Ajustes de perfiles específicos</string>
     <string name="routing_settings">Navegación</string>
-    <string name="routing_settings_descr">Indica los ajustes para la navegación</string>
+    <string name="routing_settings_descr">Indica las opciones de navegación</string>
     <string name="global_settings">Ajustes globales</string>
     <string name="index_settings">Gestionar mapas</string>
     <string name="general_settings">General</string>
-    <string name="general_settings_descr">Configura la presentación y otros ajustes globales</string>
+    <string name="general_settings_descr">Configura la pantalla y ajustes globales de la aplicación</string>
     <string name="global_app_settings">Ajustes globales de la aplicación</string>
     <string name="user_name">Tu usuario de OSM</string>
     <string name="open_street_map_login_descr">Necesario para envíos a OpenStreetMap.org</string>
@@ -2285,7 +2285,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
 \n • Muchas otras mejoras y correcciones de errores 
 \n 
 \n y más…</string>
-    <string name="trip_rec_notification_settings">Grabando viaje (sin datos)</string>
+    <string name="trip_rec_notification_settings">Activar inicio rápido de grabación</string>
     <string name="trip_rec_notification_settings_desc">Muestra una notificación del sistema que permite iniciar la grabación del viaje</string>
     <string name="shared_string_notifications">Notificaciones</string>
     <string name="osmo_share_location">Compartir</string>
@@ -2720,7 +2720,7 @@ Proporciona un código completo</string>
     <string name="add_point_before">Añadir punto anterior</string>
     <string name="add_point_after">Añadir punto posterior</string>
     <string name="shared_string_options">Opciones</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd conectará los puntos con las rutas del perfil elegido.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd conectará los puntos a las rutas del perfil elegido.</string>
     <string name="measurement_tool_save_as_new_track_descr">Puedes guardar los puntos, ya sea como puntos de ruta o como una línea.</string>
     <string name="choose_navigation_type">Elegir perfil de navegación</string>
     <string name="add_route_points">Añadir puntos de ruta</string>
@@ -2739,7 +2739,54 @@ Proporciona un código completo</string>
     <string name="do_not_use_animations_descr">Desactiva las animaciones en la aplicación</string>
     <string name="move_all_to_history">Mover todo al historial</string>
     <string name="build_route">Crear ruta</string>
-    <string name="show_direction">Mostrar dirección</string>
+    <string name="show_direction">Indicación de distancia</string>
     <string name="sort_by">Ordenar por</string>
     <string name="marker_options">Opciones del marcador</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Umbral de orientación del mapa</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Elije la velocidad a partir de la cual la orientación del mapa cambia de «Dirección del movimiento» a «Brújula»</string>
+    <string name="all_markers_moved_to_history">Todos los marcadores del mapa movidos al historial</string>
+    <string name="marker_moved_to_history">Marcador del mapa movido al historial</string>
+    <string name="marker_moved_to_active">Marcador del mapa movido a los activos</string>
+    <string name="shared_string_list">Lista</string>
+    <string name="shared_string_groups">Grupos</string>
+    <string name="passed">Último uso: %1$s</string>
+    <string name="make_active">Activar</string>
+    <string name="today">Hoy</string>
+    <string name="yesterday">Ayer</string>
+    <string name="last_seven_days">Últimos 7 días</string>
+    <string name="this_year">Este año</string>
+    <string name="widget">Control</string>
+    <string name="top_bar">Barra superior</string>
+    <string name="marker_show_distance_descr">Elige cómo se indica la distancia y dirección a los marcadores del mapa en la pantalla del mapa:</string>
+    <string name="remove_from_map_markers">Quitar de los marcadores del mapa</string>
+    <string name="descendingly">descendente</string>
+    <string name="ascendingly">ascendente</string>
+    <string name="date_added">Fecha de adición</string>
+    <string name="order_by">Ordenar por:</string>
+    <string name="show_guide_line">Mostrar línea guía</string>
+    <string name="show_arrows_on_the_map">Mostrar flechas en el mapa</string>
+    <string name="show_passed">Mostrar los usados</string>
+    <string name="hide_passed">Ocultar los usados</string>
+    <string name="use_location">Usar ubicación</string>
+    <string name="add_location_as_first_point_descr">Añade la ubicación como primer punto para planificar la ruta perfecta.</string>
+    <string name="my_location">Mi ubicación</string>
+    <string name="shared_string_finish">Finalizar</string>
+    <string name="plan_route">Planificar ruta</string>
+    <string name="shared_string_sort">Ordenar</string>
+    <string name="coordinate_input">Ingreso de coordenadas</string>
+    <string name="is_saved">está guardado</string>
+    <string name="marker_save_as_track_descr">Exporta los marcadores a un archivo que puedes nombrar aquí:</string>
+    <string name="marker_save_as_track">Guardar como traza</string>
+    <string name="move_to_history">Mover al historial</string>
+    <string name="group_will_be_removed_after_restart">El grupo se quitará al reiniciar</string>
+    <string name="shared_string_markers">Marcadores</string>
+    <string name="coordinates_format">Formato de coordenadas</string>
+    <string name="use_system_keyboard">Usar teclado del sistema</string>
+    <string name="fast_coordinates_input_descr">Elige el formato de ingreso de las coordenadas. Siempre se puede cambiar en «Opciones».</string>
+    <string name="fast_coordinates_input">Ingreso rápido de coordenadas</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Evitar caminos de hielo y vados</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Evita pasar por caminos con hielo y vados</string>
+    <string name="make_round_trip_descr">Duplica el punto de inicio y lo añade como destino.</string>
+    <string name="make_round_trip">Viaje de ida y vuelta</string>
+    <string name="shared_string_navigate">Navegar</string>
     </resources>

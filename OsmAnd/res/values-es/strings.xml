@@ -62,7 +62,7 @@
     <string name="index_settings">Gestionar mapas</string>
     <string name="index_settings_descr">Descarga y gestiona mapas sin conexión, almacenados en su dispositivo</string>
     <string name="general_settings">General</string>
-    <string name="general_settings_descr">Configura la presentación y otros ajustes comunes para la aplicación</string>
+    <string name="general_settings_descr">Configura la pantalla y otros ajustes comunes para la aplicación</string>
     <string name="global_app_settings">Ajustes globales de la aplicación</string>
     <string name="user_name">Su usuario OSM</string>
     <string name="open_street_map_login_descr">Necesario para envíos a openstreetmap.org</string>
@@ -765,7 +765,7 @@ Tanto la ubicación como el tiempo de estacionamiento se muestran en el panel de
     <string name="route_updated_loc_found">La ruta será calculada una vez encontrada la posición</string>
     <string name="continue_follow_previous_route_auto">La navegación anterior no finalizó. ¿Continuar siguiéndola? (%1$s segundos)</string>
     <string name="show_cameras">Radares</string>
-    <string name="show_traffic_warnings">Límites de velocidad</string>
+    <string name="show_traffic_warnings">Avisos de tráfico</string>
     <string name="avoid_toll_roads">Evitar peajes de carreteras</string>
     <string name="map_widget_top_text">Nombre de calle</string>
     <string name="map_widget_config">Configuración</string>
@@ -1116,7 +1116,7 @@ Tanto la ubicación como el tiempo de estacionamiento se muestran en el panel de
     <string name="routing_attr_prefer_motorway_description">Preferir autopistas</string>
     
     
-    <string name="routing_attr_avoid_toll_name">Evitar peajes de carreteras</string>
+    <string name="routing_attr_avoid_toll_name">Evitar carreteras con peajes</string>
     <string name="routing_attr_avoid_toll_description">Evita las carreteras con peaje</string>
     <string name="routing_attr_avoid_unpaved_name">Evitar carreteras no pavimentadas</string>
     <string name="routing_attr_avoid_unpaved_description">Evita las carreteras no pavimentadas</string>
@@ -1447,7 +1447,7 @@ Tanto la ubicación como el tiempo de estacionamiento se muestran en el panel de
     <string name="fav_point_dublicate_message">El nombre del favorito especificado está en uso, fue cambiado a %1$s para evitar duplicados.</string>
     <string name="print_route">Imprimir ruta</string>
     <string name="fav_point_emoticons_message">Se cambió el nombre del favorito a %1$s, para facilitar el guardado de la cadena con emoticonos a un archivo.</string>
-    <string name="speed_limit_exceed">Tolerancia de límite de velocidad</string>
+    <string name="speed_limit_exceed">Tolerancia del límite de velocidad</string>
     <string name="speed_limit_exceed_message">Seleccione el margen de tolerancia sobre el límite de velocidad con el cual recibirá un aviso de voz.</string>
     <string name="osmo_device_not_found">Dispositivo no encontrado</string>
     <string name="osmo_no_connection_msg">No puedo contactar con el servidor OsMo:
@@ -2661,7 +2661,7 @@ Por favor proporciona un código completo</string>
     <string name="add_point_before">Añadir punto anterior</string>
     <string name="add_point_after">Añadir punto posterior</string>
     <string name="shared_string_options">Opciones</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd conectará los puntos con las rutas para el perfil seleccionado.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd conectará los puntos con rutas para el perfil seleccionado.</string>
     <string name="measurement_tool_save_as_new_track_descr">Puede guardar los puntos, ya sea como puntos de ruta o como una línea.</string>
     <string name="choose_navigation_type">Seleccionar perfil de navegación</string>
     <string name="add_route_points">Añadir puntos de ruta</string>
@@ -2676,7 +2676,51 @@ Por favor proporciona un código completo</string>
     <string name="add_segment_to_the_track">Añadir a una traza GPX</string>
 <string name="move_all_to_history">Mover todo al historial</string>
     <string name="build_route">Crear ruta</string>
-    <string name="show_direction">Mostrar dirección</string>
+    <string name="show_direction">Indicación de distancia</string>
     <string name="sort_by">Ordenar por</string>
     <string name="marker_options">Opciones del marcador</string>
+    <string name="marker_show_distance_descr">Elige cómo se indica la distancia y dirección a los marcadores del mapa en la pantalla del mapa:</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Umbral de orientación del mapa</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Elije la velocidad a partir de la cual la orientación del mapa cambia de «Dirección del movimiento» a «Brújula»</string>
+    <string name="all_markers_moved_to_history">Todos los marcadores del mapa movidos al historial</string>
+    <string name="marker_moved_to_history">Marcador del mapa movido al historial</string>
+    <string name="marker_moved_to_active">Marcador del mapa movido a los activos</string>
+    <string name="shared_string_list">Lista</string>
+    <string name="shared_string_groups">Grupos</string>
+    <string name="passed">Último uso: %1$s</string>
+    <string name="make_active">Activar</string>
+    <string name="today">Hoy</string>
+    <string name="yesterday">Ayer</string>
+    <string name="last_seven_days">Últimos 7 días</string>
+    <string name="this_year">Este año</string>
+    <string name="widget">Control</string>
+    <string name="top_bar">Barra superior</string>
+    <string name="show_guide_line">Mostrar las directrices</string>
+    <string name="show_arrows_on_the_map">Mostrar las flechas en el mapa</string>
+    <string name="show_passed">Mostrar fecha de «Último uso»</string>
+    <string name="hide_passed">Ocultar fecha de «Último uso»</string>
+    <string name="remove_from_map_markers">Eliminar de Map Markers</string>
+    <string name="descendingly">descendente</string>
+    <string name="ascendingly">ascendente</string>
+    <string name="date_added">Fecha añadida</string>
+    <string name="order_by">Ordenado por:</string>
+    <string name="use_location">Usar ubicación</string>
+    <string name="add_location_as_first_point_descr">Añade tu ubicación como primer punto para planificar la ruta perfecta.</string>
+    <string name="my_location">Mi ubicación</string>
+    <string name="shared_string_finish">Finalizar</string>
+    <string name="plan_route">Planificar ruta</string>
+    <string name="shared_string_sort">Ordenar</string>
+    <string name="coordinate_input">Entrada de coordenadas</string>
+    <string name="is_saved">está guardado</string>
+    <string name="marker_save_as_track_descr">Exporte sus marcadores a un archivo que puede nombrar aquí:</string>
+    <string name="marker_save_as_track">Guardar como traza</string>
+    <string name="move_to_history">Mover al historial</string>
+    <string name="group_will_be_removed_after_restart">El grupo se quitará al reiniciar</string>
+    <string name="shared_string_markers">Marcadores</string>
+    <string name="coordinates_format">Formato de coordenadas</string>
+    <string name="use_system_keyboard">Usar el teclado del sistema</string>
+    <string name="fast_coordinates_input_descr">Elige el formato de entrada de coordenadas. Siempre puedes cambiarlo pulsando en Ajustes.</string>
+    <string name="fast_coordinates_input">Entrada rápida de coordenadas</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Evitar carreteras de hielo, vados</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Evita carreteras de hielo y vados</string>
     </resources>
