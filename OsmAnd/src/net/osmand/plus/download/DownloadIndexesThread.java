@@ -381,7 +381,7 @@ public class DownloadIndexesThread {
 			builder.setPositiveButton(R.string.button_upgrade_osmandplus, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:net.osmand.plus"));
+					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus")));
 					try {
 						ctx.startActivity(intent);
 					} catch (ActivityNotFoundException e) {
@@ -429,7 +429,7 @@ public class DownloadIndexesThread {
 				if (o instanceof IndexItem) {
 					IndexItem item = (IndexItem) o;
 					String name = item.getBasename();
-					long count = dbHelper.getCount(name, DatabaseHelper.DOWNLOAD_ENTRY) + 1;
+					int count = dbHelper.getCount(name, DatabaseHelper.DOWNLOAD_ENTRY) + 1;
 					item.setDownloaded(true);
 					DatabaseHelper.HistoryDownloadEntry entry = new DatabaseHelper.HistoryDownloadEntry(name, count);
 					if (count == 1) {

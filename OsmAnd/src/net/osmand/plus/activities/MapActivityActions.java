@@ -48,6 +48,8 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
+import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
+import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
@@ -622,6 +624,18 @@ public class MapActivityActions implements DialogProvider {
 							return false;
 						}
 					}).createItem());
+
+			optionsMenuHelper.addItem(new ItemBuilder().setTitle("New map markers")
+					.setIcon(R.drawable.ic_action_flag_dark)
+					.setListener(new ContextMenuAdapter.ItemClickListener() {
+						@Override
+						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+							app.logEvent(mapActivity, "drawer_markers_open");
+							MapActivity.clearPrevActivityIntent();
+							MapMarkersDialogFragment.showInstance(mapActivity);
+							return true;
+						}
+					}).createItem());
 		} else {
 			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.waypoints, mapActivity)
 					.setIcon(R.drawable.ic_action_intermediate)
@@ -758,6 +772,16 @@ public class MapActivityActions implements DialogProvider {
 				}).createItem());
 		*/
 
+		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.measurement_tool, mapActivity)
+				.setIcon(R.drawable.ic_action_ruler)
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
+						MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager());
+						return true;
+					}
+				}).createItem());
+
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.prefs_plugins, mapActivity)
 				.setIcon(R.drawable.ic_extension_dark)
 				.setListener(new ItemClickListener() {
@@ -827,16 +851,16 @@ public class MapActivityActions implements DialogProvider {
 		//////////// Others
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
 
-		int pluginsItemIndex = -1;
+		int measureDistanceItemIndex = -1;
 		for (int i = 0; i < optionsMenuHelper.length(); i++) {
-			if (optionsMenuHelper.getItem(i).getTitleId() == R.string.prefs_plugins) {
-				pluginsItemIndex = i;
+			if (optionsMenuHelper.getItem(i).getTitleId() == R.string.measurement_tool) {
+				measureDistanceItemIndex = i;
 				break;
 			}
 		}
 
 		ItemBuilder divider = new ItemBuilder().setLayout(R.layout.drawer_divider);
-		divider.setPosition(pluginsItemIndex >= 0 ? pluginsItemIndex : 7);
+		divider.setPosition(measureDistanceItemIndex >= 0 ? measureDistanceItemIndex : 8);
 		optionsMenuHelper.addItem(divider.createItem());
 
 		getMyApplication().getAppCustomization().prepareOptionsMenu(mapActivity, optionsMenuHelper);
@@ -921,6 +945,7 @@ public class MapActivityActions implements DialogProvider {
 		menuItemsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				mapActivity.dismissCardDialog();
 				ContextMenuItem item = contextMenuAdapter.getItem(position);
 				ContextMenuAdapter.ItemClickListener click = item.getItemClickListener();
 				if (click != null && click.onContextMenuClick(simpleListAdapter, item.getTitleId(),

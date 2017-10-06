@@ -17,7 +17,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.DirectionDrawable;
@@ -55,7 +54,6 @@ public class MapMarkersWidgetsFactory {
 	private ImageButton moreButton2nd;
 
 	private LatLon loc;
-	private LatLon lastKnownPosition;
 
 	public MapMarkersWidgetsFactory(final MapActivity map) {
 		this.map = map;
@@ -189,9 +187,8 @@ public class MapMarkersWidgetsFactory {
 			Location l = map.getMapViewTrackingUtilities().getMyLocation();
 			if (l != null) {
 				loc = new LatLon(l.getLatitude(), l.getLongitude());
-				lastKnownPosition = loc;
 			} else {
-				loc = lastKnownPosition;
+				loc = null;
 			}
 		}
 
@@ -253,7 +250,7 @@ public class MapMarkersWidgetsFactory {
 		} else {
 			dd = (DirectionDrawable) arrowImg.getDrawable();
 		}
-		dd.setImage(R.drawable.ic_arrow_marker_diretion, MapMarkerDialogHelper.getMapMarkerColorId(marker.colorIndex));
+		dd.setImage(R.drawable.ic_arrow_marker_diretion, MapMarker.getColorId(marker.colorIndex));
 		if (heading != null && loc != null) {
 			dd.setAngle(mes[1] - heading + 180 + screenOrientation);
 		}
@@ -367,7 +364,7 @@ public class MapMarkersWidgetsFactory {
 					setImageDrawable(map.getMyApplication().getIconsCache()
 							.getIcon(isNight() ? R.drawable.widget_marker_night : R.drawable.widget_marker_day,
 									R.drawable.widget_marker_triangle,
-									MapMarkerDialogHelper.getMapMarkerColorId(marker.colorIndex)));
+									MapMarker.getColorId(marker.colorIndex)));
 					cachedMarkerColorIndex = marker.colorIndex;
 					cachedNightMode = isNight();
 					res = true;

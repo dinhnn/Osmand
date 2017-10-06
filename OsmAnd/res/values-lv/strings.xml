@@ -213,8 +213,8 @@
   <string name="local_index_upload_gpx_description">Augšupielādēt GPX failus OSM kopienai. Tie tiks izmantoti, lai uzlabotu kartes.</string>
   <string name="local_index_items_uploaded">%1$d no %2$d vienība(s) veiksmīgi augšupielādētas.</string>
   <string name="local_index_mi_upload_gpx">Nosūtīt uz OSM</string>
-  <string name="show_more_map_detail">Rādīt kartē vairāk detaļu</string>
-  <string name="show_more_map_detail_descr">Rādīt kartē vairāk detaļu (ceļus u.t.t.) zemākos mērogos</string>
+  <string name="show_more_map_detail">Detalizētāka karte</string>
+  <string name="show_more_map_detail_descr">Rādīt vairāk detaļas uz kartes (ceļus u.t.t.) sākot ar lielākiem mērogiem</string>
   <string name="favourites_delete_multiple_succesful">Izlases punkts(i) veiksmīgi izdzēsts.</string>
   <string name="favorite_delete_multiple">Jūs izdzēsīsiet %1$d izlases un %2$d izlases grupu. Vai tiešām vēlaties to darīt?</string>
   <string name="favorite_home_category">Mājas</string>
@@ -549,7 +549,7 @@
   <string name="transport_route_distance">Maršruta garums</string>
   <string name="transport">Transports</string>
   <string name="shared_string_ok">Labi</string>
-  <string name="show_transport_over_map_description">Rādīt kartē sabiedriskā transporta pieturas</string>
+  <string name="show_transport_over_map_description">Rādīt uz kartes sabiedriskā transporta pieturas</string>
   <string name="show_transport_over_map">Rādīt pieturas</string>
   <string name="hello">OsmAnd navigācija</string>
   <string name="update_poi_success">POI dati tika veiksmīgi augšuplādēti ({0} tika ielādēti)</string>
@@ -709,7 +709,7 @@
   <string name="navigate_point_format_D">DDD.DD</string>
   <string name="navigate_point_format_DM">DDD MM.MM</string>
   <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-  <string name="shared_string_show_on_map">Rādīt kartē</string>
+  <string name="shared_string_show_on_map">Rādīt uz kartes</string>
   
   <string name="search_address_top_text">Izvēlēties adresi</string>
   <string name="search_address_region">Reģions</string>
@@ -934,7 +934,7 @@ Vietas koordinātes un laiks redzami arī atsevišķā sadaļā Manā Izvēlnē.
     <string name="intermediate_point_too_far">Starpposma punkts %1$s ir pārāk tālu no tuvākā ceļa.</string>
     <string name="arrived_at_intermediate_point">Jūs esat nokļuvis starpposma punktā</string>
     <string name="context_menu_item_intermediate_point">Pievienot kā starpposma punktu</string>
-    <string name="map_widget_intermediate_distance">Starpposma punkts</string>
+    <string name="map_widget_intermediate_distance">Starpposmu punkti</string>
     <string name="ending_point_too_far">Noslēdzošais punkts ir pārāk tālu no tuvākā ceļa.</string>
     <string name="add_tag">Pievienot tagu</string>
     <string name="btn_advanced_mode">Paplašinātais režīms…</string>
@@ -1006,7 +1006,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     
     <string name="shared_string_and">un</string>
     <string name="shared_string_or">vai</string>
-	<string name="route_is_too_long">OsmAnd maršruta aprēķināšana var aizņemt ļoti ilgu laiku (vai pat neizdoties), ja starp punktiem ir vairāk nekā 200km liels attālums. Lūdzu, pievienojiet papildus starpposmus, lai atvieglotu aprēķināšanu.</string>
+	
 	<string name="auto_zoom_close">Tuvināti</string>
 	<string name="auto_zoom_far">Vidēji tuvu</string>
 	<string name="auto_zoom_farthest">Attālināti</string>
@@ -1186,7 +1186,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     
     
 	
-	<string name="map_widget_max_speed">Ātruma limits</string>
+	<string name="map_widget_max_speed">Ātruma limiti</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Nav atrastas ēkas.</string>
     <string name="search_villages_and_postcodes">Meklēt apdzīvotās vietas/pasta indeksus</string>
@@ -1242,76 +1242,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
 \n Globālie dati (starp 70 Z un 70 D) ir bāzēti uz SRTM (Shuttle Radar Topography Mission) un ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mērījumiem, attēlveidošanas rīks uz Terra\'s, vadošais NASA Zemes Novērošanas Sistēmas satelīts. ASTER ir kopējs veikums ar NASA, Japānas Ekonomikas Ministriju, Trade and Industry (METI) un Japānas Izplatījuma Sistēmām (J-spacesystems). "</string>
     
     <string name="osb_author_dialog_password">OSM parole (optionāla)</string>
-	<string name="osmand_extended_description_4000_chars">"
-OsmAnd (OSM Automated Navigation Directions) ir kartes un navigācijas aplikācija ar brīvi pieejamām vispasaules, augstas kvalitātes OpenStreetMap (OSM) kartēm. Visus karšu datus ir iespējams saglabāt ierīces atmiņas kartē offline (bez interneta pieslēguma) lietošanai. Ar jūsu ierīces GPS uztvērēja palīdzibu, OsmAnd piedāvā maršrutēšanu ar vizuālo un balss vadību automašīnai, velobraucējiem un gājējiem. Visas galvenās funkcijas darbojas ar vai bez interneta pieslēguma.
- 
-Dažas no galvenajām iespējām: 
-
-Navigācija:
- - Darbojas tiešsaistē (ātri) vai bezsaistē (nevajag izmantot viesabonēšanu, esot ārzemēs) -
- -  Pagrieziens-pēc-pagrieziena balss vadība (ierakstītas vai sintizētas balsis)
- - Optionāli ceļa joslu vadība, ielas nosaukumu rādīšana un aprēķinātais laiks galapunkta sasniegšanai
- - Ceļapunktu ievietošana maršrutā 
- - Automātiski pārrēķina ceļu pēc novirzīšanās no maršruta
- - Meklē vietas pēc adreses, veida (benzīntanki, kafejnīcas, viesnīcas, muzeji u.t.t.) vai pēc koordinātām
-
- Kartes skats:
- - Rāda jūsu pozīciju un virzienu uz kartes
- - Optionāli pieskaņo karti kompasam vai kustības virzienam
- - Saglabājiet izlasē izvēlētās vietas uz kartes
- - Rāda POIs (point of interests) jums apkārt
- - Iespējams attēlot tiešsaistes bilžu kartes
- - Iespējams attēlot satelīta skatu (no Bing)
- - Iespējams attēlot vairākus kartes slāņus, kā piemēram, tūrisma/navigācijas GPX ceļus un papildus kartes ar regulējamu caurspīdīgumu
- - Optionāli rāda vietu nosaukumus angliski, vietējā valodā vai fonētiski izrunātus
-
- OpenStreetMap un wikipedia vietnes:
-  - Augstas kvalitātes informācija no labākajiem visas pasaules kopīgi veidotajiem projektiem
-  - OpenStreetMap kartes pieejamas pēc valsts vai reģiona
-  - Vikipēdijas POIs un vietu apskate (nav pieejama bezmaksas versijā) 
-  - Neierobežota lejupielāde no aplikācijas par brīvu (bezmaksas versijai ierobežojums 16 kartes)
-  - Vienmēr jaunākās kartes (atjauninājumi vismaz reizi mēnesī)
-  - Kompaktas bezsaistes vektora kartes
-  - Pilnās kartes vai tikai ceļi (piemēram visa Japāna 700MB vai tikai ceļi 200MB)
-  - Tiešsaistes kartes vai saglabātas bilžu kartes
-
- Droša braukšana:
-  - Pēc izvēles automātisks dienas/nakts režīms
-  - Pēc izvēles ātruma limita rādīšana ar brīdinājumu, pārsniedzot ātrumu
-  - Pēc izvēles, no ātruma atkarīga kartes mērogošana
-  - Dalīties ar atrašanās vietu, lai jūsu draugi var jūs atrast
-
- Velobraucēji un kājāmgājēji: 
- - Kartes veidi ietver pastaigas, velobraucēju un slēpošanas celiņus, ideāli visa veida aktivitātēm
- - Maršrutēšana un kartes attēlošana īpaši vielobraucējiem un kājāmgājējiem
- - Pēc izvēles publiskā transporta pieturas vietas, ieskaitot nosaukumus
- - Pēc izvēles ceļojuma ierakstīšana gpx failā vai caur internetu
- - Pēc izvēles ātruma un augstuma attēlošana
- - Kontūrlīniju un kalnu reljefa attēlošana (ar papildus spraudni)
-
- Tieša saziņa ar OpenStreetMap:
- - Ziņošana par kartes nepilnībām - GPX ceļu nosūtīšana OSM vietnei caur aplikāciju
- - Jaunu POI izveidošana un nosūtīšana OSM
- - Pēc izvēles ceļojuma ierakstīšana fonā (kamēr ierīce ir miega režīmā)
-
-
- OsmAnd ir atvērtā koda aplikācija un nepārtraukti tiek attīstīta. Ikviens var piedalīties, ziņojot par kļūdām, uzlabojot valodu tulkojumus vai kodējot jaunas iespējas. Projekts nepārtraukti tiek uzlabots, tiešā veidā aktīvi sadarbojoties lietotājiem ar izstrādātājiem. Tāpat projekts ir atkarīgs no finansēm, kas nepieciešamas aplikācijas izstrādei, kodēšanai un jaunu funkciju testēšanai. Noperkot OsmAnd+ jūs palīdzēsiet aplikācijai kļūt pilnvērtīgākai! Jūs varat arī finansiāli atbalstot atsevišķas jaunas iespējas vai veikt ziedojumu kopīgajam projektam osmand.net interneta vietnē. 
-
-Aptuvenais kartes pārklājums un kvalitāte:
- - Rietumeiropa: ****
- - Austrumeiropa: ***
- - Krievija: ***
- - Ziemeļamerika: ***
- - Dienvidamerika: **
- - Āzija: **
- - Japāna &amp; Koreja: ***
- - Tuvie Austrumi: **
- - Āfrika **
- - Antarktīda: *
-
- Valstu saraksts, kuras tiek atbalstītas (gandrīz visa pasaule!):
- Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.
- "</string>
+	
 	<string name="osmand_plus_extended_description_4000_chars">"
 OsmAnd (OSM Automated Navigation Directions) ir kartes un navigācijas aplikācija ar brīvi pieejamām vispasaules, augstas kvalitātes OpenStreetMap (OSM) kartēm. Visus karšu datus ir iespējams saglabāt ierīces atmiņas kartē offline (bez interneta pieslēguma) lietošanai. Ar jūsu ierīces GPS uztvērēja palīdzibu, OsmAnd piedāvā maršrutēšanu ar vizuālo un balss vadību automašīnai, velobraucējiem un gājējiem. Visas galvenās funkcijas darbojas ar vai bez interneta pieslēguma.
  
@@ -1763,7 +1694,7 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="rendering_category_details">Detaļas</string>
     <string name="rendering_category_transport">Transports</string>
     <string name="rendering_category_others">Citi kartes atribūti</string>
-    <string name="map_widget_appearance_rem">Atlikušie elementi</string>
+    <string name="map_widget_appearance_rem">Pārējie elementi</string>
     <string name="map_widget_top">Statusa josla</string>
 	<string name="map_widget_right">Labā puse</string>
 	<string name="map_widget_left">Kreisā puse</string>
@@ -2239,7 +2170,7 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="commit_poi">Iesūtīt POI</string>
     <string name="tab_title_basic">Pamata</string>
     <string name="tab_title_advanced">Paplašināts</string>
-    <string name="building_number">Būvējuma numurs</string>
+    <string name="building_number">Mājas numurs</string>
     <string name="next_proceed">Nākošais</string>
     <string name="opening_at">Atvērt</string>
     <string name="closing_at">Aizvērt</string>
@@ -2469,13 +2400,13 @@ failu(s)?
     <string name="skip_map_downloading_desc">Jums nav instalētas nevienas bezsaistes kartes. Izvēlieties kartes no saraksta vai lejuielādējiet tās caur izvēlni - %1$s.</string>
     <string name="search_another_country">Izvēlieties citu reģionu</string>
     <string name="search_map">Meklē karti…</string>
-    <string name="first_usage_wizard_desc">Nosakot jūsu atrašanās vietu, OsmAnd piedāvā sekojošas kartes lejupielādei.</string>
+    <string name="first_usage_wizard_desc">OsmAnd noteiks jūsu atrašanos un piedāvās lejupielādēt šī reģiona karti.</string>
     <string name="location_not_found">Atrašanās vieta nav zināma</string>
     <string name="no_inet_connection">Nav interneta savienojuma</string>
     <string name="no_inet_connection_desc_map">Nepieciešams lejupielādēt kartes.</string>
     <string name="search_location">Meklē atrašanās vietu…</string>
     <string name="storage_free_space">Brīvā vieta</string>
-    <string name="storage_place_description">OsmAnd datu glabātuve (kartēm, trekiem, u.t.t.): %1$s.</string>
+    <string name="storage_place_description">OsmAnd datu uzglabāšanas vieta (kartēm, maršrutiem u.c.): %1$s.</string>
     <string name="give_permission">Dot atļauju</string>
     <string name="allow_access_location">Atļaut noteikt vietu</string>
     <string name="first_usage_greeting">Veidojiet maršrutus un atklājiet jaunas vietas bez interneta savienojuma</string>
@@ -2742,53 +2673,7 @@ Apraksta laukumu: %1$s x %2$s</string>
  - optionālu kartes taisnošanu pēc kompasa vai kustības virzienā
  - optionālu joslu vadību, ātruma limita rādīšanu, ierakstītās un TTS balsis
  "</string>
-	<string name="osmand_plus_extended_description_4000_chars_v2">"
-OsmAnd Kartes &amp; Navigācija - atrodiet atrašanās vietu kartē un aprēķiniet maršrutus bez interneta savienojuma. Pirms došanās ceļā, lejupielādējiet valstu kartes, meklējiet vietas un maršrutus no nepazīstamiem apgabaliem.
-
-Pamatopcijas:
-• Detalizētas kartes no 200 valstīm
-• Bezsaistes navigācija ar balss vadību
-• Adrešu meklēšana bezsaistē
-• Info par vietām uz kartes: interešu punkti (POI), kafejnīcas, parkings, iepirkšanās
-• Vietu pievienošana izlasei
-• Autobraucēju, velobraucēju un gājēju navigācija
-
-Papildiespējas: 
-• Iespējas skatīt un ierakstīt GPX trases
-• Vikipēdijas POI apraksti
-• Pievienot foto, audio un video ierakstus kartei
-• Dienas un nakts režīmi lielākam konfortam
-• Informācija par sabiedriskā transporta maršrutiem un pieturām
-• Veloceliņi un gājēju takas
-• Tūristu pastaigu celiņi no visas pasaules
-• Tiešsaises kartes no vairākiem avotiem
-• Info par seguma klājumu un ielu apgaismojumu
-• Piecienot, labot un dzēst POI (OpenStreetMap.org lietotājiem)
-• OsMo - live monitorings no citām ierīcēm
-
-Iegūstiet uzticamu navigatoru savā valstī - vai tā būtu Francija, Vācija, Meksika, Apvienotā Karalise, Spānija, Nīderlande, ASV, Krievija, Brazīlija vai jekura cita valsts.
-
-Spraudņi:
-• Kontūrkartes un reljefs https://goo.gl/7mojP8
- Kontūrlīniju dati un reljefa vizualācija pievienota OsmAnd pamatkartei.
-
-• Slēpošanas kartes https://goo.gl/pX6DxJ
- Info par slēpošanas vietām, trasēm, vilcējiem un pacēlājiem.
-
-• Jūras karte https://goo.gl/0hEdxm
- Īpašs kartes stils ar navigācijas zīmēm kuğošanai pa ūdeņiem.
-
-• Parkinga vieta https://goo.gl/6JxQXF
- Palīdzēs jums fiksēt automašīnas atrašanās vietu kartē un redzēt atlikušo laiku parkingam ar laika ierobežojumu.
-
-Sekojiet jaunumiem!
-
-Twitter: https://twitter.com/osmandapp
-Facebook: https://www.facebook.com/osmandapp
-Site: http://osmand.net
-
-Ja jums ir vajadzīga palīdzība ar OsmAnd aplikāciju, lūdzu kontaktējieties ar mūsu atbalsta komandu: support@osmand.net. 
- "</string>
+	
     <string name="rendering_attr_depthContours_description">Rādīt dziļuma kontūras un punktus</string>
     <string name="rendering_attr_depthContours_name">Jūras dziļuma kontūras</string>
 	<string name="add_new_folder">Pievienot jaunu mapi</string>
@@ -2810,7 +2695,7 @@ Ja jums ir vajadzīga palīdzība ar OsmAnd aplikāciju, lūdzu kontaktējieties
     <string name="shared_string_move">Pārvietot</string>
     <string name="shared_string_tracks">Treki</string>
     <string name="routing_attr_driving_style_name">Braukšanas stils</string>
-    <string name="routing_attr_driving_style_description">Droša, ātra vai balancēta braukšana</string>
+    
     <string name="route_altitude">Maršruta altitūda</string>
     <string name="altitude_descent">Pazeminās</string>
     <string name="altitude_ascent">Paaugstinās</string>
@@ -2818,20 +2703,20 @@ Ja jums ir vajadzīga palīdzība ar OsmAnd aplikāciju, lūdzu kontaktējieties
     <string name="average_altitude">Vidējā altitūda</string>
     <string name="shared_string_time">Laiks</string>
     <string name="total_distance">Maršruta garums</string>
-    <string name="routing_attr_height_relief_smoothness_factor_name">Reljefa gluduma koeficients</string>
+    
     <string name="routing_attr_height_relief_smoothness_factor_description">Līdzenāks vai kalnaināks reljefs</string>
     <string name="routing_attr_height_obstacles_name">Lietot elevācijas datus</string>
     <string name="routing_attr_height_obstacles_description">Lietot apgabala elevācijas datus no SRTM, ASTER un EU-DEM</string>
 
-    <string name="driving_style_speed">Ātrais</string>
+    
     <string name="driving_style_balance">Balancētais</string>
-    <string name="driving_style_safety">Drošais</string>
+    
     <string name="relief_smoothness_factor_descr">Ieteicamais reljefs: līdzens vai kalnains</string>
     <string name="shared_string_slope">Slīpums</string>
     <string name="lang_ber">Berberu</string>
-    <string name="relief_smoothness_factor_hills">Kalnaini apvidi</string>
+    
     <string name="relief_smoothness_factor_plains">Līdzenumi</string>
-    <string name="relief_smoothness_factor_more_plains">Vairāk līdzenumu</string>
+    
     <string name="quick_action_osmbugs_show">Rādīt OSM piezīmes</string>
     <string name="quick_action_osmbugs_hide">Nerādīt OSM piezīmes</string>
     <string name="quick_action_showhide_osmbugs_descr">Nospiežot pogu, tiks rādītas vai slēptas OEM piezīmes uz kartes.</string>
@@ -2843,10 +2728,10 @@ Ja jums ir vajadzīga palīdzība ar OsmAnd aplikāciju, lūdzu kontaktējieties
     <string name="shared_string_plugin">Spraudnis</string>
     <string name="srtm_purchase_header">Lai redzētu kontūrlīnijas kartē, ir nepieciešams nopirkt un instalēt Kontūrlīniju spraudni</string>
     <string name="srtm_color_scheme">Krāsu shēma</string>
-    <string name="routing_attr_allow_private_name">Atļaut privātās zemes</string>
-    <string name="favorite_group_name">Grupas vārds</string>
-    <string name="change_color">Mainīt krāsu</string>
-    <string name="edit_name">Labot vārdu</string>
+    <string name="routing_attr_allow_private_name">Privātās teritorijas</string>
+    <string name="favorite_group_name">Nosaukums</string>
+    <string name="change_color">Nomainīt krāsu</string>
+    <string name="edit_name">Pārdēvēt</string>
     <string name="animate_my_location">Animēt atrašanās vietu</string>
     <string name="shared_string_overview">Pārskats</string>
     <string name="select_street">Izvēlieties ielu</string>
@@ -2865,7 +2750,7 @@ Ja jums ir vajadzīga palīdzība ar OsmAnd aplikāciju, lūdzu kontaktējieties
     <string name="nothing_found">Neko neatradu :(</string>
     <string name="nothing_found_descr">Meklējiet pēc cita vārda vai palieliniet meklēšanas rādiusu, ietverot blakus teritorijas</string>
     <string name="quick_action_showhide_osmbugs_title">Rādīt/nerādīt OSM piezīmes</string>
-    <string name="routing_attr_allow_private_description">Atļaut piekļūšanu privātajām zemēm</string>
+    <string name="routing_attr_allow_private_description">Atļaut piekļūšanu privātajām teritorijām</string>
     <string name="animate_my_location_desc">Maršruta gaitā turpināt rādīt kustīgu animāciju arī pie īslaicīgiem pārrāvumiem atrašanās vietas noteikšanā</string>
     <string name="quick_action_auto_zoom_desc">Spiežot darbības pogu, tiks ieslēgta vai izslēgta automātiskā kartes mērogošana, atkarībā no kustības ātruma.</string>
     <string name="quick_action_add_destination">Pievienot mērķi</string>
@@ -3037,15 +2922,13 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
 
  • Izvēle starp pilna reģiona datiem vai tikai ceļa sazarojumu (piemērs: visa Japāna 700MB vai 200MB tikai ar ceļa sazarojumu)
  "</string>
-    <string name="osmand_plus_extended_description_part6">"
- Velosipēdistu un kājāmgājēju iespējas
- • Skatīt gājēju, pārgājienu un baiku ceļus, ideāli ārpus mājas aktivitātēm
- • Speciāli maršruta un ekrāna režīmi baikiem un kājāmgājējiem
- • Optionāli sabiedriskā transporta pieturas, iekļaujot peronu nosaukumus
- • Optionāli ceļa ierakstīšana lokālā GPX failā vai tiešsaistes servisā
- • Optionāli ātruma un altitūtas rādīšana
- • Konktūrlīniju un kalnu ēnojuma attēlošana (caur atsevišķu spraudni)
- "</string>
+    <string name="osmand_plus_extended_description_part6">Velobraucēju un kājāmgājēju iespējas
+\n • Skatīt gājēju, pārgājienu un baiku ceļus, ideāli ārpus mājas aktivitātēm
+\n • Speciāli maršruta un ekrāna režīmi baikiem un kājāmgājējiem
+\n • Optionāli sabiedriskā transporta pieturas, iekļaujot peronu nosaukumus
+\n • Optionāli ceļa ierakstīšana lokālā GPX failā vai tiešsaistes servisā
+\n • Optionāli ātruma un altitūtas rādīšana
+\n • Konktūrlīniju un kalnu ēnojuma attēlošana (caur atsevišķu spraudni)</string>
     <string name="osmand_plus_extended_description_part7">"
  Piedalieties OSM veidošanā
  • Ziņojiet par datu kļūdām
@@ -3074,4 +2957,15 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="mapillary_image">Mapillary bilde</string>
     <string name="import_gpx_failed_descr">OsmAnd nevar importēt failu. Pārliecinieties vai OsmAnd ir atļauja nolasīt failu dotajā mapē.</string>
     <string name="shared_string_permissions">Atļaujas</string>
+    <string name="none_point_error">Lūdzu pievienojiet vismaz vienu punktu.</string>
+    <string name="enter_gpx_name">GPX faila vārds:</string>
+    <string name="show_on_map_after_saving">Pēc saglabāšanas rādīt uz kartes</string>
+    <string name="quick_action_resume_pause_navigation">Atsākt/pauzēt navigāciju</string>
+    <string name="quick_action_resume_pause_navigation_descr">Pieskarieties pogai, lai nopauzētu vai atsāktu navigāciju.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Rādīt Navigācija pabeigta dialogu</string>
+    <string name="quick_action_start_stop_navigation">Sākt/apturēt navigāciju</string>
+    <string name="quick_action_start_stop_navigation_descr">Pieskarieties šai pogai, lai sāktu vai apturētu navigācijas norādes.</string>
+    <string name="store_tracks_in_monthly_directories">Saglabāt treka ierakstus mēneša mapēs</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Ierakstītie treki tiks saglabāti apakšmapēs pēc mēneša datuma (piemēram, 2017-01).</string>
+    <string name="map_widget_ruler_control">Rādiusa lineāls</string>
     </resources>

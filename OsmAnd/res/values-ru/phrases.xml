@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources> 
 	<string name="poi_bakery">Булочная</string>
 	<string name="poi_alcohol">Винно-водочный магазин</string>
@@ -505,7 +505,7 @@
 	<string name="poi_travel_agent">Турагентство</string>
 	<string name="poi_viewpoint">Место с хорошим видом</string>
 	<string name="poi_camp_site">Место для лагеря</string>
-	<string name="poi_caravan_site">Место для ночлега</string>
+	<string name="poi_caravan_site">Ночлег</string>
 	<string name="poi_picnic_site">Место для пикника</string>
 	<string name="poi_spring">Родник</string>
 	<string name="poi_cemetery">Кладбище</string>
@@ -720,7 +720,7 @@
 	<string name="poi_town">Город (небольшой)</string>
 	<string name="poi_village">Деревня</string>
 	<string name="poi_hamlet">Деревня (небольшая)</string>
-	<string name="poi_suburb">Район</string>
+	<string name="poi_suburb">Пригород (suburb)</string>
 	<string name="poi_isolated_dwelling">Хутор</string>
 	<string name="poi_locality">Урочище</string>
 
@@ -786,7 +786,7 @@
 	<string name="poi_healthcare">Здоровье</string>
 	<string name="poi_sustenance">Еда</string>
 	<string name="poi_lodging">Проживание</string>
-	<string name="poi_man_made">Рукотворное</string>
+	<string name="poi_man_made">Сооружения</string>
 	<string name="poi_administrative">Административные объекты</string>
 	<string name="poi_seamark">Морские объекты</string>
 	<string name="poi_internet_access_wlan">Доступ в Интернет: беспроводной</string>
@@ -1173,10 +1173,14 @@
 
 	<string name="poi_animal_shelter">Приют для животных</string>
 
-	<string name="poi_animal_shelter_dog">Тип приюта: для собак</string>
-	<string name="poi_animal_shelter_cat">Тип приюта: для кошек</string>
-	<string name="poi_animal_shelter_dog_cat">Тип приюта: для собак и кошек</string>
-	<string name="poi_animal_shelter_bird">Тип приюта: для птиц</string>
+	<string name="poi_animal_shelter_dog">Собаки</string>
+	<string name="poi_animal_shelter_cat">Кошки</string>
+	<string name="poi_animal_shelter_dog_cat">Собаки и кошки</string>
+	<string name="poi_animal_shelter_bird">Птицы</string>
+	<string name="poi_animal_shelter_wildlife">Дикие животные</string>
+	<string name="poi_animal_shelter_horse">Лошади</string>
+	<string name="poi_animal_shelter_mammal">Млекопитающие</string>
+	<string name="poi_animal_shelter_fish">Рыбы</string>
 
 	<string name="poi_shower">Душ</string>
 
@@ -2827,7 +2831,7 @@
 	<string name="poi_health_facility_type_nursing_home">Тип медучреждения: хоспис</string>
 	<string name="poi_health_facility_type_support_group_home">Тип медучреждения: встречи групп поддержки</string>
 
-	<string name="poi_health_specialty_palliative_medicine_yes">Специализация: паллиативная помощь</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Паллиативная помощь</string>
 
 	<string name="poi_suction_point">Точка забора воды</string>
 
@@ -3074,7 +3078,7 @@
 
 	<string name="poi_barometer_yes">Барометр</string>
 	<string name="poi_barometer_no">Барометр: отсутствует</string>
-	<string name="poi_thermometer_yes">Термометр:</string>
+	<string name="poi_thermometer_yes">Термометр</string>
 	<string name="poi_thermometer_no">Термометр: отсутствует</string>
 	<string name="poi_hygrometer_yes">Гигрометр</string>
 	<string name="poi_hygrometer_no">Гигрометр: отсутствует</string>
@@ -3426,6 +3430,73 @@
 	<string name="poi_motorcycle_type_dualsport">Двойного назначения</string>
 	<string name="poi_motorcycle_type_standard">Классика</string>
 
+	<string name="poi_generator_output_electricity_no">Не вырабатывает электричество</string>
 
+	<string name="poi_owner">Владелец</string>
+
+	<string name="poi_animal_shelter_type">Принимаются животные</string>
+	<string name="poi_animal_shelter_purpose">Цель содержания</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_yes">Долговременная опека: да</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">Долговременная опека: нет</string>
+	<string name="poi_animal_shelter_purpose_release_yes">Реабилитация и выпуск: да</string>
+	<string name="poi_animal_shelter_purpose_release_no">Реабилитация и выпуск: нет</string>
+
+	<string name="poi_spaceport">Космодром</string>
+
+	<string name="poi_direction_n">Направление: север</string>
+	<string name="poi_direction_nne">Направление: северо-северо-восток</string>
+	<string name="poi_direction_ne">Направление: северо-восток</string>
+	<string name="poi_direction_ene">Направление: востоко-северо-восток</string>
+	<string name="poi_direction_e">Направление: восток</string>
+	<string name="poi_direction_ese">Направление: востоко-юго-восток</string>
+	<string name="poi_direction_se">Направление: юго-восток</string>
+	<string name="poi_direction_sse">Направление: юго-юго-восток</string>
+	<string name="poi_direction_s">Направление: юг</string>
+	<string name="poi_direction_ssw">Направление: юго-юго-запад</string>
+	<string name="poi_direction_sw">Направление: юго-запад</string>
+	<string name="poi_direction_wsw">Направление: западо-юго-запад</string>
+	<string name="poi_direction_w">Направление: запад</string>
+	<string name="poi_direction_wnw">Направление: западо-северо-запад</string>
+	<string name="poi_direction_nw">Направление: северо-запад</string>
+	<string name="poi_direction_nnw">Направление: северо-северо-запад</string>
+	<string name="poi_direction_forward">Направление: вперёд</string>
+	<string name="poi_direction_backward">Направление: назад</string>
+	<string name="poi_direction_clockwise">Направление: по часовой стрелке</string>
+	<string name="poi_direction_anticlockwise">Направление: против часовой стрелки</string>
+	<string name="poi_direction_up">Направление: вверх</string>
+	<string name="poi_direction_down">Направление: вниз</string>
+	<string name="poi_direction_entrance">Направление: вход</string>
+	<string name="poi_direction_exit">Направление: выход</string>
+	<string name="poi_direction_all">Направление: во все стороны</string>
+
+	<string name="poi_winter_room_yes">Зимняя комната: есть</string>
+	<string name="poi_winter_room_no">Зимняя комната: нет</string>
+	<string name="poi_reservation_required">Бронирование: требуется</string>
+	<string name="poi_reservation_recommended">Бронирование: рекомендуется</string>
+	<string name="poi_reservation_yes">Бронирование: возможно</string>
+	<string name="poi_reservation_no">Бронирование: не предусмотрено</string>
+	<string name="poi_reservation_members_only">Бронирование: для узкого круга лиц</string>
+
+	<string name="poi_beds">Кровати</string>
+
+	<string name="poi_boat_rental_type">Арендуемые лодки</string>
+	<string name="poi_boat_rental">Прокат лодок</string>
+	<string name="poi_boat_motorboat_rental_yes">Моторные лодки: да</string>
+	<string name="poi_boat_motorboat_rental_no">Моторные лодки: нет</string>
+	<string name="poi_boat_houseboat_rental_yes">Плавучие дома: да</string>
+	<string name="poi_boat_houseboat_rental_no">Плавучие дома: нет</string>
+	<string name="poi_boat_pedalboat_rental_yes">Педальные лодки: да</string>
+	<string name="poi_boat_pedalboat_rental_no">Педальные лодки: нет</string>
+	<string name="poi_boat_jetski_rental_yes">Гидроциклы: да</string>
+	<string name="poi_boat_jetski_rental_no">Гидроциклы: нет</string>
+	<string name="poi_boat_sailboat_rental_yes">Парусники: да</string>
+	<string name="poi_boat_sailboat_rental_no">Парусники: нет</string>
+	<string name="poi_boat_dinghy_rental_rental_yes">Шлюпки: да</string>
+	<string name="poi_boat_dinghy_rental_rental_no">Шлюпки: нет</string>
+	<string name="poi_boat_kayak_rental_rental_yes">Каяки: да</string>
+	<string name="poi_boat_kayak_rental_rental_no">Каяки: нет</string>
+	<string name="poi_boat_canoe_rental_rental_yes">Каноэ: да</string>
+	<string name="poi_boat_canoe_rental_rental_no">Каноэ: нет</string>
 
 </resources>

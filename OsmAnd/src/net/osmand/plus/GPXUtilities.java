@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.ColorInt;
+import android.text.TextUtils;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -247,6 +248,7 @@ public class GPXUtilities {
 		public String name = null;
 		public String desc = null;
 		public List<TrkSegment> segments = new ArrayList<>();
+		public boolean generalTrack = false;
 
 	}
 
@@ -275,6 +277,7 @@ public class GPXUtilities {
 		public double minElevation = 99999;
 		public double maxElevation = -100;
 
+		public float minSpeed = Float.MAX_VALUE;
 		public float maxSpeed = 0;
 		public float avgSpeed;
 
@@ -372,16 +375,18 @@ public class GPXUtilities {
 					}
 					long time = point.time;
 					if (time != 0) {
-						if (s.segment.generalSegment) {
-							if (point.firstPoint) {
-								startTimeOfSingleSegment = time;
-							} else if (point.lastPoint) {
-								endTimeOfSingleSegment = time;
-							}
-							if (startTimeOfSingleSegment != 0 && endTimeOfSingleSegment != 0) {
-								timeSpan += endTimeOfSingleSegment - startTimeOfSingleSegment;
-								startTimeOfSingleSegment = 0;
-								endTimeOfSingleSegment = 0;
+						if (s.metricEnd == 0) {
+							if (s.segment.generalSegment) {
+								if (point.firstPoint) {
+									startTimeOfSingleSegment = time;
+								} else if (point.lastPoint) {
+									endTimeOfSingleSegment = time;
+								}
+								if (startTimeOfSingleSegment != 0 && endTimeOfSingleSegment != 0) {
+									timeSpan += endTimeOfSingleSegment - startTimeOfSingleSegment;
+									startTimeOfSingleSegment = 0;
+									endTimeOfSingleSegment = 0;
+								}
 							}
 						}
 						startTime = Math.min(startTime, time);
@@ -518,6 +523,7 @@ public class GPXUtilities {
 						hasElevationData = true;
 					}
 
+					minSpeed = Math.min(speed, minSpeed);
 					if (speed > 0) {
 						totalSpeedSum += speed;
 						maxSpeed = Math.max(speed, maxSpeed);
@@ -768,6 +774,7 @@ public class GPXUtilities {
 				track.segments = new ArrayList<>();
 				track.segments.add(generalSegment);
 				generalTrack = track;
+				track.generalTrack = true;
 			}
 			return generalTrack;
 		}
@@ -807,9 +814,11 @@ public class GPXUtilities {
 			for (int i = 0; i < tracks.size(); i++) {
 				Track subtrack = tracks.get(i);
 				for (TrkSegment segment : subtrack.segments) {
-					g.totalTracks++;
-					if (segment.points.size() > 1) {
-						splitSegments.add(new SplitSegment(segment));
+					if (!segment.generalSegment) {
+						g.totalTracks++;
+						if (segment.points.size() > 1) {
+							splitSegments.add(new SplitSegment(segment));
+						}
 					}
 				}
 			}
@@ -817,6 +826,14 @@ public class GPXUtilities {
 			return g;
 		}
 
+		public List<WptPt> getRoutePoints() {
+			List<WptPt> points = new ArrayList<>();
+			for (int i = 0; i < routes.size(); i++) {
+				Route rt = routes.get(i);
+				points.addAll(rt.points);
+			}
+			return points;
+		}
 
 		public boolean hasRtePt() {
 			for (Route r : routes) {
@@ -854,9 +871,90 @@ public class GPXUtilities {
 			}
 
 			points.add(pt);
+
 			modifiedTime = System.currentTimeMillis();
 
 			return pt;
+		}
+
+		public WptPt addRtePt(double lat, double lon, long time, String description, String name, String category, int color) {
+			double latAdjusted = Double.parseDouble(latLonFormat.format(lat));
+			double lonAdjusted = Double.parseDouble(latLonFormat.format(lon));
+			final WptPt pt = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
+			pt.name = name;
+			pt.category = category;
+			pt.desc = description;
+			if (color != 0) {
+				pt.setColor(color);
+			}
+
+			if (routes.size() == 0) {
+				routes.add(new Route());
+			}
+			Route currentRoute = routes.get(routes.size() - 1);
+			currentRoute.points.add(pt);
+
+			modifiedTime = System.currentTimeMillis();
+
+			return pt;
+		}
+
+		public void addTrkSegment(List<WptPt> points) {
+			removeGeneralTrackIfExists();
+
+			TrkSegment segment = new TrkSegment();
+			segment.points.addAll(points);
+
+			if (tracks.size() == 0) {
+				tracks.add(new Track());
+			}
+			Track lastTrack = tracks.get(tracks.size() - 1);
+			lastTrack.segments.add(segment);
+
+			modifiedTime = System.currentTimeMillis();
+		}
+
+		public boolean replaceSegment(TrkSegment oldSegment, TrkSegment newSegment) {
+			removeGeneralTrackIfExists();
+
+			for (int i = 0; i < tracks.size(); i++) {
+				Track currentTrack = tracks.get(i);
+				for (int j = 0; j < currentTrack.segments.size(); j++) {
+					int segmentIndex = currentTrack.segments.indexOf(oldSegment);
+					if (segmentIndex != -1) {
+						currentTrack.segments.remove(segmentIndex);
+						currentTrack.segments.add(segmentIndex, newSegment);
+						addGeneralTrack();
+						modifiedTime = System.currentTimeMillis();
+						return true;
+					}
+				}
+			}
+
+			addGeneralTrack();
+			return false;
+		}
+
+		public void addRoutePoints(List<WptPt> points) {
+			if (routes.size() == 0) {
+				Route route = new Route();
+				routes.add(route);
+			}
+
+			Route lastRoute = routes.get(routes.size() - 1);
+
+			lastRoute.points.addAll(points);
+
+			modifiedTime = System.currentTimeMillis();
+		}
+
+		public void replaceRoutePoints(List<WptPt> points) {
+			routes.clear();
+			routes.add(new Route());
+			Route currentRoute = routes.get(routes.size() - 1);
+			currentRoute.points.addAll(points);
+
+			modifiedTime = System.currentTimeMillis();
 		}
 
 		public void updateWptPt(WptPt pt, double lat, double lon, long time, String description, String name, String category, int color) {
@@ -879,6 +977,32 @@ public class GPXUtilities {
 				points.set(index, pt);
 			}
 			modifiedTime = System.currentTimeMillis();
+		}
+
+		private void removeGeneralTrackIfExists() {
+			Track generalTrack = getGeneralTrack();
+			if (generalTrack != null) {
+				tracks.remove(generalTrack);
+				this.generalTrack = null;
+				this.generalSegment = null;
+			}
+		}
+
+		public boolean removeTrkSegment(TrkSegment segment) {
+			removeGeneralTrackIfExists();
+
+			for (int i = 0; i < tracks.size(); i++) {
+				Track currentTrack = tracks.get(i);
+				for (int j = 0; j < currentTrack.segments.size(); j++) {
+					if (currentTrack.segments.remove(segment)) {
+						addGeneralTrack();
+						modifiedTime = System.currentTimeMillis();
+						return true;
+					}
+				}
+			}
+			addGeneralTrack();
+			return false;
 		}
 
 		public boolean deleteWptPt(WptPt pt) {
@@ -917,7 +1041,7 @@ public class GPXUtilities {
 			for (Track t : tracks) {
 				int trackColor = t.getColor(getColor(0));
 				for (TrkSegment ts : t.segments) {
-					if (ts.points.size() > 0) {
+					if (!ts.generalSegment && ts.points.size() > 0) {
 						TrkSegment sgmt = new TrkSegment();
 						tpoints.add(sgmt);
 						sgmt.points.addAll(ts.points);
@@ -984,6 +1108,19 @@ public class GPXUtilities {
 				}
 			}
 			return count;
+		}
+
+		public List<String> getWaypointCategories() {
+			List<String> categories = new ArrayList<>();
+			for (WptPt pt : points) {
+				String category = pt.category;
+				if (!TextUtils.isEmpty(category)) {
+					if (!categories.contains(category)) {
+						categories.add(category);
+					}
+				}
+			}
+			return categories;
 		}
 	}
 

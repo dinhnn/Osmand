@@ -24,6 +24,7 @@ public class PointDescription {
 
 	public static final String POINT_TYPE_FAVORITE = "favorite";
 	public static final String POINT_TYPE_WPT = "wpt";
+	public static final String POINT_TYPE_RTE = "rte";
 	public static final String POINT_TYPE_POI = "poi";
 	public static final String POINT_TYPE_ADDRESS = "address";
 	public static final String POINT_TYPE_OSM_NOTE= "osm_note";
@@ -72,14 +73,6 @@ public class PointDescription {
 		}
 	}
 	
-	public void setLat(double lat) {
-		this.lat = lat;
-	}
-	
-	public void setLon(double lon) {
-		this.lon = lon;
-	}
-
 	public void setTypeName(String typeName){
 		this.typeName = typeName;
 	}
@@ -219,6 +212,10 @@ public class PointDescription {
 	public boolean isWpt() {
 		return POINT_TYPE_WPT.equals(type);
 	}
+
+	public boolean isRte() {
+		return POINT_TYPE_RTE.equals(type);
+	}
 	
 	public boolean isPoi() {
 		return POINT_TYPE_POI.equals(type);
@@ -348,8 +345,8 @@ public class PointDescription {
 			pd = new PointDescription(POINT_TYPE_LOCATION, "");
 		}
 		if(pd.isLocation() && l != null) {
-			pd.setLat(l.getLatitude());
-			pd.setLon(l.getLongitude());
+			pd.lat = l.getLatitude();
+			pd.lon = l.getLongitude();
 		}
 		return pd;
 	}

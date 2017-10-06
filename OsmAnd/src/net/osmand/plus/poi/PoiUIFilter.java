@@ -26,7 +26,6 @@ import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
@@ -261,7 +260,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 				}
 			}
 		}
-		List<Amenity> amenities = searchAmenitiesInternal(top / 2 + bottom / 2, left / 2 + right / 2, 
+		List<Amenity> amenities = searchAmenitiesInternal(top / 2 + bottom / 2, left / 2 + right / 2,
 				top, bottom, left, right, zoom, matcher);
 		results.addAll(amenities);
 		return results;
@@ -573,8 +572,27 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	}
 
 	public void combineWithPoiFilter(PoiUIFilter f) {
-		acceptedTypes.putAll(f.acceptedTypes);
+		putAllAcceptedTypes(f.acceptedTypes);
 		poiAdditionals.putAll(f.poiAdditionals);
+	}
+
+	private void putAllAcceptedTypes(Map<PoiCategory, LinkedHashSet<String>> types) {
+		for (PoiCategory category : types.keySet()) {
+			LinkedHashSet<String> typesSet = types.get(category);
+			if (acceptedTypes.containsKey(category)) {
+				if (acceptedTypes.get(category) != null && typesSet != null) {
+					acceptedTypes.get(category).addAll(typesSet);
+				} else {
+					acceptedTypes.put(category, null);
+				}
+			} else {
+				if (typesSet != null) {
+					acceptedTypes.put(category, new LinkedHashSet<>(typesSet));
+				} else {
+					acceptedTypes.put(category, null);
+				}
+			}
+		}
 	}
 
 	public void combineWithPoiFilters(Set<PoiUIFilter> filters) {

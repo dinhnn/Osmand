@@ -74,8 +74,21 @@
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
 
+    <style name="FirstSplashScreenPlus" parent="OsmandLightTheme.NoActionbar">
+        <item name="android:windowBackground">@drawable/first_splash_screen_plus</item>
+    </style>
+
+    <style name="FirstSplashScreenFree" parent="OsmandLightTheme.NoActionbar">
+        <item name="android:windowBackground">@drawable/first_splash_screen_free</item>
+    </style>
+
+    <style name="FirstSplashScreenFreeDev" parent="OsmandLightTheme.NoActionbar">
+        <item name="android:windowBackground">@drawable/first_splash_screen_free_dev</item>
+    </style>
+
     <!-- Osmand themes styles -->
     <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
+        <item name="mapBackground">@color/map_background_color_light</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_light</item>
         <item name="routeParameterTitleColor">@color/color_myloc_distance</item>
         <item name="ctx_menu_info_divider">@color/ctx_menu_info_divider_light</item>
@@ -96,6 +109,7 @@
         <item name="actionModeBackground">@color/actionbar_light_color</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
         <item name="bg_color">@color/bg_color_light</item>
+        <item name="btn_round_border">@drawable/btn_round_border_light</item>
         <item name="bg_card">@drawable/bg_card_light</item>
         <item name="context_menu_card">@drawable/context_menu_card_light</item>
         <item name="bg_map_context_menu">@drawable/bg_map_context_menu_light</item>
@@ -248,7 +262,16 @@
         <item name="android:textColorSecondary">@color/color_white</item>
     </style>
 
+    <style name="OsmandDarkTheme.NoAnimation">
+        <item name="alertDialogTheme">@style/Theme.AppCompat.Dialog.Alert.NoAnimation</item>
+    </style>
+
+    <style name="OsmandLightTheme.NoAnimation">
+        <item name="alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert.NoAnimation</item>
+    </style>
+
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
+        <item name="mapBackground">@color/map_background_color_dark</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_dark</item>
         <item name="routeParameterTitleColor">@color/osmand_orange</item>
         <item name="ctx_menu_info_divider">@color/ctx_menu_info_divider_dark</item>
@@ -268,6 +291,7 @@
         <item name="actionModeBackground">@color/actionbar_dark_color</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="bg_color">@color/bg_color_dark</item>
+        <item name="btn_round_border">@drawable/btn_round_border_dark</item>
         <item name="bg_card">@drawable/bg_card_dark</item>
         <item name="context_menu_card">@drawable/context_menu_card_dark</item>
         <item name="bg_map_context_menu">@drawable/bg_map_context_menu_dark</item>
@@ -323,6 +347,14 @@
         <item name="android:textColor">@color/color_white</item>
     </style>
 
+    <style name="Theme.AppCompat.Dialog.Alert.NoAnimation">
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <style name="Theme.AppCompat.Light.Dialog.Alert.NoAnimation">
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
     <!-- Standard action bar override -->
     <style name="Widget.Styled.ActionBarDark" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="background">@color/actionbar_dark_color</item>
@@ -333,18 +365,22 @@
     <style name="Widget.Styled.ActionBarLight" parent="Widget.AppCompat.Light.ActionBar.Solid">
         <item name="background">@color/actionbar_light_color</item>
         <item name="android:background">@color/actionbar_light_color</item>
-        <item name="titleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
-        <item name="subtitleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
+        <item name="titleTextStyle">@style/Widget.Styled.LightActionBarTitle</item>
+        <item name="subtitleTextStyle">@style/Widget.Styled.LightActionBarSubtitle</item>
         <item name="actionBarWidgetTheme">@style/Theme.AppCompat</item>
 
-        <item name="android:titleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
-        <item name="android:subtitleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
+        <item name="android:titleTextStyle">@style/Widget.Styled.LightActionBarTitle</item>
+        <item name="android:subtitleTextStyle">@style/Widget.Styled.LightActionBarSubtitle</item>
         <item name="android:actionBarWidgetTheme">@style/Theme.AppCompat</item>
         <item name="elevation">0dp</item>
     </style>
 
-    <style name="Widget.Styled.LightActionBarHeader" parent="@android:style/TextAppearance">
+    <style name="Widget.Styled.LightActionBarTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="Widget.Styled.LightActionBarSubtitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">@color/white_80_transparent</item>
     </style>
 
     <style name="WhiteActionMode" parent="@style/Widget.AppCompat.ActionMode">
@@ -358,50 +394,55 @@
 
     <!-- Dialog popup -->
     <style name="Animations"/>
+
+    <style name="Animations.NoAnimation">
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@null</item>
+    </style>
     <!-- PopDownMenu -->
     <style name="Animations.PopDownMenu"/>
 
     <style name="Animations.PopDownMenu.Left">
-        <item name="@android:windowEnterAnimation">@anim/grow_from_topleft_to_bottomright</item>
-        <item name="@android:windowExitAnimation">@anim/shrink_from_bottomright_to_topleft</item>
+        <item name="android:windowEnterAnimation">@anim/grow_from_topleft_to_bottomright</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_bottomright_to_topleft</item>
     </style>
 
     <style name="Animations.PopDownMenu.Right">
-        <item name="@android:windowEnterAnimation">@anim/grow_from_topright_to_bottomleft</item>
-        <item name="@android:windowExitAnimation">@anim/shrink_from_bottomleft_to_topright</item>
+        <item name="android:windowEnterAnimation">@anim/grow_from_topright_to_bottomleft</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_bottomleft_to_topright</item>
     </style>
 
     <style name="Animations.PopDownMenu.Center">
-        <item name="@android:windowEnterAnimation">@anim/grow_from_top</item>
-        <item name="@android:windowExitAnimation">@anim/shrink_from_bottom</item>
+        <item name="android:windowEnterAnimation">@anim/grow_from_top</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_bottom</item>
     </style>
 
     <!-- PopUpMenu -->
     <style name="Animations.PopUpMenu"/>
 
     <style name="Animations.PopUpMenu.Fade">
-        <item name="@android:windowEnterAnimation">@anim/popup_show</item>
-        <item name="@android:windowExitAnimation">@anim/popup_hide</item>
+        <item name="android:windowEnterAnimation">@anim/popup_show</item>
+        <item name="android:windowExitAnimation">@anim/popup_hide</item>
     </style>
 
     <style name="Animations.PopUpMenu.Left">
-        <item name="@android:windowEnterAnimation">@anim/grow_from_bottomleft_to_topright</item>
-        <item name="@android:windowExitAnimation">@anim/shrink_from_topright_to_bottomleft</item>
+        <item name="android:windowEnterAnimation">@anim/grow_from_bottomleft_to_topright</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_topright_to_bottomleft</item>
     </style>
 
     <style name="Animations.PopUpMenu.Right">
-        <item name="@android:windowEnterAnimation">@anim/grow_from_bottomright_to_topleft</item>
-        <item name="@android:windowExitAnimation">@anim/shrink_from_topleft_to_bottomright</item>
+        <item name="android:windowEnterAnimation">@anim/grow_from_bottomright_to_topleft</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_topleft_to_bottomright</item>
     </style>
 
     <style name="Animations.PopUpMenu.Center">
-        <item name="@android:windowEnterAnimation">@anim/grow_from_bottom</item>
-        <item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
+        <item name="android:windowEnterAnimation">@anim/grow_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_top</item>
     </style>
 
     <style name="Animations.PopUpMenu.Bottom">
-        <item name="@android:windowEnterAnimation">@anim/slide_in_bottom</item>
-        <item name="@android:windowExitAnimation">@anim/slide_out_bottom</item>
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
     </style>
 
     <style name="create_poi_text_field">

@@ -1,8 +1,10 @@
 package net.osmand.plus.views.mapwidgets;
 
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -46,6 +48,7 @@ public class MapInfoWidgetsFactory {
 		CONTEXT_MENU,
 		TRACK_DETAILS,
 		DISCOUNT,
+		MEASUREMENT_TOOL
 	}
 
 	public TextInfoWidget createAltitudeControl(final MapActivity map) {
@@ -112,117 +115,69 @@ public class MapInfoWidgetsFactory {
 		return gpsInfoControl;
 	}
 
-	public static class RulerWidgetState extends MapWidgetRegistry.WidgetState {
-
-		static final int RULER_CONTROL_WIDGET_STATE_FIRST_MODE = R.id.ruler_control_widget_state_first_mode;
-		static final int RULER_CONTROL_WIDGET_STATE_SECOND_MODE = R.id.ruler_control_widget_state_second_mode;
-		static final int RULER_CONTROL_WIDGET_STATE_EMPTY_MODE = R.id.ruler_control_widget_state_empty_mode;
-
-		private final OsmandSettings.CommonPreference<RulerMode> rulerMode;
-
-		public RulerWidgetState(OsmandApplication ctx) {
-			super(ctx);
-			rulerMode = ctx.getSettings().RULER_MODE;
-		}
-
-		@Override
-		public int getMenuTitleId() {
-			if (rulerMode.get() == RulerMode.SECOND) {
-				return R.string.map_widget_ruler_control_second_mode;
-			} else {
-				return R.string.map_widget_ruler_control_first_mode;
-			}
-		}
-
-		@Override
-		public int getMenuIconId() {
-			final RulerMode mode = rulerMode.get();
-			if (mode == RulerMode.FIRST) {
-				return R.drawable.ic_action_ruler_location;
-			} else if (mode == RulerMode.SECOND) {
-				return R.drawable.ic_action_ruler_circle;
-			}
-			return R.drawable.ic_action_hide;
-		}
-
-		@Override
-		public int getMenuItemId() {
-			RulerMode mode = rulerMode.get();
-			if (mode == RulerMode.FIRST) {
-				return RULER_CONTROL_WIDGET_STATE_FIRST_MODE;
-			} else if (mode == RulerMode.SECOND) {
-				return RULER_CONTROL_WIDGET_STATE_SECOND_MODE;
-			} else {
-				return RULER_CONTROL_WIDGET_STATE_EMPTY_MODE;
-			}
-		}
-
-		@Override
-		public int[] getMenuTitleIds() {
-			return new int[]{R.string.map_widget_ruler_control_first_mode, R.string.map_widget_ruler_control_second_mode};
-		}
-
-		@Override
-		public int[] getMenuIconIds() {
-			return new int[]{R.drawable.ic_action_ruler_location, R.drawable.ic_action_ruler_circle};
-		}
-
-		@Override
-		public int[] getMenuItemIds() {
-			return new int[]{RULER_CONTROL_WIDGET_STATE_FIRST_MODE, RULER_CONTROL_WIDGET_STATE_SECOND_MODE};
-		}
-
-		@Override
-		public void changeState(int stateId) {
-			RulerMode newMode = RulerMode.FIRST;
-			if (stateId == RULER_CONTROL_WIDGET_STATE_SECOND_MODE) {
-				newMode = RulerMode.SECOND;
-			}
-			rulerMode.set(newMode);
-		}
-	}
-
 	public TextInfoWidget createRulerControl(final MapActivity map) {
-		final String title = map.getResources().getString(R.string.map_widget_show_ruler);
+		final String title = "—";
 		final TextInfoWidget rulerControl = new TextInfoWidget(map) {
 			RulerControlLayer rulerLayer = map.getMapLayers().getRulerControlLayer();
 			LatLon cacheFirstTouchPoint = new LatLon(0, 0);
 			LatLon cacheSecondTouchPoint = new LatLon(0, 0);
+			LatLon cacheSingleTouchPoint = new LatLon(0, 0);
+			boolean fingerAndLocDistWasShown;
 
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				RulerMode mode = map.getMyApplication().getSettings().RULER_MODE.get();
 				OsmandMapTileView view = map.getMapView();
+				Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
 
-				if (rulerLayer.isShowTwoFingersDistance()) {
+				if (rulerLayer.isShowDistBetweenFingerAndLocation() && currentLoc != null) {
+					if (!cacheSingleTouchPoint.equals(rulerLayer.getTouchPointLatLon())) {
+						cacheSingleTouchPoint = rulerLayer.getTouchPointLatLon();
+						setDistanceText(cacheSingleTouchPoint.getLatitude(), cacheSingleTouchPoint.getLongitude(),
+								currentLoc.getLatitude(), currentLoc.getLongitude());
+						fingerAndLocDistWasShown = true;
+					}
+				} else if (rulerLayer.isShowTwoFingersDistance()) {
 					if (!cacheFirstTouchPoint.equals(view.getFirstTouchPointLatLon()) ||
-							!cacheSecondTouchPoint.equals(view.getSecondTouchPointLatLon())) {
+							!cacheSecondTouchPoint.equals(view.getSecondTouchPointLatLon()) ||
+							fingerAndLocDistWasShown) {
 						cacheFirstTouchPoint = view.getFirstTouchPointLatLon();
 						cacheSecondTouchPoint = view.getSecondTouchPointLatLon();
 						setDistanceText(cacheFirstTouchPoint.getLatitude(), cacheFirstTouchPoint.getLongitude(),
 								cacheSecondTouchPoint.getLatitude(), cacheSecondTouchPoint.getLongitude());
+						fingerAndLocDistWasShown = false;
 					}
-				} else if (mode == RulerMode.FIRST || mode == RulerMode.SECOND) {
-					Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
+				} else {
 					LatLon centerLoc = map.getMapLocation();
 
 					if (currentLoc != null && centerLoc != null) {
-						setDistanceText(currentLoc.getLatitude(), currentLoc.getLongitude(),
-								centerLoc.getLatitude(), centerLoc.getLongitude());
+						if (map.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+							setDistanceText(0);
+						} else {
+							setDistanceText(currentLoc.getLatitude(), currentLoc.getLongitude(),
+									centerLoc.getLatitude(), centerLoc.getLongitude());
+						}
+					} else {
+						setText(title, null);
 					}
-				} else {
-					setText(title, null);
 				}
 				return true;
 			}
 
-            private void setDistanceText(double firstLat, double firstLon, double secondLat, double secondLon) {
-                float dist = (float) MapUtils.getDistance(firstLat, firstLon, secondLat, secondLon);
-                String distance = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
-                int ls = distance.lastIndexOf(' ');
-                setText(distance.substring(0, ls), distance.substring(ls + 1));
-            }
-        };
+			private void setDistanceText(float dist) {
+				calculateAndSetText(dist);
+			}
+
+			private void setDistanceText(double firstLat, double firstLon, double secondLat, double secondLon) {
+				float dist = (float) MapUtils.getDistance(firstLat, firstLon, secondLat, secondLon);
+				calculateAndSetText(dist);
+			}
+
+			private void calculateAndSetText(float dist) {
+				String distance = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
+				int ls = distance.lastIndexOf(' ');
+				setText(distance.substring(0, ls), distance.substring(ls + 1));
+			}
+		};
 
 		rulerControl.setText(title, null);
 		setRulerControlIcon(rulerControl, map.getMyApplication().getSettings().RULER_MODE.get());
@@ -246,9 +201,7 @@ public class MapInfoWidgetsFactory {
 	}
 
 	private void setRulerControlIcon(TextInfoWidget rulerControl, RulerMode mode) {
-		if (mode == RulerMode.FIRST) {
-			rulerControl.setIcons(R.drawable.widget_ruler_location_day, R.drawable.widget_ruler_location_night);
-		} else if (mode == RulerMode.SECOND) {
+		if (mode == RulerMode.FIRST || mode == RulerMode.SECOND) {
 			rulerControl.setIcons(R.drawable.widget_ruler_circle_day, R.drawable.widget_ruler_circle_night);
 		} else {
 			rulerControl.setIcons(R.drawable.widget_hidden_day, R.drawable.widget_hidden_night);
@@ -263,8 +216,8 @@ public class MapInfoWidgetsFactory {
 		int bgLightLandId = R.drawable.btn_round;
 		int bgDarkLandId = R.drawable.btn_round_night;
 
-		int backBtnIconLightId = R.drawable.abc_ic_ab_back_mtrl_am_alpha;
-		int backBtnIconDarkId = R.drawable.abc_ic_ab_back_mtrl_am_alpha;
+		int backBtnIconLightId = R.drawable.ic_arrow_back;
+		int backBtnIconDarkId = R.drawable.ic_arrow_back;
 		int backBtnIconClrLightId = R.color.icon_color;
 		int backBtnIconClrDarkId = 0;
 
@@ -278,7 +231,11 @@ public class MapInfoWidgetsFactory {
 		int refreshBtnIconDarkId = R.drawable.ic_action_refresh_dark;
 		int refreshBtnIconClrLightId = R.color.icon_color;
 		int refreshBtnIconClrDarkId = 0;
+
 		boolean refreshBtnVisible = false;
+		boolean saveViewVisible = false;
+		protected boolean topBarSwitchVisible = false;
+		protected boolean topBarSwitchChecked = false;
 
 		int titleTextClrLightId = R.color.primary_text_light;
 		int titleTextClrDarkId = R.color.primary_text_dark;
@@ -296,6 +253,8 @@ public class MapInfoWidgetsFactory {
 		OnClickListener onTitleClickListener;
 		OnClickListener onCloseButtonClickListener;
 		OnClickListener onRefreshButtonClickListener;
+		OnClickListener onSaveViewClickListener;
+		OnCheckedChangeListener onSwitchCheckedChangeListener;
 
 		Runnable onCloseToolbarListener;
 
@@ -311,6 +270,10 @@ public class MapInfoWidgetsFactory {
 
 		public void setTitle(String title) {
 			this.title = title;
+		}
+
+		public String getTitle() {
+			return title;
 		}
 
 		public void setBottomView(View bottomView) {
@@ -370,6 +333,18 @@ public class MapInfoWidgetsFactory {
 			this.refreshBtnVisible = visible;
 		}
 
+		public void setSaveViewVisible(boolean visible) {
+			this.saveViewVisible = visible;
+		}
+
+		public void setTopBarSwitchVisible(boolean visible) {
+			this.topBarSwitchVisible = visible;
+		}
+
+		public void setTopBarSwitchChecked(boolean checked) {
+			this.topBarSwitchChecked = checked;
+		}
+
 		public void setTitleTextClrIds(int titleTextClrLightId, int titleTextClrDarkId) {
 			this.titleTextClrLightId = titleTextClrLightId;
 			this.titleTextClrDarkId = titleTextClrDarkId;
@@ -392,6 +367,14 @@ public class MapInfoWidgetsFactory {
 			this.onCloseButtonClickListener = onCloseButtonClickListener;
 		}
 
+		public void setOnSaveViewClickListener(OnClickListener onSaveViewClickListener) {
+			this.onSaveViewClickListener = onSaveViewClickListener;
+		}
+
+		public void setOnSwitchCheckedChangeListener(OnCheckedChangeListener onSwitchCheckedChangeListener) {
+			this.onSwitchCheckedChangeListener = onSwitchCheckedChangeListener;
+		}
+
 		public void setOnRefreshButtonClickListener(OnClickListener onRefreshButtonClickListener) {
 			this.onRefreshButtonClickListener = onRefreshButtonClickListener;
 		}
@@ -404,6 +387,7 @@ public class MapInfoWidgetsFactory {
 			TextView titleView = view.getTitleView();
 			TextView descrView = view.getDescrView();
 			LinearLayout bottomViewLayout = view.getBottomViewLayout();
+			SwitchCompat switchCompat = view.getTopBarSwitch();
 			if (title != null) {
 				titleView.setText(title);
 				view.updateVisibility(titleView, true);
@@ -422,6 +406,10 @@ public class MapInfoWidgetsFactory {
 				view.updateVisibility(bottomViewLayout, true);
 			} else {
 				view.updateVisibility(bottomViewLayout, false);
+			}
+			view.updateVisibility(switchCompat, topBarSwitchVisible);
+			if (topBarSwitchVisible) {
+				switchCompat.setChecked(topBarSwitchChecked);
 			}
 			if (view.getShadowView() != null) {
 				view.getShadowView().setVisibility(View.VISIBLE);
@@ -442,6 +430,8 @@ public class MapInfoWidgetsFactory {
 		private TextView descrView;
 		private ImageButton refreshButton;
 		private ImageButton closeButton;
+		private TextView saveView;
+		private SwitchCompat topBarSwitch;
 		private View shadowView;
 		private boolean nightMode;
 
@@ -456,7 +446,9 @@ public class MapInfoWidgetsFactory {
 			refreshButton = (ImageButton) map.findViewById(R.id.widget_top_bar_refresh_button);
 			closeButton = (ImageButton) map.findViewById(R.id.widget_top_bar_close_button);
 			titleView = (TextView) map.findViewById(R.id.widget_top_bar_title);
+			saveView = (TextView) map.findViewById(R.id.widget_top_bar_save);
 			descrView = (TextView) map.findViewById(R.id.widget_top_bar_description);
+			topBarSwitch = (SwitchCompat) map.findViewById(R.id.widget_top_bar_switch);
 			shadowView = map.findViewById(R.id.widget_top_bar_shadow);
 			updateVisibility(false);
 		}
@@ -491,6 +483,14 @@ public class MapInfoWidgetsFactory {
 
 		public ImageButton getCloseButton() {
 			return closeButton;
+		}
+
+		public TextView getSaveView() {
+			return saveView;
+		}
+
+		public SwitchCompat getTopBarSwitch() {
+			return topBarSwitch;
 		}
 
 		public ImageButton getRefreshButton() {
@@ -564,6 +564,8 @@ public class MapInfoWidgetsFactory {
 			topBarTitleLayout.setOnClickListener(controller.onTitleClickListener);
 			closeButton.setOnClickListener(controller.onCloseButtonClickListener);
 			refreshButton.setOnClickListener(controller.onRefreshButtonClickListener);
+			saveView.setOnClickListener(controller.onSaveViewClickListener);
+			topBarSwitch.setOnCheckedChangeListener(controller.onSwitchCheckedChangeListener);
 		}
 
 		public void updateInfo() {
@@ -602,6 +604,7 @@ public class MapInfoWidgetsFactory {
 				int descrColor = map.getResources().getColor(controller.descrTextClrDarkId);
 				titleView.setTextColor(titleColor);
 				descrView.setTextColor(descrColor);
+				saveView.setTextColor(titleColor);
 			} else {
 				topBarLayout.setBackgroundResource(AndroidUiHelper.isOrientationPortrait(map) ? controller.bgLightId : controller.bgLightLandId);
 				if (controller.backBtnIconLightId == 0) {
@@ -623,6 +626,7 @@ public class MapInfoWidgetsFactory {
 				int descrColor = map.getResources().getColor(controller.descrTextClrLightId);
 				titleView.setTextColor(titleColor);
 				descrView.setTextColor(descrColor);
+				saveView.setTextColor(titleColor);
 			}
 			if (controller.singleLineTitle) {
 				titleView.setSingleLine(true);
@@ -630,15 +634,26 @@ public class MapInfoWidgetsFactory {
 				titleView.setSingleLine(false);
 			}
 
-			if (controller.closeBtnVisible && closeButton.getVisibility() == View.GONE) {
-				closeButton.setVisibility(View.VISIBLE);
-			} else {
+			if (controller.closeBtnVisible) {
+				if (closeButton.getVisibility() == View.GONE) {
+					closeButton.setVisibility(View.VISIBLE);
+				}
+			} else if (closeButton.getVisibility() == View.VISIBLE) {
 				closeButton.setVisibility(View.GONE);
 			}
-			if (controller.refreshBtnVisible && refreshButton.getVisibility() == View.GONE) {
-				refreshButton.setVisibility(View.VISIBLE);
-			} else {
+			if (controller.refreshBtnVisible) {
+				if (refreshButton.getVisibility() == View.GONE) {
+					refreshButton.setVisibility(View.VISIBLE);
+				}
+			} else if (refreshButton.getVisibility() == View.VISIBLE) {
 				refreshButton.setVisibility(View.GONE);
+			}
+			if (controller.saveViewVisible) {
+				if (saveView.getVisibility() == View.GONE) {
+					saveView.setVisibility(View.VISIBLE);
+				}
+			} else if (saveView.getVisibility() == View.VISIBLE) {
+				saveView.setVisibility(View.GONE);
 			}
 		}
 
@@ -764,18 +779,20 @@ public class MapInfoWidgetsFactory {
 					settings.SHOW_STREET_NAME.get()) {
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment();
 				if (rt != null) {
+					Location lastKnownLocation = locationProvider.getLastKnownLocation();
 					text = RoutingHelper.formatStreetName(
 							rt.getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get()),
-							rt.getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(locationProvider.getLastKnownLocation())),
-							rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(locationProvider.getLastKnownLocation())),
+							rt.getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(lastKnownLocation)),
+							rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(lastKnownLocation)),
 									"»");
 				}
 				if (text == null) {
 					text = "";
 				} else {
-					if(!Algorithms.isEmpty(text) && locationProvider.getLastKnownLocation() != null) {
+					Location lastKnownLocation = locationProvider.getLastKnownLocation();
+					if(!Algorithms.isEmpty(text) && lastKnownLocation != null) {
 						double dist =
-								CurrentPositionHelper.getOrthogonalDistance(rt, locationProvider.getLastKnownLocation());
+								CurrentPositionHelper.getOrthogonalDistance(rt, lastKnownLocation);
 						if(dist < 50) {
 							showMarker = true;
 						} else {

@@ -2,16 +2,22 @@ package net.osmand.aidl;
 
 import android.app.Service;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.IBinder;
 import android.os.RemoteException;
 
 import net.osmand.aidl.calculateroute.CalculateRouteParams;
+import net.osmand.aidl.favorite.AddFavoriteParams;
+import net.osmand.aidl.favorite.RemoveFavoriteParams;
+import net.osmand.aidl.favorite.UpdateFavoriteParams;
+import net.osmand.aidl.favorite.group.AddFavoriteGroupParams;
+import net.osmand.aidl.favorite.group.RemoveFavoriteGroupParams;
+import net.osmand.aidl.favorite.group.UpdateFavoriteGroupParams;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
 import net.osmand.aidl.gpx.HideGpxParams;
 import net.osmand.aidl.gpx.ImportGpxParams;
 import net.osmand.aidl.gpx.ShowGpxParams;
+import net.osmand.aidl.gpx.StartGpxRecordingParams;
+import net.osmand.aidl.gpx.StopGpxRecordingParams;
 import net.osmand.aidl.map.SetMapLocationParams;
 import net.osmand.aidl.maplayer.AddMapLayerParams;
 import net.osmand.aidl.maplayer.RemoveMapLayerParams;
@@ -25,6 +31,12 @@ import net.osmand.aidl.mapmarker.UpdateMapMarkerParams;
 import net.osmand.aidl.mapwidget.AddMapWidgetParams;
 import net.osmand.aidl.mapwidget.RemoveMapWidgetParams;
 import net.osmand.aidl.mapwidget.UpdateMapWidgetParams;
+import net.osmand.aidl.navigation.NavigateGpxParams;
+import net.osmand.aidl.navigation.NavigateParams;
+import net.osmand.aidl.note.StartAudioRecordingParams;
+import net.osmand.aidl.note.StopRecordingParams;
+import net.osmand.aidl.note.TakePhotoNoteParams;
+import net.osmand.aidl.note.StartVideoRecordingParams;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 
@@ -47,6 +59,69 @@ public class OsmandAidlService extends Service {
 	}
 
 	private final IOsmAndAidlInterface.Stub mBinder = new IOsmAndAidlInterface.Stub() {
+
+		@Override
+		public boolean refreshMap() throws RemoteException {
+			try {
+				return getApi().reloadMap();
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean addFavoriteGroup(AddFavoriteGroupParams params) throws RemoteException {
+			try {
+				return params != null && getApi().addFavoriteGroup(params.getFavoriteGroup());
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean removeFavoriteGroup(RemoveFavoriteGroupParams params) throws RemoteException {
+			try {
+				return params != null && getApi().removeFavoriteGroup(params.getFavoriteGroup());
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean updateFavoriteGroup(UpdateFavoriteGroupParams params) throws RemoteException {
+			try {
+				return params != null && getApi().updateFavoriteGroup(params.getFavoriteGroupPrev(), params.getFavoriteGroupNew());
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean addFavorite(AddFavoriteParams params) throws RemoteException {
+			try {
+				return params != null && getApi().addFavorite(params.getFavorite());
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean removeFavorite(RemoveFavoriteParams params) throws RemoteException {
+			try {
+				return params != null && getApi().removeFavorite(params.getFavorite());
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean updateFavorite(UpdateFavoriteParams params) throws RemoteException {
+			try {
+				return params != null && getApi().updateFavorite(params.getFavoritePrev(), params.getFavoriteNew());
+			} catch (Exception e) {
+				return false;
+			}
+		}
 
 		@Override
 		public boolean addMapMarker(AddMapMarkerParams params) throws RemoteException {
@@ -160,11 +235,14 @@ public class OsmandAidlService extends Service {
 		public boolean importGpx(ImportGpxParams params) throws RemoteException {
 			if (params != null && !Algorithms.isEmpty(params.getDestinationPath())) {
 				if (params.getGpxFile() != null) {
-					return getApi().importGpxFromFile(params.getGpxFile(), params.getDestinationPath());
+					return getApi().importGpxFromFile(params.getGpxFile(), params.getDestinationPath(),
+							params.getColor(), params.isShow());
 				} else if (params.getGpxUri() != null) {
-					return getApi().importGpxFromUri(params.getGpxUri(), params.getDestinationPath());
+					return getApi().importGpxFromUri(params.getGpxUri(), params.getDestinationPath(),
+							params.getColor(), params.isShow());
 				} else if (params.getSourceRawData() != null) {
-					return getApi().importGpxFromData(params.getSourceRawData(), params.getDestinationPath());
+					return getApi().importGpxFromData(params.getSourceRawData(), params.getDestinationPath(),
+							params.getColor(), params.isShow());
 				}
 			}
 			return false;
@@ -255,6 +333,77 @@ public class OsmandAidlService extends Service {
 		public boolean setMaxSpeed(float maxSpeed) throws RemoteException {
 			getApi().setMaxSpeed(maxSpeed);
 			return true;
+		}
+		@Override
+		public boolean startGpxRecording(StartGpxRecordingParams params) throws RemoteException {
+			try {
+				return getApi().startGpxRecording(params);
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean stopGpxRecording(StopGpxRecordingParams params) throws RemoteException {
+			try {
+				return getApi().stopGpxRecording(params);
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean takePhotoNote(TakePhotoNoteParams params) throws RemoteException {
+			try {
+				return params != null && getApi().takePhotoNote(params.getLatitude(), params.getLongitude());
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean startVideoRecording(StartVideoRecordingParams params) throws RemoteException {
+			try {
+				return params != null && getApi().startVideoRecording(params.getLatitude(), params.getLongitude());
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean startAudioRecording(StartAudioRecordingParams params) throws RemoteException {
+			try {
+				return params != null && getApi().startAudioRecording(params.getLatitude(), params.getLongitude());
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean stopRecording(StopRecordingParams params) throws RemoteException {
+			try {
+				return getApi().stopRecording();
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean navigate(NavigateParams params) throws RemoteException {
+			try {
+				return params != null && getApi().navigate(params.getStartName(), params.getStartLat(), params.getStartLon(), params.getDestName(), params.getDestLat(), params.getDestLon(), params.getProfile(), params.isForce());
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean navigateGpx(NavigateGpxParams params) throws RemoteException {
+			try {
+				return params != null && getApi().navigateGpx(params.getData(), params.getUri(), params.isForce());
+			} catch (Exception e) {
+				return false;
+			}
 		}
 	};
 }

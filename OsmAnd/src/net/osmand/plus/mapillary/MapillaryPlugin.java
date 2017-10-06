@@ -23,6 +23,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.BottomSheetDialogFragment;
@@ -34,7 +35,10 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
+import java.text.MessageFormat;
 import java.util.List;
+
+import static android.content.Intent.ACTION_VIEW;
 
 public class MapillaryPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.mapillary";
@@ -90,17 +94,21 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		updateMapLayers(mapView, activity.getMapLayers());
+		updateMapLayers(mapView, activity.getMapLayers(), false);
 	}
 
-	private void updateMapLayers(OsmandMapTileView mapView, final MapActivityLayers layers) {
+	public void updateLayers(OsmandMapTileView mapView, MapActivity activity, boolean force) {
+		updateMapLayers(mapView, activity.getMapLayers(), force);
+	}
+
+	private void updateMapLayers(OsmandMapTileView mapView, final MapActivityLayers layers, boolean force) {
 		if (rasterLayer == null || vectorLayer == null) {
 			createLayers();
 		}
 		if (isActive()) {
 			ITileSource rasterSource = null;
 			ITileSource vectorSource = null;
-			if (settings.SHOW_MAPILLARY.get()) {
+			if (settings.SHOW_MAPILLARY.get() || force) {
 				rasterSource = settings.getTileSourceByName(TileSourceManager.getMapillaryRasterSource().getName(), false);
 				vectorSource = settings.getTileSourceByName(TileSourceManager.getMapillaryVectorSource().getName(), false);
 			}
@@ -150,7 +158,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 					OsmandMapTileView mapView = mapActivity.getMapView();
 					MapActivityLayers mapLayers = mapActivity.getMapLayers();
 					settings.SHOW_MAPILLARY.set(!settings.SHOW_MAPILLARY.get());
-					updateMapLayers(mapView, mapLayers);
+					updateMapLayers(mapView, mapLayers, false);
 					ContextMenuItem item = adapter.getItem(pos);
 					if (item != null) {
 						item.setSelected(settings.SHOW_MAPILLARY.get());
@@ -186,7 +194,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	private TextInfoWidget createMonitoringControl(final MapActivity map) {
 		mapillaryControl = new TextInfoWidget(map);
-		mapillaryControl.setText("", map.getString(R.string.mapillary));
+		mapillaryControl.setText(map.getString(R.string.mapillary), "");
 		mapillaryControl.setIcons(R.drawable.widget_mapillary_day, R.drawable.widget_mapillary_night);
 		mapillaryControl.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -216,22 +224,25 @@ public class MapillaryPlugin extends OsmandPlugin {
 		boolean success = false;
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		if (isPackageInstalled(MAPILLARY_PACKAGE_ID, app)) {
-			Intent launchIntent = app.getPackageManager().getLaunchIntentForPackage(MAPILLARY_PACKAGE_ID);
-			if (launchIntent != null) {
-				if (imageKey != null) {
-					launchIntent.putExtra("photo_id", imageKey);
-				}
-				app.startActivity(launchIntent);
-				success = true;
+			if (imageKey != null) {
+				Intent intent = new Intent(ACTION_VIEW, Uri.parse(MessageFormat.format("mapillary://mapillary/photo/{0}?image_key={0}", imageKey)));
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				app.startActivity(intent);
+			} else {
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mapillary://mapillary/capture"));
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				app.startActivity(intent);
 			}
+			success = true;
 		} else {
 			new MapillaryInstallDialogFragment().show(activity.getSupportFragmentManager(), MapillaryInstallDialogFragment.TAG);
 		}
 		return success;
 	}
 
-	public static boolean installMapillary(OsmandApplication app) {
-		boolean success = execInstall(app, "market://search?q=pname:" + MAPILLARY_PACKAGE_ID);
+	public static boolean installMapillary(Activity activity, OsmandApplication app) {
+		app.logEvent(activity, "install_mapillary");
+		boolean success = execInstall(app, Version.getUrlWithUtmRef(app, MAPILLARY_PACKAGE_ID));
 		if (!success) {
 			success = execInstall(app, "https://play.google.com/store/apps/details?id=" + MAPILLARY_PACKAGE_ID);
 		}
@@ -239,7 +250,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	private static boolean execInstall(OsmandApplication app, String url) {
-		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+		Intent intent = new Intent(ACTION_VIEW, Uri.parse(url));
 		try {
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			app.startActivity(intent);

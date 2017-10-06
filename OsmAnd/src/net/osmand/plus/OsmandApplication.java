@@ -14,7 +14,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.PreferenceManager;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AlertDialog;
@@ -129,7 +128,7 @@ public class OsmandApplication extends MultiDexApplication {
 	@Override
 	public void onCreate() {
 		long timeToStart = System.currentTimeMillis();
-		if (Version.getAppName(this).equals("OsmAnd~")) {
+		if (Version.isDeveloperVersion(this)) {
 			if (android.os.Build.VERSION.SDK_INT >= 9) {
 				try {
 					Class.forName("net.osmand.plus.base.EnableStrictMode").newInstance();
@@ -158,6 +157,7 @@ public class OsmandApplication extends MultiDexApplication {
 			externalStorageDirectoryReadOnly = true;
 			externalStorageDirectory = osmandSettings.getInternalAppPath();
 		}
+		osmandSettings.USE_MAP_MARKERS.set(true);
 		
 		checkPreferredLocale();
 		appInitializer.onCreateApplication();
@@ -436,6 +436,12 @@ public class OsmandApplication extends MultiDexApplication {
 						}
 					}
 				});
+				builder.setNeutralButton(R.string.shared_string_do_not_use, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+						osmandSettings.VOICE_PROVIDER.set(OsmandSettings.VOICE_PROVIDER_NOT_USE);
+					}
+				});
 
 				builder.setView(view);
 				builder.show();
@@ -688,10 +694,19 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void applyTheme(Context c) {
 		int t = R.style.OsmandDarkTheme;
+		boolean doNotUseAnimations = osmandSettings.DO_NOT_USE_ANIMATIONS.get();
 		if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME) {
-			t = R.style.OsmandDarkTheme;
+			if (doNotUseAnimations) {
+				t = R.style.OsmandDarkTheme_NoAnimation;
+			} else {
+				t = R.style.OsmandDarkTheme;
+			}
 		} else if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME) {
-			t = R.style.OsmandLightTheme;
+			if (doNotUseAnimations) {
+				t = R.style.OsmandLightTheme_NoAnimation;
+			} else {
+				t = R.style.OsmandLightTheme;
+			}
 		}
 		setLanguage(c);
 		c.setTheme(t);

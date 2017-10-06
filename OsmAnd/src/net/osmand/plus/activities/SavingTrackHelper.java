@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.text.format.DateFormat;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
@@ -32,6 +33,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class SavingTrackHelper extends SQLiteOpenHelper {
 	
@@ -198,6 +200,20 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					File fout = new File(dir, f + ".gpx"); //$NON-NLS-1$
 					if (!data.get(f).isEmpty()) {
 						WptPt pt = data.get(f).findPointToShow();
+
+						if (ctx.getSettings().STORE_TRACKS_IN_MONTHLY_DIRECTORIES.get()) {
+							SimpleDateFormat dateDirFormat = new SimpleDateFormat("yyyy-MM");
+							dateDirFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+							String dateDirName = dateDirFormat.format(new Date(pt.time));
+
+							File dateDir = new File(dir, dateDirName);
+							dateDir.mkdirs();
+
+							if (dateDir.exists()) {
+								dir = dateDir;
+							}
+						}
+
 						String fileName = f + "_" + new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time)); //$NON-NLS-1$
 						fout = new File(dir, fileName + ".gpx"); //$NON-NLS-1$
 						int ind = 1;
@@ -211,6 +227,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 						warnings.add(warn);
 						return warnings;
 					}
+
+					GPXFile gpx = data.get(f);
+					GPXTrackAnalysis analysis = gpx.getAnalysis(fout.lastModified());
+					GpxDataItem item = new GpxDataItem(fout, analysis);
+					ctx.getGpxDatabase().add(item);
 				}
 			}
 		}

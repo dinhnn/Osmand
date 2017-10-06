@@ -49,7 +49,7 @@ public abstract class PointEditorFragment extends Fragment {
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setTitle(getToolbarTitle());
-		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
+		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setTitleTextColor(getResources().getColor(getResIdFromAttribute(getMapActivity(), R.attr.pstsTextColor)));
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -118,7 +118,7 @@ public abstract class PointEditorFragment extends Fragment {
 			public boolean onTouch(final View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_UP) {
 					DialogFragment dialogFragment =
-							SelectCategoryDialogFragment.createInstance(getEditor().getFragmentTag());
+							createSelectCategoryDialog();
 					dialogFragment.show(getChildFragmentManager(), SelectCategoryDialogFragment.TAG);
 					return true;
 				}
@@ -174,6 +174,10 @@ public abstract class PointEditorFragment extends Fragment {
 		}
 
 		return view;
+	}
+
+	protected DialogFragment createSelectCategoryDialog() {
+		return SelectCategoryDialogFragment.createInstance(getEditor().getFragmentTag());
 	}
 
 	public Drawable getRowIcon(int iconId) {

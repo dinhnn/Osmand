@@ -15,7 +15,10 @@ import android.view.ViewGroup;
 import android.webkit.ConsoleMessage;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,6 +36,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -76,21 +80,25 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	private String viewerUrl;
 	private LatLon latLon;
 	private double ca = Double.NaN;
+	private boolean sync;
 
 	private View staticImageView;
+	private View noInternetView;
 	private List<Pair<QuadPointDouble, GeometryTile>> tiles = new ArrayList<>();
 	private double fetchedTileLat = Double.NaN;
 	private double fetchedTileLon = Double.NaN;
 	private List<MapillaryImage> sequenceImages = new ArrayList<>();
 	private AtomicInteger downloadRequestNumber = new AtomicInteger();
+	private IconsCache ic;
 
 	public MapillaryImageDialog(@NonNull MapActivity mapActivity, @NonNull Bundle bundle) {
 		super(mapActivity, CardDialogType.MAPILLARY);
 		restoreFields(bundle);
+		this.ic = mapActivity.getMyApplication().getIconsCache();
 	}
 
 	public MapillaryImageDialog(MapActivity mapActivity, String key, String sKey, String imageUrl,
-								String viewerUrl, LatLon latLon, double ca, String title, String description) {
+								String viewerUrl, LatLon latLon, double ca, String title, String description, boolean sync) {
 		super(mapActivity, CardDialogType.MAPILLARY);
 		this.title = title;
 		this.description = description;
@@ -100,6 +108,8 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		this.viewerUrl = viewerUrl;
 		this.latLon = latLon;
 		this.ca = ca;
+		this.ic = mapActivity.getMyApplication().getIconsCache();
+		this.sync = sync;
 	}
 
 	public String getKey() {
@@ -180,11 +190,14 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	}
 
 	public View getContentView() {
+		return getWebView();
+		/*
 		if (getMapActivity().getMyApplication().getSettings().WEBGL_SUPPORTED.get()) {
 			return getWebView();
 		} else {
 			return getStaticImageView();
 		}
+		*/
 	}
 
 	@Override
@@ -208,17 +221,28 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 
 
 	@SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
-	private WebView getWebView() {
-		final WebView webView = new WebView(getMapActivity());
+	private View getWebView() {
+		View view = getMapActivity().getLayoutInflater().inflate(R.layout.mapillary_web_view, null);
+		final WebView webView = view.findViewById(R.id.webView);
 		webView.setBackgroundColor(Color.argb(1, 0, 0, 0));
+		final View noInternetView = view.findViewById(R.id.mapillaryNoInternetLayout);
+		((ImageView) noInternetView.findViewById(R.id.wifiOff)).setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_wifi_off));
 		//webView.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
-		webView.setScrollContainer(false);
+		view.setScrollContainer(false);
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.addJavascriptInterface(new MapillaryWebAppInterface(), "Android");
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				isPortrait() ? ViewGroup.LayoutParams.MATCH_PARENT : AndroidUtils.dpToPx(getMapActivity(), 360f),
 				isPortrait() ? AndroidUtils.dpToPx(getMapActivity(), 270f) : ViewGroup.LayoutParams.MATCH_PARENT);
-		webView.setLayoutParams(lp);
+		view.setLayoutParams(lp);
+		webView.setWebViewClient(new WebViewClient() {
+			@Override
+			public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+				webView.loadUrl("about:blank");
+				noInternetView.setVisibility(View.VISIBLE);
+			}
+		});
+		/*
 		webView.setWebChromeClient(new WebChromeClient() {
 			@Override
 			public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
@@ -229,8 +253,16 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 				return false;
 			}
 		});
+		*/
+		noInternetView.findViewById(R.id.retry_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				noInternetView.setVisibility(View.GONE);
+				webView.loadUrl(viewerUrl);
+			}
+		});
 		webView.loadUrl(viewerUrl);
-		return webView;
+		return view;
 	}
 
 	private class MapillaryWebAppInterface {
@@ -273,14 +305,24 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 			}
 		});
 
-		staticImageView = view;
+		staticImageView = view.findViewById(R.id.staticImageViewLayout);
+
+		noInternetView = view.findViewById(R.id.mapillaryNoInternetLayout);
+		((ImageView) noInternetView.findViewById(R.id.wifiOff)).setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_wifi_off));
+		noInternetView.findViewById(R.id.retry_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				MenuBuilder.execute(new DownloadImageTask(staticImageView, downloadRequestNumber.incrementAndGet(), downloadRequestNumber));
+				fetchSequence();
+			}
+		});
 
 		if (!Algorithms.isEmpty(imageUrl)) {
 			MenuBuilder.execute(new DownloadImageTask(staticImageView, downloadRequestNumber.incrementAndGet(), downloadRequestNumber));
 			fetchSequence();
 		}
 		updateArrowButtons();
-		return staticImageView;
+		return view;
 	}
 
 	private void fetchSequence() {
@@ -440,7 +482,12 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 					// asking tile image async
 					boolean imgExist = mgr.tileExistOnFileSystem(tileId, map, tileX, tileY, TILE_ZOOM);
 					if (imgExist) {
-						tile = mgr.getGeometryTilesCache().getTileForMapAsync(tileId, map, tileX, tileY, TILE_ZOOM, false);
+						if (sync) {
+							tile = mgr.getGeometryTilesCache().getTileForMapSync(tileId, map, tileX, tileY, TILE_ZOOM, false);
+							sync = false;
+						} else {
+							tile = mgr.getGeometryTilesCache().getTileForMapAsync(tileId, map, tileX, tileY, TILE_ZOOM, false);
+						}
 					}
 					if (tile != null) {
 						tiles.put(tileId, new Pair<>(new QuadPointDouble(tileX,  tileY), tile));
@@ -457,7 +504,16 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 											String viewerUrl, LatLon latLon, double ca,
 											String title, String description) {
 		MapillaryImageDialog dialog = new MapillaryImageDialog(mapActivity, key, null, imageUrl,
-				viewerUrl, latLon, ca, title, description);
+				viewerUrl, latLon, ca, title, description, false);
+		ContextMenuCardDialogFragment.showInstance(dialog);
+		return dialog;
+	}
+
+	public static MapillaryImageDialog show(MapActivity mapActivity, String key, String imageUrl,
+											String viewerUrl, LatLon latLon, double ca,
+											String title, String description, boolean sync) {
+		MapillaryImageDialog dialog = new MapillaryImageDialog(mapActivity, key, null, imageUrl,
+				viewerUrl, latLon, ca, title, description, sync);
 		ContextMenuCardDialogFragment.showInstance(dialog);
 		return dialog;
 	}
@@ -468,7 +524,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		String viewerUrl = MAPILLARY_VIEWER_URL_TEMPLATE + key;
 		LatLon latLon = new LatLon(latitude, longitude);
 		MapillaryImageDialog dialog = new MapillaryImageDialog(mapActivity, key, sKey, imageUrl, viewerUrl,
-				latLon, ca, title, description);
+				latLon, ca, title, description, false);
 		ContextMenuCardDialogFragment.showInstance(dialog);
 		return dialog;
 	}
@@ -493,6 +549,8 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 
 		@Override
 		protected void onPreExecute() {
+			noInternetView.setVisibility(View.GONE);
+			staticImageView.setVisibility(View.VISIBLE);
 			if (progressBar != null) {
 				progressBar.setVisibility(View.VISIBLE);
 			}
@@ -518,8 +576,14 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 				if (progressBar != null) {
 					progressBar.setVisibility(View.GONE);
 				}
-				if (bitmap != null && imageView != null) {
-					imageView.setImageDrawable(new BitmapDrawable(getMapActivity().getResources(), bitmap));
+				if (imageView != null) {
+					if (bitmap != null) {
+						imageView.setImageDrawable(new BitmapDrawable(getMapActivity().getResources(), bitmap));
+					} else {
+						imageView.setImageDrawable(null);
+						staticImageView.setVisibility(View.GONE);
+						noInternetView.setVisibility(View.VISIBLE);
+					}
 				}
 			}
 		}

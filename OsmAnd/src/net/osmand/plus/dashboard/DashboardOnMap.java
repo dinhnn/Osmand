@@ -487,7 +487,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		lst.setVisibility(View.GONE);
 		ImageView back = (ImageView) dashboardView.findViewById(R.id.toolbar_back);
 		back.setImageDrawable(
-				getMyApplication().getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
+				getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back));
 		back.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -757,7 +757,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	public void setDashboardVisibility(boolean visible, DashboardType type) {
-		setDashboardVisibility(visible, type, this.visible ? visibleType : null, true);
+		boolean animate = !getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get();
+		setDashboardVisibility(visible, type, this.visible ? visibleType : null, animate);
 	}
 
 	public void setDashboardVisibility(boolean visible, DashboardType type, boolean animation) {
@@ -793,8 +794,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		if (swipeDismissListener != null) {
 			swipeDismissListener.discardUndo();
 		}
+		removeMapillaryFiltersFragment();
 
 		if (visible) {
+			mapActivity.dismissCardDialog();
 			mapActivity.getContextMenu().hideMenues();
 			mapViewLocation = mapActivity.getMapLocation();
 			mapRotation = mapActivity.getMapRotate();
@@ -818,7 +821,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 			ScrollView scrollView = (ScrollView) dashboardView.findViewById(R.id.main_scroll);
 			if (visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.MAPILLARY) {
-				removeMapillaryFiltersFragment();
 				if (visibleType == DashboardType.DASHBOARD) {
 					addOrUpdateDashboardFragments();
 				} else {
@@ -1186,7 +1188,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 			mapActivity.refreshMap();
 		}
-		hideDashboard(true);
+		boolean animate = !getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get();
+		hideDashboard(animate);
 	}
 
 

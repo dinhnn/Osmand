@@ -1603,7 +1603,7 @@
 	<string name="poi_tents_no">Tentes interdites</string>
 	<string name="poi_openfire_yes">Feu autorisé</string>
 	<string name="poi_openfire_no">Feu interdit</string>
-	<string name="poi_scout_yes">Camp scout : oui</string>
+	<string name="poi_scout_yes">Oui</string>
 	<string name="poi_scout_no">Camp scout : non</string>
 	<string name="poi_group_only_yes">Groupe seulement : oui</string>
 	<string name="poi_group_only_no">Groupe seulement : non</string>
@@ -1946,7 +1946,7 @@
 	<string name="poi_social_facility_food_bank">Banque alimentaire</string>
 	<string name="poi_historic_civilization_ancient_greek">Civilisation : Grèce antique</string>
 	<string name="poi_payment_pro100_no">Cartes PRO100 non acceptées</string>
-	<string name="poi_payment_pro100_yes">"PRO100 "</string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
 	<string name="poi_fair_trade_no">Commerce équitable : non</string>
 	<string name="poi_fair_trade_only">Uniquement des produits issus du commerce équitable</string>
 
@@ -2432,8 +2432,8 @@
 	<string name="poi_outdoor_seating_filter_yes">Oui</string>
 	<string name="poi_brushless_yes">Oui</string>
 	<string name="poi_architecture_stalinist_neoclassicism">"Architecture :  néoclassicisme stalinien"</string>
-	<string name="poi_service_bicycle_charging_yes">Recharge de vélos : oui</string>
-	<string name="poi_service_bicycle_charging_no">Recharge de vélos : non</string>
+	<string name="poi_service_bicycle_charging_yes">Recharge: oui</string>
+	<string name="poi_service_bicycle_charging_no">Recharge: non</string>
 	<string name="poi_clothes_schoolwear">École</string>
 	<string name="poi_shower_filter_yes">Oui</string>
 	<string name="poi_social_facility_shelter">Abri</string>
@@ -2634,12 +2634,12 @@
 	<string name="poi_historic_period_old_kingdom">Période historique : Ancien Empire (2686 – 2181 av. J.C.)</string>
 	<string name="poi_historic_period_first_intermediate_period">Période historique : Première Période intermédiaire (2181 – 2055 av. J.C.)</string>
 	<string name="poi_historic_period_second_intermediate_period">Période historique : Deuxième Période intermédiaire (1650 – 1550 av. J.C.)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Période historique : Troisième Période intermédiaire (1069 – 664 av. J.C.) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Période historique : Troisième Période intermédiaire (1069 – 664 av. J.C.)</string>
 	<string name="poi_historic_period_greek_dark_ages">Période historique : siècles obscurs grecques (1100 – 800 av. J.C.)</string>
 	<string name="poi_historic_period_roman_greece">Période historique : Grèce romaine (146 av. J.C. – 330 ap. J.C.)</string>
 	<string name="poi_historic_period_roman_kingdom">Période historique : Royauté romaine (753 av. J.C. – 509 av. J.C.)</string>
 	<string name="poi_historic_period_dominate">Période historique : dominat (285 ap. J.C. – 476 ap. J.C.)</string>
-	<string name="poi_historic_era_paleolithic">Période historique : paléolithique (2,6 millions d\'années – 10000 AP)</string>
+	<string name="poi_historic_era_paleolithic">Période historique : paléolithique (2,6 millions d\'années – 10000 avant le présent)</string>
 	<string name="poi_historic_era_mesolithic">Période historique : mésolithique</string>
 	<string name="poi_historic_era_neolithic">Période historique : néolithique</string>
 	<string name="poi_historic_era_chalcolithic">Période historique : chalcolithique (4ème–3ème millénaire av. J.C.)</string>
@@ -2964,7 +2964,7 @@
 	<string name="poi_lit_no">Éclairé : non</string>
 
 	<string name="poi_route_light_rail_ref">Métro léger</string>
-	<string name="poi_industrial_wellsite"/>
+	<string name="poi_industrial_wellsite">Type: puits</string>
 	<string name="poi_step_condition_rough">État des marches : rugueuses</string>
 
 	<string name="poi_step_condition_even">État des marches : régulières</string>
@@ -3003,4 +3003,87 @@
 	<string name="poi_vending_water">Vente d\'eau</string>
 	<string name="poi_fuel_autogas">GPL/LPG</string>
 	<string name="poi_crop_rape">Culture : colza</string>
+	<string name="poi_animal_shelter_type">Animaux acceptés</string>
+	<string name="poi_animal_shelter_purpose">Objet</string>
+
+<string name="poi_seamark_dyke">Digue marine</string>
+	<string name="poi_lock_basin">Bassin fermé</string>
+	<string name="poi_animal_shelter_wildlife">Faune</string>
+	<string name="poi_animal_shelter_horse">Chevaux</string>
+	<string name="poi_animal_shelter_mammal">Mammifères</string>
+	<string name="poi_animal_shelter_fish">Poissons</string>
+
+	<string name="poi_information_trail_blaze">Balise de voie</string>
+	<string name="poi_traffic_signals_sound_walk">Autorisé uniquement à pied</string>
+
+	<string name="poi_piste_grooming_backcountry">Arrière-pays</string>
+	<string name="poi_aerialway_occupancy">Cabine/Siège/capacité de voiture</string>
+	<string name="poi_payment_account_cards_yes">Cartes de comptes</string>
+	<string name="poi_payment_account_cards_no">Cartes de compte non acceptées</string>
+	<string name="poi_payment_ep_cash_yes">Carte de paiement</string>
+	<string name="poi_payment_ep_cash_no">carte de paiement non acceptée</string>
+	<string name="poi_full_service_yes">Service complet</string>
+	<string name="poi_resource_dimension_stone">Pierre de taille</string>
+	<string name="poi_artwork_type_relief">Type d\'oeuvre : secours</string>
+	<string name="poi_architecture_timber_frame">Architecture : Cadre en bois</string>
+	<string name="poi_architecture_oldrussian">Architecture : russe ancien</string>
+	<string name="poi_architecture_wilhelminian_style">Architecture : Style wilhelminien</string>
+	<string name="poi_tunnel_waterway">Tunnel d\'eau</string>
+	<string name="poi_bridge_waterway">Pont de voie navigable</string>
+	<string name="poi_payment_ep_minicash_yes">MiniCash</string>
+	<string name="poi_payment_ep_monedero4b_yes">Monedero 4B</string>
+	<string name="poi_payment_ep_monedero_yes">Monedero</string>
+	<string name="poi_brushless_no">Sans brosse : non</string>
+	<string name="poi_boat_rental_type">Location bateaux</string>
+
+<string name="poi_toilets_access_community">Accès toilettes : communauté</string>
+	<string name="poi_vending_toll">Péage par automate</string>
+	<string name="poi_memorial_fassade_decoration">Décoration de façade</string>
+
+	<string name="poi_bridge_structure_simple_wooden">Structure de pont : Bois simple</string>
+	<string name="poi_bridge_structure_log">Structure du pont : rondin</string>
+	<string name="poi_surface_pebblestone">Surface : cailloux</string>
+	<string name="poi_surface_compacted">Surface : sol compacté</string>
+	<string name="poi_surface_grass_paver">Surface : pavés d\'herbes</string>
+	<string name="poi_surface_ground">Surface: terre</string>
+	<string name="poi_route_railway_ref">Voie de chemin de fer</string>
+
+	<string name="poi_animal_boarding_dog">Type d\'hébergement: chien</string>
+	<string name="poi_animal_boarding_cat">Type d\'hébergement: chat</string>
+	<string name="poi_animal_boarding_dog_cat">Type d\'hébergement: chien, chat</string>
+	<string name="poi_animal_boarding_horse">Type d\'hébergement: cheval</string>
+
+	<string name="poi_publisher">Bureau d\'édition</string>
+
+	<string name="poi_fuel_91ul">Carburant 91UL</string>
+	<string name="poi_fuel_100ll">Carburant 100LL</string>
+	<string name="poi_fuel_jeta1">Carburant Jet A-1</string>
+	<string name="poi_fuel_adblue">Carburant AdBlue</string>
+
+	<string name="poi_power_supply_cee_17_blue">Alimentation (prise): CEE 17 bleu</string>
+	<string name="poi_power_supply_cee_7_4">Alimentation (prise): CEE 7/4</string>
+	<string name="poi_power_supply_cee_7_5">Alimentation (prise): CEE 7/5</string>
+	<string name="poi_power_supply_nema_5_15">Alimentation (prise): NEMA 5-15</string>
+
+	<string name="poi_refugee_yes">Équipement pour les réfugiés</string>
+	<string name="poi_social_facility_group_home">Foyer de groupe</string>
+	<string name="poi_social_facility_assisted_living">Vie assistée</string>
+	<string name="poi_social_facility_outreach">Sensibilisation</string>
+	<string name="poi_social_facility_for_diseased">Malade</string>
+	<string name="poi_tomb_rock_cut">Type: coupe de roche</string>
+	<string name="poi_historic_civilization_ancient_roman">Civilisation: ancien romain \'753 av. JC. - 284 ap. JC.)</string>
+	<string name="poi_historic_period_early_dynastic_period">Période historique: période dynastique antérieure (3100 - 2686 av. J.-C.)</string>
+	<string name="poi_historic_period_first_persian_period">Période historique: première période perse</string>
+	<string name="poi_historic_period_late_period">Période historique: période tardive (664 - 332 av. J.-C.)</string>
+	<string name="poi_historic_period_second_persian_period">Période historique: deuxième période perse</string>
+	<string name="poi_historic_period_ptolemaic_egypt">Période historique: egypte ptolemaïque (305 av. J.-C. - 30 av. J.-C.)</string>
+	<string name="poi_historic_period_christian_egypt">Période historique: Egypte chrétienne</string>
+	<string name="poi_historic_period_byzantine_egypt">Période historique: Egypte chrétienne</string>
+	<string name="poi_historic_period_persian_occupation">Période historique: occupation persane</string>
+	<string name="poi_historic_period_villager">Période historique: villageois (époque I, II, 1580 avant JC - 133 après JC)</string>
+	<string name="poi_historic_period_urban">Période historique: urbaine (époque III, 133 AD - 374 après JC)</string>
+	<string name="poi_historic_period_classical">Période historique: classique (époque IV, 374 ap. JC - 900 ap. JC)</string>
+	<string name="poi_historic_period_imperial">Période historique: impériale (époque V, 900 ap. JC - 1200 ap. JC)</string>
+
+	<string name="poi_stone_type_conciliation_cross">Type: croix de conciliation</string>
 	</resources>

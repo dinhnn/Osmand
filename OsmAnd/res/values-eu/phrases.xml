@@ -1078,7 +1078,7 @@
 	<string name="poi_hostel">Hostatua</string>
 	<string name="poi_chalet">Txaleta</string>
 	<string name="poi_alpine_hut">Mendi-aterpea</string>
-	<string name="poi_apartment">Etxebizitza</string>
+	<string name="poi_apartment">Apartamentua</string>
 	<string name="poi_wilderness_hut">Borda</string>
 	<string name="poi_cabin">Etxola</string>
 	<string name="poi_hunting_lodge">Ehiztari-aterpea</string>
@@ -1427,7 +1427,7 @@
 	<string name="poi_bitcoin_yes">Bitcoin bidezko ordainketa</string>
 
 	<string name="poi_cave_entrance">Haitzulora sarrera</string>
-	<string name="poi_backcountry">Pistaz kanpo</string>
+	<string name="poi_backcountry">Pistatik at</string>
 	<string name="poi_drive_through">Autoz zeharkatu</string>
 	<string name="poi_nudism">Nudismoa</string>
 
@@ -1518,8 +1518,8 @@
 	<string name="poi_casino">Kasinoa</string>
 	<string name="poi_community_centre">Komunitate zentroa</string>
 	<string name="poi_social_centre">Gizarte zentroa</string>
-	<string name="poi_ferry_terminal_cargo">Kargaontzia</string>
-	<string name="poi_scout_camp">Ikuskatzaileen kanpamentua</string>
+	<string name="poi_ferry_terminal_cargo">Karga</string>
+	<string name="poi_scout_camp">Eskaut kanpina</string>
 	<string name="poi_diet_vegetarian_only">Begetarianoa besterik ez</string>
 	<string name="poi_diet_vegetarian_yes">Begetarianoa</string>
 	<string name="poi_diet_vegetarian_no">Dieta begetarianoa: ez</string>
@@ -1566,9 +1566,9 @@
 	<string name="poi_training_aviation">Heziketa: abiazioa</string>
 	<string name="poi_training_hairdressing">Heziketa: ile-apaintzailea</string>
 
-	<string name="poi_tactile_paving">Ukimen zoladura</string>
-	<string name="poi_piste_grooming">Pisten prestaketa</string>
-	<string name="poi_drive_in">Drive in</string>
+	<string name="poi_tactile_paving">Ukimenezko zoladura</string>
+	<string name="poi_piste_grooming">Pistaren prestaketa</string>
+	<string name="poi_drive_in">Autoz sartu</string>
 	<string name="poi_diet">Dieta</string>
 	<string name="poi_health_specialty">Osasun espezialitatea</string>
 	<string name="poi_massage_type">Masaje mota</string>
@@ -1843,7 +1843,7 @@
 	<string name="poi_aerialway_station">Teleaulki geltokia</string>
 	<string name="poi_aerialway_magic_carpet">Tapiz magikoa (igogailua)</string>
 	<string name="poi_aerialway_rope_tow">Kable-igogailua</string>
-	<string name="poi_aerialway_pylon">Metalezko dorreak dituen teleaulkia</string>
+	<string name="poi_aerialway_pylon">Metalezko dorreak dituen kable bidezko igogailua</string>
 
 	<string name="poi_water_works">Edateko uren araztegia</string>
 	<string name="poi_waterway_turning_point">Ubidearen biraketa puntua</string>
@@ -2169,4 +2169,50 @@
 	<string name="poi_elevator_yes">Igogailuarekin</string>
 	<string name="poi_elevator_no">Igogailu gabe</string>
 
+	<string name="poi_cafeteria">Kafetegia</string>
+	<string name="poi_zoo_type">Mota</string>
+	<string name="poi_motorcycle_services">Zerbitzuak</string>
+	<string name="poi_motorcycle_type">Motor mota</string>
+
+<string name="poi_animal_shelter_type">Animalia onartuak</string>
+	<string name="poi_animal_shelter_purpose">Helburu zehatza</string>
+
+<string name="poi_buoy_lateral">Alboko buia</string>
+	<string name="poi_buoy_safe_water">Ur bareen buia</string>
+	<string name="poi_buoy_special_purpose">Helburu bereziko buia</string>
+	<string name="poi_daymark">Eguneko seinalea</string>
+	<string name="poi_distance_mark">Distantzia marka</string>
+	<string name="poi_dry_dock">Dike lehorra</string>
+	<string name="poi_seamark_dyke">Dike-seinalea</string>
+	<string name="poi_floating_dock">dike flotatzailea</string>
+	<string name="poi_fog_signal">Laino seinalea</string>
+	<string name="poi_harbour_basin">Nasa</string>
+	<string name="poi_seamark_harbour">Kaia</string>
+	<string name="poi_landmark">Lurreko marka</string>
+	<string name="poi_seamark_light">Itsas argia</string>
+	<string name="poi_seamark_light_major">Itsas argi nagusia</string>
+	<string name="poi_seamark_light_minor">Itsas argi txikia</string>
+	<string name="poi_seamark_light_float">Itsas argi flotatzailea</string>
+	<string name="poi_seamark_light_vessel">Itsasargi ontzia</string>
+	<string name="poi_mooring">Amarratze</string>
+	<string name="poi_lock_basin">Esklusako atea</string>
+	<string name="poi_notice">Itsas oharra</string>
+	<string name="poi_pile">Pilote</string>
+	<string name="poi_wiki_lang_bs">Wikia bosnieraz</string>
+	<string name="poi_bicycle_parking_wall_loops">Hormako begiztak</string>
+	<string name="poi_capacity">Ahalmena</string>
+	<string name="poi_crossing_activation_automatic">Bidegurutzearen aktibazioa: automatikoa</string>
+	<string name="poi_crossing_activation_local">Bidegurutzearen aktibazioa: lokala</string>
+	<string name="poi_crossing_activation_remote">Bidegurutzearen aktibazioa: urrunekoa</string>
+	<string name="poi_crossing_barrier_no">Barrera bidegurutzean: ez</string>
+	<string name="poi_crossing_barrier_yes">Barrera bidegurutzean</string>
+	<string name="poi_crossing_barrier_full">Barrera bidegurutzean: osoa</string>
+	<string name="poi_crossing_barrier_half">Barrera bidegurutzean: erdia</string>
+	<string name="poi_crossing_barrier_double_half">Barrera bidegurutzean: erdi bikoitza</string>
+	<string name="poi_crossing_bell_yes">Bidegurutze kanpaia</string>
+	<string name="poi_crossing_bell_no">Bidegurutze kanpaia: ez</string>
+	<string name="poi_crossing_light_yes">Bidegurutze argia</string>
+	<string name="poi_crossing_light_no">Bidegurutze argia: ez</string>
+	<string name="poi_crossing_on_demand_yes">Eskapeko bidegurutzea</string>
+	<string name="poi_crossing_on_demand_no">Eskapeko bidegurutzea: ez</string>
 	</resources>
