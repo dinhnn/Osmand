@@ -64,12 +64,19 @@ public class DayNightHelper implements SensorEventListener {
 			return true;
 		}
 	}
-
+	private boolean hud;
+	public void setHudMode(boolean hud){
+		this.hud = hud;
+	}
+	public boolean isHudMode(){
+		return hud;
+	}
 	/**
 	 * @return null if could not be determined (in case of error)
 	 * @return true if day is supposed to be 
 	 */
 	public boolean isNightMode() {
+		if(hud)return true;
 		DayNightMode dayNightMode = pref.get();
 		if (dayNightMode.isDay()) {
 			return false;

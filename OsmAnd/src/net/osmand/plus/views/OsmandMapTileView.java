@@ -533,6 +533,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			canvas.rotate(-rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
 		}
 	}
+	private boolean hud;
+	public void setHud(boolean hud) {
+		if(this.hud==hud)return;
+		this.hud = hud;
+		this.refreshMap(true);
+	}
 
 	private void refreshBaseMapInternal(RotatedTileBox tileBox, DrawSettings drawSettings) {
 		if (tileBox.getPixHeight() == 0 || tileBox.getPixWidth() == 0) {
@@ -605,11 +611,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			synchronized (holder) {
 				Canvas canvas = holder.lockCanvas();
 				if (canvas != null) {
+					canvas.save();
+					if(hud) {
+						canvas.scale(1, -1, 0, canvas.getHeight() / 2);
+					}
 					try {
 						// make copy to avoid concurrency
 						RotatedTileBox viewportToDraw = currentViewport.copy();
 						drawOverMap(canvas, viewportToDraw, drawSettings);
 					} finally {
+						canvas.restore();
 						holder.unlockCanvasAndPost(canvas);
 					}
 				}
