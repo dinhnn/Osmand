@@ -1211,9 +1211,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	}
 	private boolean hud = false;
-
+	private float currentBrightness;
 	public void setHud(boolean hud) {
 		this.hud = hud;
+		WindowManager.LayoutParams layout = getWindow().getAttributes();
+		if(hud) {
+			currentBrightness = layout.screenBrightness;
+			layout.screenBrightness = 1F;
+		} else {
+			layout.screenBrightness = currentBrightness;
+		}
+		getWindow().setAttributes(layout);
 		float scaleY = hud?-1:1;
 		app.getDaynightHelper().setHudMode(hud);
 		mainMapOverlay.setScaleY(scaleY);
