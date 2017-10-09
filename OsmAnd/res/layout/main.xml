@@ -6,12 +6,11 @@
     android:layout_height="match_parent"
     android:background="?attr/mapBackground"
     >
-
     <FrameLayout
+        android:id="@+id/MainMapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-
         <FrameLayout
             android:id="@+id/MapViewWithLayers"
             android:layout_width="fill_parent"
@@ -41,7 +40,12 @@
                 android:visibility="gone"/>
 
         </FrameLayout>
-
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/MainMapOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
         <FrameLayout
             android:id="@+id/MapHudButtonsOverlay"
             android:layout_width="match_parent"

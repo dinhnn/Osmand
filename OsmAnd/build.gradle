@@ -359,6 +359,7 @@ task appStart(type: Exec) {
 }
 
 repositories {
+
 	ivy {
 		name = "OsmAndBinariesIvy"
 		url = "http://builder.osmand.net"

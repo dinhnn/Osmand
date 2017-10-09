@@ -63,6 +63,7 @@ public class RendererRegistry {
 		internalRenderers.put("LightRS", "LightRS" + ".render.xml");
 		internalRenderers.put(NAUTICAL_RENDER, "nautical" + ".render.xml");
 		internalRenderers.put(WINTER_SKI_RENDER, "skimap" + ".render.xml");
+		internalRenderers.put("HUD", "hud" + ".render.xml");
 	}
 	
 	public RenderingRulesStorage defaultRender() {

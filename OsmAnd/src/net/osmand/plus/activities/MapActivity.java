@@ -125,14 +125,12 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControll
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.GeneralRouter;
-import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -182,7 +180,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean landscapeLayout;
 
 	private Dialog progressDlg = null;
-
+	private View mainMapOverlay;
+	private View menuItems;
 	private List<DialogProvider> dialogProviders = new ArrayList<>(2);
 	private StateChangedListener<ApplicationMode> applicationModeListener;
 	private GpxImportHelper gpxImportHelper;
@@ -305,6 +304,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		mapView.refreshMap(true);
 
 		mapActions.updateDrawerMenu();
+		mainMapOverlay = findViewById(R.id.MainMapOverlay);
+		menuItems = findViewById(R.id.menuItems);
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 		IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
@@ -1226,11 +1227,28 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	}
 	private boolean hud = false;
+	private float currentBrightness;
+	public void setHud(boolean hud) {
+		this.hud = hud;
+		WindowManager.LayoutParams layout = getWindow().getAttributes();
+		if(hud) {
+			currentBrightness = layout.screenBrightness;
+			layout.screenBrightness = 1F;
+		} else {
+			layout.screenBrightness = currentBrightness;
+		}
+		getWindow().setAttributes(layout);
+		float scaleY = hud?-1:1;
+		app.getDaynightHelper().setHudMode(hud);
+		mainMapOverlay.setScaleY(scaleY);
+		menuItems.setScaleY(scaleY);
+		mapView.setHud(hud);
+	}
+
 	@Override
 	public boolean onKeyLongPress(int keyCode, KeyEvent event) {
 		if(keyCode == KeyEvent.KEYCODE_BACK){
-			hud = !hud;
-			drawerLayout.setScaleY(hud?-1:1);
+			setHud(!hud);
 			return true;
 		}
 		return super.onKeyLongPress(keyCode,event);
