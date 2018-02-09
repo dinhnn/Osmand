@@ -112,10 +112,8 @@ public class OsmandRenderer {
 		Paint[] oneWay ;
 		Paint[] reverseOneWay ;
 		final Context ctx;
-		final IMapRenderer renderer;
-		public RenderingContext(Context ctx,IMapRenderer renderer) {
+		public RenderingContext(Context ctx) {
 			this.ctx = ctx;
-			this.renderer = renderer;
 		}
 
 		// use to calculate points
