@@ -15,10 +15,12 @@ import net.osmand.NativeLibrary.NativeSearchResult;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.core.jni.IMapRenderer;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.map.MapTileDownloader;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.render.TextRenderer.TextDrawInfo;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -110,9 +112,10 @@ public class OsmandRenderer {
 		Paint[] oneWay ;
 		Paint[] reverseOneWay ;
 		final Context ctx;
-
-		public RenderingContext(Context ctx) {
+		final IMapRenderer renderer;
+		public RenderingContext(Context ctx,IMapRenderer renderer) {
 			this.ctx = ctx;
+			this.renderer = renderer;
 		}
 
 		// use to calculate points
