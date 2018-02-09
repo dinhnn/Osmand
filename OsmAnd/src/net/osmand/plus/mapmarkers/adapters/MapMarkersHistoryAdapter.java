@@ -43,10 +43,8 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 	}
 
 	public void createHeaders() {
-		items.clear();
-
+		items = new ArrayList<>();
 		List<MapMarker> markersHistory = app.getMapMarkersHelper().getMapMarkersHistory();
-
 		int previousHeader = -1;
 		int monthsDisplayed = 0;
 
@@ -129,8 +127,17 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			if (month.length() > 1) {
 				month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
 			}
-			String day = new SimpleDateFormat("dd", Locale.getDefault()).format(date);
-			itemViewHolder.description.setText(app.getString(R.string.passed, month + " " + day));
+			month = month.replaceAll("\\.", "");
+			String day = new SimpleDateFormat("d", Locale.getDefault()).format(date);
+			String desc = app.getString(R.string.passed, month + " " + day);
+			String markerGroupName = marker.groupName;
+			if (markerGroupName != null) {
+				if (markerGroupName.equals("")) {
+					markerGroupName = app.getString(R.string.shared_string_favorites);
+				}
+				desc += " • " + markerGroupName;
+			}
+			itemViewHolder.description.setText(desc);
 
 			itemViewHolder.optionsBtn.setBackgroundDrawable(app.getResources().getDrawable(night ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
 			itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reset_to_default_dark));
@@ -142,14 +149,12 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 						return;
 					}
 					app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
-					notifyItemRemoved(position);
 
 					snackbar = Snackbar.make(itemViewHolder.itemView, app.getString(R.string.marker_moved_to_active), Snackbar.LENGTH_LONG)
 							.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 								@Override
 								public void onClick(View view) {
 									app.getMapMarkersHelper().moveMapMarkerToHistory(marker);
-									notifyDataSetChanged();
 								}
 							});
 					View snackBarView = snackbar.getView();

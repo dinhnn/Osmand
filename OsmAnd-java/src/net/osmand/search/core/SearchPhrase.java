@@ -340,6 +340,10 @@ public class SearchPhrase {
 		return getSearchTypes() != null;
 	}
 
+	public boolean hasCustomSearchType(ObjectType type) {
+		return settings.hasCustomSearchType(type);
+	}
+
 	public boolean isSearchTypeAllowed(ObjectType searchType) {
 		if (getSearchTypes() == null) {
 			return true;
@@ -359,10 +363,6 @@ public class SearchPhrase {
 
 	public boolean isSortByName() {
 		return settings.isSortByName();
-	}
-
-	public boolean isInAddressSearch() {
-		return settings.isInAddressSearch();
 	}
 
 	public SearchPhrase selectWord(SearchResult res) {
@@ -587,7 +587,11 @@ public class SearchPhrase {
         Iterator<BinaryMapIndexReader> it = indexes.iterator();
         while (it.hasNext()) {
             BinaryMapIndexReader r = it.next();
-            if (r.getFile().getName().matches(".*([0-9]+_*){3}\\.obf")) {
+            if(r == null || r.getFile() == null) {
+            	continue;
+            }
+            String filename = r.getFile().getName();
+            if (filename.matches("([a-zA-Z-]+_)+([0-9]+_){2}[0-9]+\\.obf")) {
                 String currRegionName = r.getRegionName();
                 if (result.containsKey(currRegionName)) {
                     result.get(currRegionName).add(r);

@@ -14,6 +14,7 @@ public class MapMarkerItemViewHolder extends RecyclerView.ViewHolder {
 	final View mainLayout;
 	final View topDivider;
 	final ImageView iconDirection;
+	final TextView numberText;
 	final ImageView iconReorder;
 	final ImageView icon;
 	final TextView title;
@@ -25,6 +26,7 @@ public class MapMarkerItemViewHolder extends RecyclerView.ViewHolder {
 	final View rightPointSpace;
 	final TextView description;
 	public final ImageButton optionsBtn;
+	final View checkBoxContainer;
 	final CheckBox checkBox;
 	final View divider;
 	final View bottomShadow;
@@ -34,6 +36,7 @@ public class MapMarkerItemViewHolder extends RecyclerView.ViewHolder {
 		mainLayout = view.findViewById(R.id.main_layout);
 		topDivider = view.findViewById(R.id.top_divider);
 		iconDirection = (ImageView) view.findViewById(R.id.map_marker_direction_icon);
+		numberText = (TextView) view.findViewById(R.id.map_marker_number_text_view);
 		iconReorder = (ImageView) view.findViewById(R.id.map_marker_reorder_icon);
 		icon = (ImageView) view.findViewById(R.id.map_marker_icon);
 		title = (TextView) view.findViewById(R.id.map_marker_title);
@@ -45,6 +48,7 @@ public class MapMarkerItemViewHolder extends RecyclerView.ViewHolder {
 		rightPointSpace = view.findViewById(R.id.map_marker_right_point_space);
 		description = (TextView) view.findViewById(R.id.map_marker_description);
 		optionsBtn = (ImageButton) view.findViewById(R.id.map_marker_options_button);
+		checkBoxContainer = view.findViewById(R.id.check_box_container);
 		checkBox = (CheckBox) view.findViewById(R.id.map_marker_check_box);
 		divider = view.findViewById(R.id.divider);
 		bottomShadow = view.findViewById(R.id.bottom_shadow);

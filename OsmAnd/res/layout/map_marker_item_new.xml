@@ -7,21 +7,14 @@
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical">
 
-    <LinearLayout
+    <ImageView
         android:id="@+id/top_divider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_shadow_list_top"
         android:visibility="gone"
-        tools:visibility="visible">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"/>
-
-        <include layout="@layout/card_top_divider"/>
-
-    </LinearLayout>
+        tools:visibility="visible"/>
 
     <LinearLayout
         android:id="@+id/main_layout"
@@ -32,13 +25,24 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="@dimen/map_button_shadow_width"
             android:background="?attr/selectableItemBackground">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:textSize="@dimen/default_list_text_size"
+                tools:text="3"
+                android:gravity="center"
+                android:id="@+id/map_marker_number_text_view"
+                android:layout_width="@dimen/map_button_shadow_width"
+                android:layout_height="@dimen/map_button_shadow_width"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"
+                tools:visibility="visible"/>
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/map_marker_reorder_icon"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="@dimen/map_button_shadow_width"
+                android:layout_height="@dimen/map_button_shadow_width"
                 android:layout_gravity="center_vertical"
                 android:scaleType="centerInside"
                 android:tint="?attr/secondary_icon_color"
@@ -46,7 +50,7 @@
 
             <View
                 android:id="@+id/flag_icon_left_space"
-                android:layout_width="16dp"
+                android:layout_width="@dimen/content_padding"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 tools:visibility="visible"/>
@@ -56,8 +60,8 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
+                android:layout_marginRight="@dimen/bottom_sheet_content_margin"
                 tools:src="@drawable/ic_action_flag_dark"/>
 
             <LinearLayout
@@ -68,7 +72,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="28dp">
+                    android:layout_height="@dimen/map_marker_title_height">
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/map_marker_title"
@@ -103,8 +107,8 @@
                         android:id="@+id/map_marker_direction_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginRight="4dp"
+                        android:layout_marginEnd="@dimen/text_margin_small"
+                        android:layout_marginRight="@dimen/text_margin_small"
                         tools:src="@drawable/ic_direction_arrow"/>
 
                     <android.support.v7.widget.AppCompatTextView
@@ -117,7 +121,7 @@
 
                     <View
                         android:id="@+id/map_marker_left_point_space"
-                        android:layout_width="4dp"
+                        android:layout_width="@dimen/text_margin_small"
                         android:layout_height="match_parent"/>
 
                     <android.support.v7.widget.AppCompatTextView
@@ -132,7 +136,7 @@
 
                     <View
                         android:id="@+id/map_marker_right_point_space"
-                        android:layout_width="4dp"
+                        android:layout_width="@dimen/text_margin_small"
                         android:layout_height="match_parent"/>
 
                     <android.support.v7.widget.AppCompatTextView
@@ -150,31 +154,37 @@
 
             <ImageButton
                 android:id="@+id/map_marker_options_button"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="@dimen/map_button_shadow_width"
+                android:layout_height="@dimen/map_button_shadow_width"
                 android:focusableInTouchMode="true"
                 tools:background="@drawable/marker_circle_background_dark_with_inset"
                 tools:src="@drawable/ic_action_marker_passed"/>
 
-            <CheckBox
-                android:id="@+id/map_marker_check_box"
+            <FrameLayout
+                android:id="@+id/check_box_container"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@null"
-                android:visibility="gone"
-                tools:visibility="visible"/>
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/map_marker_check_box"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/bottom_sheet_content_margin"
+                    android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+                    android:layout_marginRight="@dimen/bottom_sheet_content_margin"
+                    android:layout_marginTop="@dimen/bottom_sheet_content_margin"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+            </FrameLayout>
+
         </LinearLayout>
 
         <View
             android:id="@+id/divider"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:layout_marginLeft="56dp"
-            android:layout_marginStart="56dp"
+            android:layout_marginLeft="@dimen/map_button_shadow_width"
+            android:layout_marginStart="@dimen/map_button_shadow_width"
             tools:background="?attr/dashboard_divider"/>
     </LinearLayout>
 

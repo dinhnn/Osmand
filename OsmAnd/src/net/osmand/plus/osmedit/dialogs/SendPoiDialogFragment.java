@@ -3,6 +3,7 @@ package net.osmand.plus.osmedit.dialogs;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -203,7 +204,7 @@ public class SendPoiDialogFragment extends DialogFragment {
 					group = deleteGroup;
 					break;
 				case 3:
-					action = getString(R.string.default_changeset_reopen);;
+					action = getString(R.string.default_changeset_reopen);
 					group = reopenGroup;
 					break;
 				default:
@@ -272,7 +273,7 @@ public class SendPoiDialogFragment extends DialogFragment {
 			dialog.show(mapActivity.getSupportFragmentManager(), ProgressDialogFragment.TAG);
 			UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
 					dialog, listener, plugin, points.length, closeChangeSet, anonymously);
-			uploadTask.execute(points);
+			uploadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, points);
 		}
 	}
 }

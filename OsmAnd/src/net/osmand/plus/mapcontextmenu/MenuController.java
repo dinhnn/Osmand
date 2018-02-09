@@ -1,12 +1,21 @@
 package net.osmand.plus.mapcontextmenu;
 
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.aidl.maplayer.point.AMapPoint;
@@ -23,9 +32,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
@@ -36,6 +43,7 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapseExpandListener;
 import net.osmand.plus.mapcontextmenu.controllers.AMapPointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.FavouritePointMenuController;
@@ -50,7 +58,6 @@ import net.osmand.plus.mapcontextmenu.controllers.RenderedObjectMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TargetPointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportRouteController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
-import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.TransportStopRoute;
 import net.osmand.plus.mapcontextmenu.controllers.WptPtMenuController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapillary.MapillaryImage;
@@ -63,18 +70,20 @@ import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoMenuController;
 import net.osmand.plus.parkingpoint.ParkingPositionMenuController;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.DownloadedRegionsLayer.DownloadMapObject;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.util.OpeningHoursParser.OpeningHours;
 
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class MenuController extends BaseMenuController {
+public abstract class MenuController extends BaseMenuController implements CollapseExpandListener {
 
 	public static class MenuState {
 		public static final int HEADER_ONLY = 1;
@@ -97,7 +106,7 @@ public abstract class MenuController extends BaseMenuController {
 
 	protected TitleButtonController leftTitleButtonController;
 	protected TitleButtonController rightTitleButtonController;
-	protected TitleButtonController topRightTitleButtonController;
+	protected TitleButtonController bottomTitleButtonController;
 
 	protected TitleButtonController leftDownloadButtonController;
 	protected TitleButtonController rightDownloadButtonController;
@@ -111,12 +120,37 @@ public abstract class MenuController extends BaseMenuController {
 	private WorldRegion downloadRegion;
 	private DownloadIndexesThread downloadThread;
 
+	protected List<OpeningHours.Info> openingHoursInfo;
+
 	public MenuController(MenuBuilder builder, PointDescription pointDescription, MapActivity mapActivity) {
 		super(mapActivity);
 		this.pointDescription = pointDescription;
 		this.builder = builder;
+		this.builder.setCollapseExpandListener(this);
 		this.currentMenuState = getInitialMenuState();
 		this.builder.setLight(isLight());
+	}
+
+	protected void onCreated() {
+	}
+
+	@Override
+	public void onCollapseExpand(boolean collapsed) {
+		if (mapContextMenu != null) {
+			mapContextMenu.updateLayout();
+		}
+	}
+
+	public String getPreferredMapLang() {
+		return builder.getPreferredMapLang();
+	}
+
+	public String getPreferredMapAppLang() {
+		return builder.getPreferredMapAppLang();
+	}
+
+	public boolean isTransliterateNames() {
+		return builder.isTransliterateNames();
 	}
 
 	public void setMapContextMenu(MapContextMenu mapContextMenu) {
@@ -187,6 +221,7 @@ public abstract class MenuController extends BaseMenuController {
 		}
 		menuController.menuType = menuType;
 		menuController.setLatLon(latLon);
+		menuController.onCreated();
 		return menuController;
 	}
 
@@ -212,8 +247,8 @@ public abstract class MenuController extends BaseMenuController {
 		return true;
 	}
 
-	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
-		builder.addPlainMenuItem(iconId, text, needLinks, isUrl, onClickListener);
+	public void addPlainMenuItem(int iconId, String buttonText, String text, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
+		builder.addPlainMenuItem(iconId, buttonText, text, needLinks, isUrl, onClickListener);
 	}
 
 	public void clearPlainMenuItems() {
@@ -225,12 +260,8 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	protected void addMyLocationToPlainItems(LatLon latLon) {
-		OsmandSettings st = ((OsmandApplication) getMapActivity().getApplicationContext()).getSettings();
-		addPlainMenuItem(R.drawable.ic_action_get_my_location, PointDescription.getLocationName(getMapActivity(),
+		addPlainMenuItem(R.drawable.ic_action_get_my_location, null, PointDescription.getLocationName(getMapActivity(),
 				latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", " "), false, false, null);
-		//if (st.COORDINATES_FORMAT.get() != PointDescription.OLC_FORMAT)
-		//	addPlainMenuItem(R.drawable.ic_action_get_my_location, PointDescription.getLocationOlcName(
-		//			latLon.getLatitude(), latLon.getLongitude()).replaceAll("\n", " "), false, false, null);
 	}
 
 	public PointDescription getPointDescription() {
@@ -305,8 +336,8 @@ public abstract class MenuController extends BaseMenuController {
 		return rightTitleButtonController;
 	}
 
-	public TitleButtonController getTopRightTitleButtonController() {
-		return topRightTitleButtonController;
+	public TitleButtonController getBottomTitleButtonController() {
+		return bottomTitleButtonController;
 	}
 
 	public TitleButtonController getLeftDownloadButtonController() {
@@ -337,8 +368,12 @@ public abstract class MenuController extends BaseMenuController {
 		return true;
 	}
 
-	public boolean fabVisible() {
+	public boolean navigateButtonVisible() {
 		return true;
+	}
+
+	public boolean zoomButtonsVisible() {
+		return !isLandscapeLayout();
 	}
 
 	public boolean buttonsVisible() {
@@ -369,11 +404,11 @@ public abstract class MenuController extends BaseMenuController {
 		return false;
 	}
 
-	public int getLeftIconId() {
+	public int getRightIconId() {
 		return 0;
 	}
 
-	public Drawable getLeftIcon() {
+	public Drawable getRightIcon() {
 		return null;
 	}
 
@@ -381,16 +416,98 @@ public abstract class MenuController extends BaseMenuController {
 		return null;
 	}
 
+	public Drawable getSubtypeIcon() {
+		return null;
+	}
+
+	public boolean navigateInPedestrianMode() {
+		return false;
+	}
+
 	public int getFavActionIconId() {
 		return R.drawable.map_action_fav_dark;
 	}
 
 	public int getFavActionStringId() {
-		return R.string.shared_string_add_to_favorites;
+		return R.string.shared_string_add;
+	}
+
+	public int getWaypointActionIconId() {
+		return getMapActivity().getMyApplication().getSettings().USE_MAP_MARKERS.get()
+				? R.drawable.map_action_flag_dark : R.drawable.map_action_waypoint;
+	}
+
+	public int getWaypointActionStringId() {
+		return getMapActivity().getMyApplication().getSettings().USE_MAP_MARKERS.get()
+				? R.string.shared_string_add_to_map_markers : R.string.context_menu_item_destination_point;
+	}
+
+	public boolean isWaypointButtonEnabled() {
+		return true;
 	}
 
 	public String getTypeStr() {
 		return "";
+	}
+
+	public String getSubtypeStr() {
+		return "";
+	}
+
+	@ColorRes
+	public int getAdditionalInfoColorId() {
+		if (openingHoursInfo != null) {
+			boolean open = false;
+			for (OpeningHours.Info info : openingHoursInfo) {
+				if (info.isOpened() || info.isOpened24_7()) {
+					open = true;
+					break;
+				}
+			}
+			return open ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color;
+		} else if (indexItem != null) {
+			return R.color.icon_color;
+		}
+		return 0;
+	}
+
+	public CharSequence getAdditionalInfoStr() {
+		if (openingHoursInfo != null) {
+			StringBuilder sb = new StringBuilder();
+			int colorOpen = getMapActivity().getResources().getColor(R.color.ctx_menu_amenity_opened_text_color);
+			int colorClosed = getMapActivity().getResources().getColor(R.color.ctx_menu_amenity_closed_text_color);
+			int[] pos = new int[openingHoursInfo.size()];
+			for (int i = 0; i < openingHoursInfo.size(); i++) {
+				OpeningHours.Info info = openingHoursInfo.get(i);
+				if (sb.length() > 0) {
+					sb.append("\n");
+				}
+				sb.append(info.getInfo());
+				pos[i] = sb.length();
+			}
+			SpannableString infoStr = new SpannableString(sb.toString());
+			int k = 0;
+			for (int i = 0; i < openingHoursInfo.size(); i++) {
+				OpeningHours.Info info = openingHoursInfo.get(i);
+				infoStr.setSpan(new ForegroundColorSpan(info.isOpened() ? colorOpen : colorClosed), k, pos[i], 0);
+				k = pos[i];
+			}
+			return infoStr;
+
+		} else if (indexItem != null) {
+			return getMapActivity().getString(R.string.file_size_in_mb, indexItem.getArchiveSizeMB());
+		}
+		return "";
+	}
+
+	@DrawableRes
+	public int getAdditionalInfoIconRes() {
+		if (openingHoursInfo != null) {
+			return R.drawable.ic_action_opening_hour_16;
+		} else if (indexItem != null) {
+			return R.drawable.ic_sdcard_16;
+		}
+		return 0;
 	}
 
 	public String getCommonTypeStr() {
@@ -399,6 +516,10 @@ public abstract class MenuController extends BaseMenuController {
 
 	public String getNameStr() {
 		return pointDescription.getName();
+	}
+
+	public List<TransportStopRoute> getTransportStopRoutes() {
+		return null;
 	}
 
 	public void share(LatLon latLon, String title, String address) {
@@ -424,7 +545,9 @@ public abstract class MenuController extends BaseMenuController {
 			leftDownloadButtonController.visible = !downloaded;
 			leftDownloadButtonController.leftIconId = R.drawable.ic_action_import;
 
-			boolean downloadIndexes = getMapActivity().getMyApplication().getSettings().isInternetConnectionAvailable()
+			boolean internetConnectionAvailable =
+					getMapActivity().getMyApplication().getSettings().isInternetConnectionAvailable();
+			boolean downloadIndexes = internetConnectionAvailable
 					&& !downloadThread.getIndexes().isDownloadedFromInternet
 					&& !downloadThread.getIndexes().downloadFromInternetFailed;
 
@@ -454,6 +577,9 @@ public abstract class MenuController extends BaseMenuController {
 			} else if (downloadIndexes) {
 				titleProgressController.setIndexesDownloadMode();
 				titleProgressController.visible = true;
+			} else if (!internetConnectionAvailable) {
+				titleProgressController.setNoInternetConnectionMode();
+				titleProgressController.visible = true;
 			} else {
 				titleProgressController.visible = false;
 			}
@@ -471,16 +597,78 @@ public abstract class MenuController extends BaseMenuController {
 	public abstract class TitleButtonController {
 		public String caption = "";
 		public int leftIconId = 0;
+		public int rightIconId = 0;
 		public boolean needRightText = false;
 		public String rightTextCaption = "";
 		public boolean visible = true;
+		public boolean needColorizeIcon = true;
+		public Drawable leftIcon;
+		public Drawable rightIcon;
+		public boolean enabled = true;
 
+		@Nullable
 		public Drawable getLeftIcon() {
-			if (leftIconId != 0) {
-				return getIcon(leftIconId, isLight() ? R.color.map_widget_blue : R.color.osmand_orange);
-			} else {
-				return null;
+			return getIconDrawable(true);
+		}
+
+		@Nullable
+		public Drawable getRightIcon() {
+			return getIconDrawable(false);
+		}
+
+		@Nullable
+		private Drawable getIconDrawable(boolean left) {
+			Drawable drawable = left ? leftIcon : rightIcon;
+			if (drawable != null) {
+				return drawable;
 			}
+			int resId = left ? leftIconId : rightIconId;
+			if (resId != 0) {
+				if (needColorizeIcon) {
+					return enabled ? getNormalIcon(resId) : getDisabledIcon(resId);
+				}
+				return ContextCompat.getDrawable(getMapActivity(), resId);
+			}
+			return null;
+		}
+
+		public void clearIcon(boolean left) {
+			if (left) {
+				leftIcon = null;
+				leftIconId = 0;
+			} else {
+				rightIcon = null;
+				rightIconId = 0;
+			}
+		}
+
+		public void updateStateListDrawableIcon(@DrawableRes int resId, boolean left) {
+			boolean useStateList = enabled && Build.VERSION.SDK_INT >= 21;
+			if (left) {
+				leftIcon = useStateList ? getStateListDrawable(resId) : null;
+				leftIconId = useStateList ? 0 : resId;
+			} else {
+				rightIcon = useStateList ? getStateListDrawable(resId) : null;
+				rightIconId = useStateList ? 0 : resId;
+			}
+		}
+
+		private Drawable getDisabledIcon(@DrawableRes int iconResId) {
+			return getIcon(iconResId, isLight() ? R.color.ctx_menu_controller_disabled_text_color_light
+					: R.color.ctx_menu_controller_disabled_text_color_dark);
+		}
+
+		private Drawable getNormalIcon(@DrawableRes int iconResId) {
+			return getIcon(iconResId, isLight() ? R.color.map_widget_blue : R.color.osmand_orange);
+		}
+
+		private Drawable getPressedIcon(@DrawableRes int iconResId) {
+			return getIcon(iconResId, isLight() ? R.color.ctx_menu_controller_button_text_color_light_p
+					: R.color.ctx_menu_controller_button_text_color_dark_p);
+		}
+
+		private StateListDrawable getStateListDrawable(@DrawableRes int iconResId) {
+			return AndroidUtils.createStateListDrawable(getNormalIcon(iconResId), getPressedIcon(iconResId));
 		}
 
 		public abstract void buttonPressed();
@@ -491,16 +679,25 @@ public abstract class MenuController extends BaseMenuController {
 		public int progress = 0;
 		public boolean indeterminate;
 		public boolean visible;
+		public boolean progressVisible;
 		public boolean buttonVisible;
 
 		public void setIndexesDownloadMode() {
 			caption = getMapActivity().getString(R.string.downloading_list_indexes);
 			indeterminate = true;
+			progressVisible = true;
+			buttonVisible = false;
+		}
+
+		public void setNoInternetConnectionMode() {
+			caption = getMapActivity().getString(R.string.no_index_file_to_download);
+			progressVisible = false;
 			buttonVisible = false;
 		}
 
 		public void setMapDownloadMode() {
 			indeterminate = false;
+			progressVisible = true;
 			buttonVisible = true;
 		}
 
@@ -542,7 +739,7 @@ public abstract class MenuController extends BaseMenuController {
 		}
 	}
 
-	public void buildMapDownloadButton(final LatLon latLon) {
+	public void buildMapDownloadButtonAndSizeInfo(final LatLon latLon) {
 		new AsyncTask<Void, Void, BinaryMapDataObject>() {
 
 			ResourceManager rm;
@@ -697,6 +894,11 @@ public abstract class MenuController extends BaseMenuController {
 		public ContextMenuToolbarController(MenuController menuController) {
 			super(TopToolbarControllerType.CONTEXT_MENU);
 			this.menuController = menuController;
+			setBgIds(R.color.actionbar_light_color, R.color.actionbar_dark_color,
+					R.color.actionbar_light_color, R.color.actionbar_dark_color);
+			setBackBtnIconClrIds(R.color.color_white, R.color.color_white);
+			setCloseBtnIconClrIds(R.color.color_white, R.color.color_white);
+			setTitleTextClrIds(R.color.color_white, R.color.color_white);
 		}
 
 		public MenuController getMenuController() {

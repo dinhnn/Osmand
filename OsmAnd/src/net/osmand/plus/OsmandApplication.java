@@ -56,6 +56,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.search.SearchUICore;
 import net.osmand.util.Algorithms;
 
 import java.io.BufferedWriter;
@@ -146,9 +147,6 @@ public class OsmandApplication extends MultiDexApplication {
 		appCustomization.setup(this);
 		osmandSettings = appCustomization.getOsmandSettings();
 		appInitializer.initVariables();
-		if (osmandSettings.ENABLE_PROXY.get()) {
-			NetworkUtils.setProxy(osmandSettings.PROXY_HOST.get(), osmandSettings.PROXY_PORT.get());
-		}
 		if (appInitializer.isAppVersionChanged() && appInitializer.getPrevAppVersion() < AppInitializer.VERSION_2_3) {
 			osmandSettings.freezeExternalStorageDirectory();
 		} else if (appInitializer.isFirstTime()) {
@@ -174,6 +172,8 @@ public class OsmandApplication extends MultiDexApplication {
 		timeToStart = System.currentTimeMillis();
 		OsmandPlugin.initPlugins(this);
 		System.out.println("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
+
+		SearchUICore.setDebugMode(OsmandPlugin.isDevelopment());
 	}
 
 	public boolean isExternalStorageDirectoryReadOnly() {
@@ -204,7 +204,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 			protected void onPostExecute(Void result) {
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 	
 	public IconsCache getIconsCache() {
@@ -552,6 +552,9 @@ public class OsmandApplication extends MultiDexApplication {
 		if (!(uncaughtExceptionHandler instanceof DefaultExceptionHandler)) {
 			Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
 		}
+		if (NetworkUtils.getProxy() == null && osmandSettings.ENABLE_PROXY.get()) {
+			NetworkUtils.setProxy(osmandSettings.PROXY_HOST.get(), osmandSettings.PROXY_PORT.get());
+		}
 		appInitializer.startApplication();
 	}
 
@@ -599,7 +602,11 @@ public class OsmandApplication extends MultiDexApplication {
 				}
 				if (routingHelper.isFollowingMode()) {
 					AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-					mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
+					if (Build.VERSION.SDK_INT >= 19) {
+						mgr.setExact(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
+					} else {
+						mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
+					}
 					System.exit(2);
 				}
 				defaultHandler.uncaughtException(thread, ex);
@@ -758,7 +765,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return lang;
 	}
 	
-	public RoutingConfiguration.Builder getDefaultRoutingConfig() {
+	public synchronized RoutingConfiguration.Builder getDefaultRoutingConfig() {
 		if(defaultRoutingConfig == null) {
 			defaultRoutingConfig = appInitializer.getLazyDefaultRoutingConfig();
 		}

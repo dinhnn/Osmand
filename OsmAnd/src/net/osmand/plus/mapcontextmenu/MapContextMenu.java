@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
@@ -24,13 +26,13 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.TargetPointsHelper.TargetPointChangedListener;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuController.ContextMenuToolbarController;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
@@ -44,8 +46,11 @@ import net.osmand.plus.mapcontextmenu.editors.RtePtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
+import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
+import net.osmand.plus.mapmarkers.RenameMarkerBottomSheetDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -82,11 +87,13 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private LatLon myLocation;
 	private Float heading;
 	private boolean inLocationUpdate = false;
+	private boolean cachedMyLocation;
 	private boolean appModeChanged;
 	private boolean appModeListenerAdded;
 	private boolean autoHide;
 
 	private int favActionIconId;
+	private int waypointActionIconId;
 
 	private MenuAction searchDoneAction;
 
@@ -285,9 +292,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 						@Nullable PointDescription pointDescription,
 						@Nullable Object object,
 						boolean update, boolean restorePrevious) {
+		OsmandApplication app = mapActivity.getMyApplication();
 
 		if (myLocation == null) {
-			myLocation = mapActivity.getMyApplication().getSettings().getLastKnownMapLocation();
+			updateMyLocation(app.getLocationProvider().getLastKnownLocation(), false);
 		}
 
 		if (!update && isVisible()) {
@@ -345,9 +353,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		mapActivity.refreshMap();
 
 		if (object instanceof MapMarker) {
-			mapActivity.getMyApplication().getMapMarkersHelper().addListener(this);
+			app.getMapMarkersHelper().addListener(this);
 		} else if (object instanceof TargetPoint) {
-			mapActivity.getMyApplication().getTargetPointsHelper().addPointListener(this);
+			app.getTargetPointsHelper().addPointListener(this);
 		}
 
 		return true;
@@ -368,13 +376,13 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				fragmentRef.get().centerMarkerLocation();
 			}
 		}
-		updateWidgetsVisibility(false);
 	}
 
 	public void show(@NonNull LatLon latLon,
 					 @Nullable PointDescription pointDescription,
 					 @Nullable Object object) {
 		if (init(latLon, pointDescription, object)) {
+			mapActivity.getMyApplication().logEvent(mapActivity, "open_context_menu");
 			showInternal();
 		}
 	}
@@ -389,7 +397,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 		centerMarker = false;
 		autoHide = false;
-		updateWidgetsVisibility(false);
 	}
 
 	public void update(LatLon latLon, PointDescription pointDescription, Object object) {
@@ -398,6 +405,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (fragmentRef != null) {
 			fragmentRef.get().rebuildMenu(centerMarker);
 		}
+		ContextMenuLayer contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
+		contextMenuLayer.updateContextMenu();
 		centerMarker = false;
 	}
 
@@ -413,7 +422,21 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		init(latLon, pointDescription, object);
 	}
 
-	public void close() {
+	public void onFragmentResume() {
+		if (active && displayDistanceDirection() && myLocation != null) {
+			updateLocation(false, true, false);
+		}
+	}
+
+	public boolean navigateInPedestrianMode() {
+		if (menuController != null) {
+			return menuController.navigateInPedestrianMode();
+		}
+		return false;
+	}
+
+	public boolean close() {
+		boolean result = false;
 		if (active) {
 			active = false;
 			if (object instanceof MapMarker) {
@@ -428,15 +451,17 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			if (this.object != null) {
 				clearSelectedObject(this.object);
 			}
-			hide();
+			result = hide();
 			if (menuController != null) {
 				menuController.setActive(false);
 			}
 			mapActivity.refreshMap();
 		}
+		return result;
 	}
 
-	public void hide() {
+	public boolean hide(boolean animated) {
+		boolean result = false;
 		if (mapPosition != 0) {
 			mapActivity.getMapView().setMapPosition(mapPosition);
 			mapPosition = 0;
@@ -446,17 +471,41 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
 		if (fragmentRef != null) {
+			if (!animated) {
+				fragmentRef.get().disableTransitionAnimation();
+			}
 			fragmentRef.get().dismissMenu();
+			result = true;
 		}
-		updateWidgetsVisibility(true);
+		return result;
 	}
 
-	private void updateWidgetsVisibility(boolean visible) {
-		int visibility = visible ? View.VISIBLE : View.GONE;
-		mapActivity.findViewById(R.id.map_center_info).setVisibility(visibility);
-		mapActivity.findViewById(R.id.map_left_widgets_panel).setVisibility(visibility);
-		mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
+	public boolean hide() {
+		return hide(true);
+	}
+
+	public void updateControlsVisibility(boolean menuVisible) {
+		int topControlsVisibility = shouldShowTopControls(menuVisible) ? View.VISIBLE : View.GONE;
+		mapActivity.findViewById(R.id.map_center_info).setVisibility(topControlsVisibility);
+		mapActivity.findViewById(R.id.map_left_widgets_panel).setVisibility(topControlsVisibility);
+		mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(topControlsVisibility);
+
+		int bottomControlsVisibility = shouldShowBottomControls(menuVisible) ? View.VISIBLE : View.GONE;
+		mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(bottomControlsVisibility);
+
 		mapActivity.refreshMap();
+	}
+
+	public boolean shouldShowTopControls() {
+		return shouldShowTopControls(isVisible());
+	}
+
+	public boolean shouldShowTopControls(boolean menuVisible) {
+		return !menuVisible || isLandscapeLayout() || getCurrentMenuState() == MenuController.MenuState.HEADER_ONLY;
+	}
+
+	public boolean shouldShowBottomControls(boolean menuVisible) {
+		return !menuVisible || isLandscapeLayout();
 	}
 
 	// timeout in msec
@@ -470,6 +519,13 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				}
 			}
 		}, timeout);
+	}
+
+	public void updateLayout() {
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().updateLayout();
+		}
 	}
 
 	public void updateMenuUI() {
@@ -562,7 +618,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				historyStack.add(menuData);
 			}
 			if (!(menuController instanceof MapDataMenuController)) {
-				menuController.buildMapDownloadButton(latLon);
+				menuController.buildMapDownloadButtonAndSizeInfo(latLon);
 			}
 			return true;
 		} else {
@@ -609,6 +665,11 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
+	public boolean hasActiveToolbar() {
+		TopToolbarController toolbarController = mapActivity.getTopToolbarController(TopToolbarControllerType.CONTEXT_MENU);
+		return toolbarController != null && toolbarController instanceof ContextMenuToolbarController;
+	}
+
 	public void closeActiveToolbar() {
 		TopToolbarController toolbarController = mapActivity.getTopToolbarController(TopToolbarControllerType.CONTEXT_MENU);
 		if (toolbarController != null && toolbarController instanceof ContextMenuToolbarController) {
@@ -627,18 +688,20 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void onSingleTapOnMap() {
+	public boolean onSingleTapOnMap() {
+		boolean result = false;
 		if (menuController == null || !menuController.handleSingleTapOnMap()) {
 			if (menuController != null && !menuController.isClosable()) {
-				hide();
+				result = hide();
 			} else {
 				updateMapCenter(null);
-				close();
+				result = close();
 			}
 			if (mapActivity.getMapLayers().getMapQuickActionLayer().isLayerOn()) {
 				mapActivity.getMapLayers().getMapQuickActionLayer().refreshLayer();
 			}
 		}
+		return result;
 	}
 
 	@Override
@@ -679,15 +742,37 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public int getFavActionStringId() {
 		if (menuController != null)
 			return menuController.getFavActionStringId();
-		return R.string.shared_string_add_to_favorites;
+		return R.string.shared_string_add;
+	}
+
+	public int getWaypointActionIconId() {
+		return waypointActionIconId;
+	}
+
+	public int getWaypointActionStringId() {
+		if (menuController != null) {
+			return menuController.getWaypointActionStringId();
+		}
+		return settings.USE_MAP_MARKERS.get()
+				? R.string.shared_string_add_to_map_markers : R.string.context_menu_item_destination_point;
+	}
+
+	public boolean isButtonWaypointEnabled() {
+		if (menuController != null) {
+			return menuController.isWaypointButtonEnabled();
+		}
+		return true;
 	}
 
 	protected void acquireIcons() {
 		super.acquireIcons();
 		if (menuController != null) {
 			favActionIconId = menuController.getFavActionIconId();
+			waypointActionIconId = menuController.getWaypointActionIconId();
 		} else {
 			favActionIconId = R.drawable.map_action_fav_dark;
+			waypointActionIconId = settings.USE_MAP_MARKERS.get()
+					? R.drawable.map_action_flag_dark : R.drawable.map_action_waypoint;
 		}
 	}
 
@@ -700,25 +785,63 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void fabPressed() {
-		mapActivity.getMapLayers().getMapControlsLayer().navigateFab();
+	public List<TransportStopRoute> getTransportStopRoutes() {
+		if (menuController != null) {
+			return menuController.getTransportStopRoutes();
+		}
+		return null;
+	}
+
+	public void navigateButtonPressed() {
+		if (navigateInPedestrianMode()) {
+			settings.APPLICATION_MODE.set(ApplicationMode.PEDESTRIAN);
+		}
+		mapActivity.getMapLayers().getMapControlsLayer().navigateButton();
+	}
+
+	public boolean zoomInPressed() {
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().doZoomIn();
+			return true;
+		}
+		return false;
+	}
+
+	public boolean zoomOutPressed() {
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().doZoomOut();
+			return true;
+		}
+		return false;
 	}
 
 	public void buttonWaypointPressed() {
-		if (pointDescription.isDestination()) {
-			mapActivity.getMapActions().editWaypoints();
-		} else if (settings.USE_MAP_MARKERS.get()) {
-			if (pointDescription.isMapMarker()) {
-				hide();
-				MapActivity.clearPrevActivityIntent();
-				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS);
-			} else {
-				mapActivity.getMapActions().addMapMarker(latLon.getLatitude(), latLon.getLongitude(),
-						getPointDescriptionForMarker());
-			}
+		if (object != null && object instanceof MapMarker) {
+			RenameMarkerBottomSheetDialogFragment
+					.showInstance(mapActivity.getSupportFragmentManager(), (MapMarker) object);
 		} else {
-			mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),
-					getPointDescriptionForTarget());
+			if (pointDescription.isDestination()) {
+				mapActivity.getMapActions().editWaypoints();
+			} else if (settings.USE_MAP_MARKERS.get()) {
+				if (pointDescription.isMapMarker()) {
+					hide();
+					MapActivity.clearPrevActivityIntent();
+					MapMarkersDialogFragment.showInstance(mapActivity);
+				} else {
+					String mapObjectName = null;
+					if (object instanceof Amenity) {
+						Amenity amenity = (Amenity) object;
+						mapObjectName = amenity.getName() + "_" + amenity.getType().getKeyName();
+					}
+					mapActivity.getMapActions().addMapMarker(latLon.getLatitude(), latLon.getLongitude(),
+							getPointDescriptionForMarker(), mapObjectName);
+				}
+			} else {
+				mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),
+						getPointDescriptionForTarget());
+			}
 		}
 		close();
 	}
@@ -892,7 +1015,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public PointDescription getPointDescriptionForMarker() {
 		PointDescription pd = getPointDescriptionForTarget();
-		if (Algorithms.isEmpty(pd.getName()) && !nameStr.equals(PointDescription.getAddressNotFoundStr(mapActivity))) {
+		if (Algorithms.isEmpty(pd.getName()) && !Algorithms.isEmpty(nameStr)
+				&& !nameStr.equals(PointDescription.getAddressNotFoundStr(mapActivity))) {
 			return new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, nameStr);
 		} else {
 			return pd;
@@ -950,7 +1074,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (menuController != null) {
 			return menuController.getHalfScreenMaxHeightKoef();
 		} else {
-			return 0f;
+			return .75f;
 		}
 	}
 
@@ -986,9 +1110,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public TitleButtonController getTopRightTitleButtonController() {
+	public TitleButtonController getBottomTitleButtonController() {
 		if (menuController != null) {
-			return menuController.getTopRightTitleButtonController();
+			return menuController.getBottomTitleButtonController();
 		} else {
 			return null;
 		}
@@ -1022,8 +1146,12 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return menuController == null || menuController.supportZoomIn();
 	}
 
-	public boolean fabVisible() {
-		return menuController == null || menuController.fabVisible();
+	public boolean navigateButtonVisible() {
+		return menuController == null || menuController.navigateButtonVisible();
+	}
+
+	public boolean zoomButtonsVisible() {
+		return menuController == null || menuController.zoomButtonsVisible();
 	}
 
 	public boolean isClosable() {
@@ -1036,6 +1164,41 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public boolean displayDistanceDirection() {
 		return menuController != null && menuController.displayDistanceDirection();
+	}
+
+	public String getSubtypeStr() {
+		if (menuController != null) {
+			return menuController.getSubtypeStr();
+		}
+		return "";
+	}
+
+	public Drawable getSubtypeIcon() {
+		if (menuController != null) {
+			return menuController.getSubtypeIcon();
+		}
+		return null;
+	}
+
+	public int getAdditionalInfoColor() {
+		if (menuController != null) {
+			return menuController.getAdditionalInfoColorId();
+		}
+		return 0;
+	}
+
+	public CharSequence getAdditionalInfo() {
+		if (menuController != null) {
+			return menuController.getAdditionalInfoStr();
+		}
+		return "";
+	}
+
+	public int getAdditionalInfoIconRes() {
+		if (menuController != null) {
+			return menuController.getAdditionalInfoIconRes();
+		}
+		return 0;
 	}
 
 	public boolean isMapDownloaded() {
@@ -1074,14 +1237,32 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return myLocation;
 	}
 
+	public boolean isCachedMyLocation() {
+		return cachedMyLocation;
+	}
+
 	public Float getHeading() {
 		return heading;
 	}
 
-	public void updateMyLocation(net.osmand.Location location) {
-		if (location != null && active && displayDistanceDirection()) {
+	private void updateMyLocation(Location location, boolean updateLocationUi) {
+		if (location == null) {
+			location = getMapActivity().getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+			cachedMyLocation = location != null;
+		} else {
+			cachedMyLocation = false;
+		}
+		if (location != null) {
 			myLocation = new LatLon(location.getLatitude(), location.getLongitude());
-			updateLocation(false, true, false);
+			if (updateLocationUi) {
+				updateLocation(false, true, false);
+			}
+		}
+	}
+
+	public void updateMyLocation(net.osmand.Location location) {
+		if (active && displayDistanceDirection()) {
+			updateMyLocation(location, true);
 		}
 	}
 

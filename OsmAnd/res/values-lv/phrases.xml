@@ -248,7 +248,7 @@
 	<string name="poi_fuel_electricity">Elektroenerğija</string>
 	<string name="poi_aeroway_fuel">Aviācijas degvielas stacijas</string>
 	<string name="poi_waterway_fuel">Ūdenstransporta degvielas stacijas</string>
-	<string name="poi_charging_station">Elektrouzlādes stacijas</string>
+	<string name="poi_electricity_combined_charging">Elektrouzlādes stacijas</string>
 	<string name="poi_vehicle_ramp">Estekāde</string>
 	<string name="poi_compressed_air">Saspiests gaiss</string>
 	<string name="poi_parking">Stāvvieta</string>
@@ -3330,5 +3330,15 @@
 
 	<string name="poi_zoo_petting_zoo">Mājdzīvnieku zoo</string>
 	<string name="poi_stands">Sporta tribīnes</string>
+
+	<string name="poi_animal_shelter_type">Pieņem dzīvniekus</string>
+	<string name="poi_animal_shelter_purpose">Mērķis</string>
+	<string name="poi_boat_rental_type">Laivu īre</string>
+	<string name="poi_water_supply_type">Ūdens piegādes tips</string>
+	<string name="poi_water_purification">Ūdens attīrīšana</string>
+	<string name="poi_animal_shelter_wildlife">Savvaļas dzīvnieki</string>
+	<string name="poi_animal_shelter_horse">Zirgi</string>
+	<string name="poi_animal_shelter_mammal">Zīdītāji</string>
+	<string name="poi_animal_shelter_fish">Zivis</string>
 
 	</resources>

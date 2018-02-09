@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
@@ -715,7 +716,11 @@ public class MapInfoWidgetsFactory {
 		}
 
 		public boolean updateVisibility(boolean visible) {
-			return updateVisibility(topBar, visible);
+			boolean res = updateVisibility(topBar, visible);
+			if (res) {
+				map.updateStatusBarColor();
+			}
+			return res;
 		}
 
 		public boolean updateVisibility(View v, boolean visible) {
@@ -811,7 +816,7 @@ public class MapInfoWidgetsFactory {
 					}
 				}
 			}
-			if (map.isTopToolbarActive() || map.getContextMenu().isVisible()) {
+			if (map.isTopToolbarActive() || !map.getContextMenu().shouldShowTopControls()) {
 				updateVisibility(false);
 			} else if (!showNextTurn && updateWaypoint()) {
 				updateVisibility(true);
@@ -877,7 +882,7 @@ public class MapInfoWidgetsFactory {
 					all.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							map.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
+							map.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS, AndroidUtils.getCenterViewCoordinates(view));
 						}
 					});
 					remove.setOnClickListener(new OnClickListener() {

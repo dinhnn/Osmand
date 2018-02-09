@@ -72,7 +72,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private Activity activity;
 	private OsmandApplication application;
 	protected OsmandSettings settings = null;
-	private Integer defaultColor = null;
+	private CanvasColors canvasColors = null;
+	private Boolean nightMode = null;
+
+	private class CanvasColors {
+		int colorDay = MAP_DEFAULT_COLOR;
+		int colorNight = MAP_DEFAULT_COLOR;
+	}
 
 	private class FPSMeasurement {
 		int fpsMeasureCount = 0;
@@ -112,10 +118,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		public void onDrawOverMap();
 	}
 
-	public int getDefaultColor() {
-		return defaultColor;
-	}
-
 	protected static final Log LOG = PlatformUtil.getLog(OsmandMapTileView.class);
 
 
@@ -124,8 +126,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private float rotate; // accumulate
 
 	private int mapPosition;
-
 	private int mapPositionX;
+
+	private float mapRatioX;
+	private float mapRatioY;
 
 	private boolean showMapPosition = true;
 
@@ -488,6 +492,29 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		this.mapPositionX = type;
 	}
 
+	public void setCustomMapRatio(float ratioX, float ratioY) {
+		this.mapRatioX = ratioX;
+		this.mapRatioY = ratioY;
+	}
+
+	public void restoreMapRatio() {
+		RotatedTileBox box = currentViewport.copy();
+		float rx = (float)box.getCenterPixelX() / box.getPixWidth();
+		float ry = (float)box.getCenterPixelY() / box.getPixHeight();
+		if (mapPosition == OsmandSettings.BOTTOM_CONSTANT) {
+			ry -= 0.35;
+		}
+		box.setCenterLocation(rx, ry);
+		LatLon screenCenter = box.getLatLonFromPixel(box.getPixWidth() / 2, box.getPixHeight() / 2);
+		mapRatioX = 0;
+		mapRatioY = 0;
+		setLatLon(screenCenter.getLatitude(), screenCenter.getLongitude());
+	}
+
+	public boolean hasCustomMapRatio() {
+		return mapRatioX != 0 && mapRatioY != 0;
+	}
+
 	public OsmandSettings getSettings() {
 		return settings;
 	}
@@ -582,7 +609,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			return;
 		}
 		final float ratioy;
-		if (mapPosition == OsmandSettings.BOTTOM_CONSTANT) {
+		if (mapRatioY != 0) {
+			ratioy = mapRatioY;
+		} else if (mapPosition == OsmandSettings.BOTTOM_CONSTANT) {
 			ratioy = 0.85f;
 		} else if (mapPosition == OsmandSettings.MIDDLE_BOTTOM_CONSTANT) {
 			ratioy = 0.70f;
@@ -592,7 +621,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			ratioy = 0.5f;
 		}
 		final float ratiox;
-		if (mapPosition == OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT) {
+		if (mapRatioX != 0) {
+			ratiox = mapRatioX;
+		} else if (mapPosition == OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT) {
 			ratiox = 0.7f;
 		} else {
 			ratiox = mapPositionX == 0 ? 0.5f : 0.75f;
@@ -634,29 +665,39 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	private void fillCanvas(Canvas canvas, DrawSettings drawSettings) {
-		Integer color = defaultColor;
-		if (color == null) {
-			color = updateDefaultColor(drawSettings.isNightMode());
+		int color = MAP_DEFAULT_COLOR;
+		CanvasColors canvasColors = this.canvasColors;
+		if (canvasColors == null) {
+			canvasColors = updateCanvasColors();
+			this.canvasColors = canvasColors;
+		}
+		if (canvasColors != null) {
+			color = drawSettings.isNightMode() ? canvasColors.colorNight : canvasColors.colorDay;
 		}
 		canvas.drawColor(color);
 	}
 
 	public void resetDefaultColor() {
-		defaultColor = null;
+		canvasColors = null;
 	}
 
-	private int updateDefaultColor(boolean nightMode) {
-		int color = MAP_DEFAULT_COLOR;
+	private CanvasColors updateCanvasColors() {
+		CanvasColors canvasColors = null;
 		RenderingRulesStorage rrs = application.getRendererRegistry().getCurrentSelectedRenderer();
 		if (rrs != null) {
+			canvasColors = new CanvasColors();
 			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
-			req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
+			req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, false);
 			if (req.searchRenderingAttribute(RenderingRuleStorageProperties.A_DEFAULT_COLOR)) {
-				color = req.getIntPropertyValue(req.ALL.R_ATTR_COLOR_VALUE);
-				defaultColor = color;
+				canvasColors.colorDay = req.getIntPropertyValue(req.ALL.R_ATTR_COLOR_VALUE);
+			}
+			req = new RenderingRuleSearchRequest(rrs);
+			req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, true);
+			if (req.searchRenderingAttribute(RenderingRuleStorageProperties.A_DEFAULT_COLOR)) {
+				canvasColors.colorNight = req.getIntPropertyValue(req.ALL.R_ATTR_COLOR_VALUE);
 			}
 		}
-		return color;
+		return canvasColors;
 	}
 
 	public boolean isMeasureFPS() {
@@ -737,6 +778,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					baseHandler.removeMessages(BASE_REFRESH_MESSAGE);
 					try {
 						DrawSettings param = drawSettings;
+						Boolean currentNightMode = nightMode;
+						if (currentNightMode != null && currentNightMode != param.isNightMode()) {
+							param = new DrawSettings(currentNightMode, true);
+							resetDefaultColor();
+						}
 						if (handler.hasMessages(MAP_FORCE_REFRESH_MESSAGE)) {
 							if (!param.isUpdateVectorRendering()) {
 								param = new DrawSettings(drawSettings.isNightMode(), true);
@@ -765,7 +811,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void refreshMap(final boolean updateVectorRendering) {
 		if (view != null && view.isShown()) {
 			boolean nightMode = application.getDaynightHelper().isNightMode();
-			DrawSettings drawSettings = new DrawSettings(nightMode, updateVectorRendering);
+			Boolean currentNightMode = this.nightMode;
+			boolean forceUpdateVectorDrawing = currentNightMode != null && currentNightMode != nightMode;
+			if (forceUpdateVectorDrawing) {
+				resetDefaultColor();
+			}
+			this.nightMode = nightMode;
+			DrawSettings drawSettings = new DrawSettings(nightMode, updateVectorRendering || forceUpdateVectorDrawing);
 			sendRefreshMapMsg(drawSettings, 20);
 			refreshBufferImage(drawSettings);
 		}
@@ -931,7 +983,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void fitLocationToMap(double clat, double clon, int zoom,
-							 int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, boolean animated) {
+								 int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, boolean animated) {
 		RotatedTileBox tb = currentViewport.copy();
 		int dy = 0;
 
@@ -1112,7 +1164,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				firstTouchPointLatLon = currentViewport.getLatLonFromPixel(x1, y1);
 				secondTouchPointLatLon = currentViewport.getLatLonFromPixel(x2, y2);
 				multiTouch = true;
-                wasZoomInMultiTouch = false;
+				wasZoomInMultiTouch = false;
 				multiTouchStartTime = System.currentTimeMillis();
 			}
 		}

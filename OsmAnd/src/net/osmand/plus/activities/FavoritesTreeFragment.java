@@ -114,7 +114,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	}
 
 	private void deleteFavorites() {
-		new AsyncTask<Void, Object, String>() {
+		new AsyncTask<Void, Object, Void>() {
 
 			@Override
 			protected void onPreExecute() {
@@ -122,20 +122,20 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			}
 
 			@Override
-			protected void onPostExecute(String result) {
+			protected void onPostExecute(Void result) {
 				hideProgressBar();
 				favouritesAdapter.synchronizeGroups();
 			}
 
 			@Override
-			protected String doInBackground(Void... params) {
+			protected Void doInBackground(Void... params) {
 				helper.delete(groupsToDelete, getSelectedFavorites());
 				favoritesSelected.clear();
 				groupsToDelete.clear();
-				return getString(R.string.favourites_delete_multiple_succesful);
+				return null;
 			}
 
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 	}
 
@@ -164,7 +164,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		}
 		View emptyView = view.findViewById(android.R.id.empty);
 		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
-		emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_favorites_day_result : R.drawable.ic_empty_state_favorites_night_result);
+		emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_favorites_day : R.drawable.ic_empty_state_favorites_night);
 		Button importButton = (Button) emptyView.findViewById(R.id.import_button);
 		importButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -190,6 +190,13 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				getGroupExpandedPreference(groupName).set(true);
 			}
 		});
+		String groupNameToShow = ((FavoritesActivity) getActivity()).getGroupNameToShow();
+		if (groupNameToShow != null) {
+			int position = favouritesAdapter.getGroupPosition(groupNameToShow);
+			if (position != -1) {
+				listView.setSelectedGroup(position);
+			}
+		}
 		return view;
 	}
 
@@ -206,6 +213,14 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		super.onResume();
 		favouritesAdapter.synchronizeGroups();
 		initListExpandedState();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (actionMode != null) {
+			actionMode.finish();
+		}
 	}
 
 	private int getSelectedFavoritesCount() {
@@ -411,7 +426,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 							new MarkersSyncGroup(favGr.name, favGr.name, MarkersSyncGroup.FAVORITES_TYPE, favGr.color);
 					if (entry.getValue().size() == favGr.points.size()) {
 						markersHelper.addMarkersSyncGroup(syncGr);
-						markersHelper.syncGroup(syncGr);
+						markersHelper.syncGroupAsync(syncGr);
 					} else {
 						for (FavouritePoint fp : entry.getValue()) {
 							points.add(new LatLon(fp.getLatitude(), fp.getLongitude()));
@@ -599,7 +614,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			}
 		};
 
-		exportTask.execute();
+		exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	protected void export() {
@@ -639,14 +654,14 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						exportTask.execute();
+						exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 					}
 				});
 				bld.setNegativeButton(R.string.shared_string_no, null);
 				bld.setMessage(R.string.fav_export_confirmation);
 				bld.show();
 			} else {
-				exportTask.execute();
+				exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			}
 		}
 	}
@@ -957,6 +972,16 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 		public void setFilterResults(Set<?> values) {
 			this.filter = values;
+		}
+
+		public int getGroupPosition(String groupName) {
+			for (int i = 0; i < getGroupCount(); i++) {
+				FavoriteGroup group = getGroup(i);
+				if (group.name.equals(groupName)) {
+					return i;
+				}
+			}
+			return -1;
 		}
 	}
 

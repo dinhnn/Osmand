@@ -39,7 +39,10 @@ public class MarkersPlanRouteContext {
 
 	private PlanRouteProgressListener listener;
 	private boolean progressBarVisible;
-	private boolean fragmentShowed;
+	private boolean fragmentVisible;
+	private boolean markersListOpened;
+	private boolean adjustMapOnStart = true;
+	private boolean navigationFromMarkers;
 
 	Map<Pair<WptPt, WptPt>, List<WptPt>> getSnappedToRoadPoints() {
 		return snappedToRoadPoints;
@@ -49,7 +52,7 @@ public class MarkersPlanRouteContext {
 		return snapTrkSegment;
 	}
 
-	ApplicationMode getSnappedMode() {
+	public ApplicationMode getSnappedMode() {
 		return snappedMode;
 	}
 
@@ -73,12 +76,36 @@ public class MarkersPlanRouteContext {
 		this.progressBarVisible = progressBarVisible;
 	}
 
-	public boolean isFragmentShowed() {
-		return fragmentShowed;
+	public boolean isFragmentVisible() {
+		return fragmentVisible;
 	}
 
-	public void setFragmentShowed(boolean fragmentShowed) {
-		this.fragmentShowed = fragmentShowed;
+	public void setFragmentVisible(boolean fragmentVisible) {
+		this.fragmentVisible = fragmentVisible;
+	}
+
+	public boolean isMarkersListOpened() {
+		return markersListOpened;
+	}
+
+	public void setMarkersListOpened(boolean markersListOpened) {
+		this.markersListOpened = markersListOpened;
+	}
+
+	public boolean isAdjustMapOnStart() {
+		return adjustMapOnStart;
+	}
+
+	public void setAdjustMapOnStart(boolean adjustMapOnStart) {
+		this.adjustMapOnStart = adjustMapOnStart;
+	}
+
+	public boolean isNavigationFromMarkers() {
+		return navigationFromMarkers;
+	}
+
+	public void setNavigationFromMarkers(boolean navigationFromMarkers) {
+		this.navigationFromMarkers = navigationFromMarkers;
 	}
 
 	public MarkersPlanRouteContext(OsmandApplication app) {
@@ -86,7 +113,7 @@ public class MarkersPlanRouteContext {
 	}
 
 	void cancelSnapToRoad() {
-		listener.hideProgressBar();
+		listener.hideProgressBar(true);
 		snapToRoadPairsToCalculate.clear();
 		if (calculationProgress != null) {
 			calculationProgress.isCancelled = true;
@@ -123,11 +150,7 @@ public class MarkersPlanRouteContext {
 		}
 	}
 
-	void recreateSnapTrkSegment() {
-		recreateSnapTrkSegment(true);
-	}
-
-	private void recreateSnapTrkSegment(boolean adjustMap) {
+	void recreateSnapTrkSegment(boolean adjustMap) {
 		snapTrkSegment.points.clear();
 		List<WptPt> points = getPointsToCalculate();
 		if (snappedMode == ApplicationMode.DEFAULT) {
@@ -161,6 +184,10 @@ public class MarkersPlanRouteContext {
 			addWptPt(points, myLoc.getLatitude(), myLoc.getLongitude());
 		}
 		for (LatLon l : markersHelper.getSelectedMarkersLatLon()) {
+			addWptPt(points, l.getLatitude(), l.getLongitude());
+		}
+		if (app.getSettings().ROUTE_MAP_MARKERS_ROUND_TRIP.get() && !points.isEmpty()) {
+			WptPt l = points.get(0);
 			addWptPt(points, l.getLatitude(), l.getLongitude());
 		}
 		return points;
@@ -236,7 +263,7 @@ public class MarkersPlanRouteContext {
 					app.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
-							listener.hideProgressBar();
+							listener.hideProgressBar(false);
 						}
 					});
 				}
@@ -252,7 +279,7 @@ public class MarkersPlanRouteContext {
 
 		void updateProgress(int progress);
 
-		void hideProgressBar();
+		void hideProgressBar(boolean canceled);
 
 		void refresh();
 

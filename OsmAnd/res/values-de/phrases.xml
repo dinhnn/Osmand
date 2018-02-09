@@ -108,7 +108,7 @@
 	<string name="poi_cave_entrance">Höhleneingang</string>
 	<string name="poi_cemetery">Friedhof</string>
 	<string name="poi_chalet">Ferienhaus</string>
-	<string name="poi_charging_station">Ladestation</string>
+	<string name="poi_electricity_combined_charging">Ladestation</string>
 	<string name="poi_chemist">Drogerie</string>
 	<string name="poi_chess">Schach</string>
 	<string name="poi_clothes_children">Kinderbekleidungsgeschäft</string>
@@ -325,7 +325,7 @@
 	<string name="poi_musical_instrument">Musikinstrumente</string>
 	<string name="poi_nature_reserve">Naturschutzgebiet</string>
 	<string name="poi_neighbourhood">Nachbarschaft</string>
-	<string name="poi_newsagent">Nachrichtenagentur</string>
+	<string name="poi_newsagent">Zeitungshändler</string>
 	<string name="poi_newspaper">Zeitungsbüro</string>
 	<string name="poi_ngo">NGO</string>
 	<string name="poi_nightclub">Diskothek</string>
@@ -510,7 +510,7 @@
 	<string name="poi_suburb">Stadtteil</string>
 	<string name="poi_subway_entrance">U-Bahnhofeingang</string>
 	<string name="poi_subway_station">U-Bahnhof</string>
-	<string name="poi_craft_sun_protection">Lichtschutz</string>
+	<string name="poi_craft_sun_protection">Sonnenschutz</string>
 	<string name="poi_supermarket">Supermarkt</string>
 	<string name="poi_surveillance">Überwachung</string>
 	<string name="poi_survey_point">Vermessungspunkt</string>
@@ -613,7 +613,7 @@
 	<string name="poi_aquarium">Aquarium</string>
 	<string name="poi_team_handball">Handball</string>
   <string name="poi_shop">Geschäft</string>
-		<string name="poi_shop_food">Gemischtwaren- und Lebensmittelgeschäft</string>
+		<string name="poi_shop_food">Gemischtwarengeschäft und Supermarkt</string>
 	<string name="poi_emergency">Notfall</string>
 	<string name="poi_road_obstacle">Straßenhindernis</string>
 		<string name="poi_filling_station">Tankstelle</string>
@@ -1134,7 +1134,7 @@
 
 	<string name="poi_intermittent">Zeitweise</string>
 
-	<string name="poi_deadlock">Sackgasse</string>
+	<string name="poi_deadlock">Verklemmung</string>
 
 	<string name="poi_aerialway_length">Länge</string>
 
@@ -1247,10 +1247,10 @@
 	<string name="poi_caravans_no">Wohnwagen: nein</string>
 	<string name="poi_power_supply_yes">ja</string>
 	<string name="poi_power_supply_no">Stromanschluss: nein</string>
-	<string name="poi_power_supply_cee_17_blue">Stromanschluss: CEE 17 blau</string>
-	<string name="poi_power_supply_cee_7_4">Stromanschluss: CEE 7/4</string>
-	<string name="poi_power_supply_cee_7_5">Stromanschluss: CEE 7/5</string>
-	<string name="poi_power_supply_nema_5_15">Stromanschluss: NEMA 5-15</string>
+	<string name="poi_power_supply_cee_17_blue">Sockel: CEE 17 blau</string>
+	<string name="poi_power_supply_cee_7_4">Sockel: CEE 7/4</string>
+	<string name="poi_power_supply_cee_7_5">Sockel: CEE 7/5</string>
+	<string name="poi_power_supply_nema_5_15">Sockel: NEMA 5-15</string>
 
 	<string name="poi_capacity_tents">Maximale Anzahl Zeltplätze</string>
 	<string name="poi_capacity_caravans">Maximale Anzahl Wohnwagen</string>
@@ -1487,7 +1487,7 @@
 
 	<string name="poi_payment_coins_yes">Münzen</string>
 	<string name="poi_payment_coins_no">Münzen nicht akzeptiert</string>
-	<string name="poi_payment_coins_0.5">$0,5 Münzen</string>
+	<string name="poi_payment_coins_0.5">$0,50 Münzen</string>
 	<string name="poi_payment_coins_50c12">50c, 1€ und 2€ Münzen</string>
 	<string name="poi_payment_telephone_cards_yes">Telefonkarten</string>
 	<string name="poi_payment_telephone_cards_no">Telefonkarten nicht akzeptiert</string>
@@ -2552,8 +2552,8 @@
 <string name="poi_seamark_dyke">Seezeichen Deich</string>
 	<string name="poi_dolphin">Dalbe</string>
 
-	<string name="poi_forestry_compartment">Wegweiser: Forstabteilung</string>
-	<string name="poi_forestry_allotment">Wegweiser: Forstparzelle</string>
+	<string name="poi_forestry_compartment">Schild: Forstabteilung</string>
+	<string name="poi_forestry_allotment">Schild: Forstparzelle</string>
 	<string name="poi_inscription_n">Beschriftung: N</string>
 	<string name="poi_inscription_nw">Beschriftung: NW</string>
 	<string name="poi_inscription_w">Beschriftung: W</string>
@@ -2811,8 +2811,8 @@
 	<string name="poi_treat_inpatient_only">Nur stationäre Dienste</string>
 	<string name="poi_counselling_yes">Beratung: ja</string>
 	<string name="poi_counselling_no">Beratung: nein</string>
-	<string name="poi_emergency_yes">Notfall: ja</string>
-	<string name="poi_emergency_no">Notfall: nein</string>
+	<string name="poi_emergency_yes">Notaufnahme: ja</string>
+	<string name="poi_emergency_no">Notaufnahme: nein</string>
 	<string name="poi_home_visit_yes">ja</string>
 	<string name="poi_home_visit_no">Hausbesuch: nein</string>
 
@@ -3013,7 +3013,7 @@
 
 <string name="poi_spices">Gewürzgeschäft</string>
 
-<string name="poi_fuel_type">Typ</string>
+<string name="poi_fuel_type">Kraftstoffart</string>
 	<string name="poi_payment_type">Zahlungsart</string>
 	<string name="poi_additional_type">Zusätzlich</string>
 <string name="poi_service_bicycle_charging_yes">Ladestation: ja</string>
@@ -3021,7 +3021,7 @@
 
 <string name="poi_shop_craft">Geschäft für Kunsthandwerksbedarf</string>
 
-	<string name="poi_fuel_avia_type">Typ</string>
+	<string name="poi_fuel_avia_type">Kraftstoffart (avia)</string>
 	<string name="poi_payment_fuel_type">Tankkarten</string>
 	<string name="poi_internet_access_type">Internet-Zugangsart</string>
 	<string name="poi_clothes_type">Typ</string>
@@ -3093,7 +3093,7 @@
 	<string name="poi_bicycle_service">Fahrradwerkstatt</string>
 	<string name="poi_service_car">Dienstleistung</string>
 	<string name="poi_self_service">Selbstbedienung</string>
-	<string name="poi_pharmacy_dispensing">Rezeptur</string>
+	<string name="poi_pharmacy_dispensing">Rezepte</string>
 	<string name="poi_archaeological_site_type">Typ</string>
 	<string name="poi_star_rating">Bewertung in Sternen</string>
 	<string name="poi_denomination">Konfession</string>
@@ -3268,7 +3268,7 @@
 	<string name="poi_cuisine_diner">Esslokal</string>
 	<string name="poi_cuisine_yakiniku">Yakiniku</string>
 	<string name="poi_cuisine_udon">Udon</string>
-	<string name="poi_cuisine_brasserie">Brasserie</string>
+	<string name="poi_cuisine_brasserie">Brauhaus</string>
 	<string name="poi_cuisine_yakitori">Yakitori</string>
 	<string name="poi_cuisine_teriyaki">Teriyaki</string>
 
@@ -3382,7 +3382,7 @@
 	<string name="poi_motorcycle_services">Kundendienst</string>
 	<string name="poi_motorcycle_type">Motorradtyp</string>
 
-<string name="poi_stands">Standplätze</string>
+<string name="poi_stands">Stände</string>
 
 	<string name="poi_motorcycle_sales_yes">Verkauf</string>
 	<string name="poi_motorcycle_sales_no">Verkauf: nein</string>
@@ -3410,8 +3410,8 @@
 	<string name="poi_animal_shelter_mammal">Säugetiere</string>
 	<string name="poi_animal_shelter_fish">Fische</string>
 
-	<string name="poi_animal_shelter_type">Tierannahme</string>
-	<string name="poi_animal_shelter_purpose">Bestimmung</string>
+	<string name="poi_animal_shelter_type">Tiere erlaubt</string>
+	<string name="poi_animal_shelter_purpose">Zweck</string>
 
 <string name="poi_owner">Eigentümer</string>
 
@@ -3442,7 +3442,7 @@
 	<string name="poi_direction_forward">Richtung: vorwärts</string>
 	<string name="poi_direction_backward">Richtung: rückwärts</string>
 	<string name="poi_direction_clockwise">Richtung: im Uhrzeigersinn</string>
-	<string name="poi_direction_anticlockwise">Richtung: gegen Uhrzeigersinn</string>
+	<string name="poi_direction_anticlockwise">Richtung: Gegen Uhrzeigersinn</string>
 	<string name="poi_direction_up">Richtung: aufwärts</string>
 	<string name="poi_direction_down">Richtung: abwärts</string>
 	<string name="poi_direction_all">Richtung: alle</string>
@@ -3492,4 +3492,237 @@
 	<string name="poi_government_transportation">Transportministerium</string>
 	<string name="poi_government_legislative">Gesetzgebende Institution</string>
 
-</resources>
+<string name="poi_seamark_clearance_height">Durchfahrtshöhe</string>
+	<string name="poi_seamark_clearance_height_closed">Durchfahrtshöhe (geschlossen)</string>
+	<string name="poi_seamark_clearance_height_open">Durchfahrtshöhe (geöffnet)</string>
+	<string name="poi_seamark_clearance_width">Durchfahrtsbreite</string>
+
+	<string name="poi_vhf">VHF-Band</string>
+
+	<string name="poi_gorge">Schlucht</string>
+	<string name="poi_couloir">Felsschlucht</string>
+	<string name="poi_mountain_area">Berggebiet</string>
+
+	<string name="poi_surface_clay">Sand</string>
+	<string name="poi_surface_tartan">Tartan</string>
+	<string name="poi_surface_artificial_turf">Kunstrasen</string>
+	<string name="poi_surface_decoturf">Zierrasen</string>
+	<string name="poi_surface_metal_grid">Metallgitter</string>
+
+<string name="poi_location_underground">Lage: unterirdisch</string>
+	<string name="poi_location_underwater">Lage: Unterwasser</string>
+	<string name="poi_location_overground">Lage: oberirdisch</string>
+	<string name="poi_location_roof">Lage: Dach</string>
+	<string name="poi_location_outdoor">Lage: im Freien</string>
+	<string name="poi_location_indoor">Lage: im Gebäude</string>
+	<string name="poi_location_platform">Lage: Plattform</string>
+	<string name="poi_location_kiosk">Lage: Kiosk</string>
+	<string name="poi_location_bridge">Lage: Brücke</string>
+	<string name="poi_location_wall">Lage: Wand</string>
+	<string name="poi_location_entrance">Lage: Eingang</string>
+
+	<string name="poi_operational_status">Betriebsstatus</string>
+	<string name="poi_water_supply_type">Wasserversorgungsart</string>
+	<string name="poi_water_purification">Wasseraufbereitung</string>
+	<string name="poi_water_place_access">Wasserplatzzugang</string>
+
+<string name="poi_location_rooftop">Lage: Auf dem Dach</string>
+	<string name="poi_visibility_house">Sichtbarkeit: Haus</string>
+	<string name="poi_visibility_street">Sichtbarkeit: Straße</string>
+	<string name="poi_visibility_area">Sichtbarkeit: Bereich</string>
+
+	<string name="poi_operational_status_open">Offen</string>
+	<string name="poi_operational_status_closed">Geschlossen</string>
+	<string name="poi_operational_status_restricted">Eingeschränkt</string>
+	<string name="poi_operational_status_broken">Beschädigt</string>
+	<string name="poi_operational_status_needs_maintenance">Wartung benötigt</string>
+
+	<string name="poi_water_purification_none">Keine</string>
+	<string name="poi_water_purification_chlorine">Chlor</string>
+	<string name="poi_water_purification_reverse_osmosis">Umkehrosmose</string>
+	<string name="poi_water_purification_aquatabs">Aquatabs</string>
+
+	<string name="poi_water_supply_water_well">Brunnen</string>
+	<string name="poi_water_supply_pipeline">Rohrleitung</string>
+	<string name="poi_water_supply_running_water">Fließendes Wasser</string>
+	<string name="poi_water_supply_pump">Pumpe</string>
+	<string name="poi_water_supply_borehole">Bohrloch</string>
+	<string name="poi_water_supply_water_trucking">Wasser-LKW</string>
+	<string name="poi_water_supply_water_tank">Wassertank</string>
+	<string name="poi_water_supply_bottled_water">Wasser in Flaschen</string>
+
+	<string name="poi_water_place_access_community">Gemeinschaft</string>
+	<string name="poi_water_place_access_family">Familie</string>
+	<string name="poi_socket_cee_blue">Sockel: CEE blau</string>
+	<string name="poi_socket_cee_blue_current">Sockel: CEE blau: Strom</string>
+	<string name="poi_socket_cee_blue_output">Sockel: CEE blau: Leistung</string>
+	<string name="poi_socket_cee_red_16a">Sockel: CEE rot 16A</string>
+	<string name="poi_socket_cee_red_16a_current">Sockel: CEE rot 16A: Strom</string>
+	<string name="poi_socket_cee_red_16a_output">Sockel: CEE rot 16A: Leistung</string>
+	<string name="poi_socket_cee_red_32a">Sockel: CEE rot 32A</string>
+	<string name="poi_socket_cee_red_32a_current">Sockel: CEE rot 32A: Strom</string>
+	<string name="poi_socket_cee_red_32a_output">Sockel: CEE rot 32A: Leistung</string>
+	<string name="poi_socket_cee_red_64a">Sockel: CEE rot 64A</string>
+	<string name="poi_socket_cee_red_64a_current">Sockel: CEE rot 64A: Strom</string>
+	<string name="poi_socket_cee_red_64a_output">Sockel: CEE rot 64A: Leistung</string>
+	<string name="poi_socket_cee_red_125a">Sockel: CEE rot 125A</string>
+	<string name="poi_socket_cee_red_125a_current">Sockel: CEE rot 125A: Strom</string>
+	<string name="poi_socket_cee_red_125a_output">Sockel: CEE rot 125A: Leistung</string>
+	<string name="poi_socket_type1">Sockel: Typ 1</string>
+	<string name="poi_socket_type1_current">Sockel: Typ 1: Strom</string>
+	<string name="poi_socket_type1_output">Sockel: Typ 1: Leistung</string>
+	<string name="poi_socket_type1_combo">Sockel: Combo Typ 1</string>
+	<string name="poi_socket_type1_combo_current">Sockel: Combo Typ 1: Strom</string>
+	<string name="poi_socket_type1_combo_output">Sockel: Combo Typ 1: Leistung</string>
+	<string name="poi_socket_type2">Sockel: Typ 2</string>
+	<string name="poi_socket_type2_current">Sockel: Typ 2: Strom</string>
+	<string name="poi_socket_type2_output">Sockel: Typ 2: Leistung</string>
+	<string name="poi_socket_type2_combo">Sockel: Combo Typ 2</string>
+	<string name="poi_socket_type2_combo_current">Sockel: Combo Typ 2: Strom</string>
+	<string name="poi_socket_type2_combo_output">Sockel: Combo Typ 2: Leistung</string>
+	<string name="poi_socket_type3">Sockel: Typ 3</string>
+	<string name="poi_socket_type3_current">Sockel: Typ 3: Strom</string>
+	<string name="poi_socket_type3_output">Sockel: Typ 3: Leistung</string>
+	<string name="poi_socket_chademo">Sockel: CHAdeMO</string>
+	<string name="poi_socket_chademo_current">Sockel: CHAdeMO: Strom</string>
+	<string name="poi_socket_chademo_output">Sockel: CHAdeMO: Leistung</string>
+	<string name="poi_socket_tesla_standard">Sockel: Tesla Standard</string>
+	<string name="poi_socket_tesla_standard_current">Sockel: Tesla Standard: Strom</string>
+	<string name="poi_socket_tesla_standard_output">Sockel: Tesla Standard: Leistung</string>
+	<string name="poi_socket_tesla_supercharger">Sockel: Tesla Supercharger</string>
+	<string name="poi_socket_tesla_supercharger_current">Sockel: Tesla Supercharger: Strom</string>
+	<string name="poi_socket_tesla_supercharger_output">Sockel: Tesla Supercharger: Leistung</string>
+	<string name="poi_socket_tesla_roadster">Sockel: Tesla Roadster</string>
+	<string name="poi_socket_tesla_roadster_current">Sockel: Tesla Roadster: Strom</string>
+	<string name="poi_socket_tesla_roadster_output">Sockel: Tesla Roadster: Leistung</string>
+	<string name="poi_socket_nema_5_15">Sockel: NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_15_current">Sockel: NEMA 5-15R: Strom</string>
+	<string name="poi_socket_nema_5_15_output">Sockel: NEMA 5-15R: Leistung</string>
+	<string name="poi_socket_nema_5_20">Sockel: NEMA 5-20</string>
+	<string name="poi_socket_nema_5_20_current">Sockel: NEMA 5-20: Strom</string>
+	<string name="poi_socket_nema_5_20_output">Sockel: NEMA 5-20: Leistung</string>
+	<string name="poi_socket_nema_14_30">Sockel: NEMA 14-30</string>
+	<string name="poi_socket_nema_14_30_current">Sockel: NEMA 14-30: Strom</string>
+	<string name="poi_socket_nema_14_30_output">Sockel: NEMA 14-30: Leistung</string>
+	<string name="poi_socket_nema_14_50">Sockel: NEMA 14-50</string>
+	<string name="poi_socket_nema_14_50_current">Sockel: NEMA 14-50: Strom</string>
+	<string name="poi_socket_nema_14_50_output">Sockel: NEMA 14-50: Leistung</string>
+	<string name="poi_socket_schuko">Sockel: Schuko</string>
+	<string name="poi_socket_schuko_current">Sockel: Schuko: Strom</string>
+	<string name="poi_socket_schuko_output">Sockel: Schuko: Leistung</string>
+	<string name="poi_socket_bs1363">Sockel: BS 1363</string>
+	<string name="poi_socket_bs1363_current">Sockel: BS 1363: Strom</string>
+	<string name="poi_socket_bs1363_output">Sockel: BS 1363: Leistung</string>
+	<string name="poi_socket_as3112">Sockel: AS/NZS 3112</string>
+	<string name="poi_socket_as3112_current">Sockel: AS/NZS 3112: Strom</string>
+	<string name="poi_socket_as3112_output">Sockel: AS/NZS 3112: Leistung</string>
+
+	<string name="poi_car_yes">Auto: ja</string>
+	<string name="poi_car_no">Auto: nein</string>
+	<string name="poi_bicycle_yes">Fahrrad: ja</string>
+	<string name="poi_bicycle_no">Fahrrad: nein</string>
+	<string name="poi_scooter_yes">Roller: ja</string>
+	<string name="poi_scooter_no">Roller: nein</string>
+	<string name="poi_truck_yes">LKW: ja</string>
+	<string name="poi_truck_no">LKW: nein</string>
+
+	<string name="poi_parking_fee_yes">Parkgebühr: ja</string>
+	<string name="poi_parking_fee_no">Parkgebühr: nein</string>
+	<string name="poi_parking_fee">Parkgebühr</string>
+
+	<string name="poi_amperage">Stromstärke</string>
+	<string name="poi_location_overhead">Lage: Oben</string>
+	<string name="poi_water_place_durability_durable">Wasserstelle Haltbarkeit: Dauerhaft</string>
+	<string name="poi_water_place_durability_emergency">Wasserstelle Haltbarkeit: Notfall</string>
+
+	<string name="poi_water_place_access_multifamilies">Mehrfamilien</string>
+
+	<string name="poi_charging_station_output">Ladestation Ausgang</string>
+
+<string name="poi_map_type_topo">Kartentyp: Gelände</string>
+	<string name="poi_map_type_street">Kartentyp: Straße</string>
+	<string name="poi_map_type_scheme">Kartentyp: Übersicht</string>
+	<string name="poi_map_type_toposcope">Kartentyp: Toposkop</string>
+	<string name="poi_charging_station_filter">Ladestation</string>
+
+	<string name="poi_depot">Lager</string>
+
+<string name="poi_map_size_site">Kartengröße: Platz</string>
+	<string name="poi_map_size_city">Kartengröße: Stadt</string>
+	<string name="poi_map_size_region">Kartengröße: Region</string>
+
+	<string name="poi_letter_box">Briefkasten</string>
+	<string name="poi_post_street">Straße</string>
+	<string name="poi_post_housenumber">Hausnummer</string>
+	<string name="poi_post_flats">Flach</string>
+
+	<string name="poi_payment_centre">Zahlungs-Zentrum</string>
+	<string name="poi_money_transfer">Überweisung</string>
+
+<string name="poi_route_subway_ref">U-Bahn</string>
+
+	<string name="poi_climbing_style">Klettertechnik</string>
+
+<string name="poi_ref_post">Postleitzahl</string>
+
+	<string name="poi_climbing_sport_yes">Sport: ja</string>
+	<string name="poi_climbing_sport_no">Sport: nein</string>
+	<string name="poi_climbing_trad_yes">Traditionell: ja</string>
+	<string name="poi_climbing_trad_no">Traditionell: nein</string>
+	<string name="poi_climbing_ice_yes">Eis: ja</string>
+	<string name="poi_climbing_ice_no">Eis: nein</string>
+	<string name="poi_climbing_rock_limestone">Kletterfelsen: Kalkstein</string>
+	<string name="poi_climbing_rock_granite">Kletterfelsen: Granit</string>
+	<string name="poi_climbing_rock_sandstone">Kletterfelsen: Sandstein</string>
+	<string name="poi_climbing_rock_quartzite">Kletterfelsen: Quarzit</string>
+	<string name="poi_climbing_rock_gneiss">Kletterfelsen: Gneis</string>
+	<string name="poi_climbing_rock_porphyry">Kletterfelsen: Porphyr</string>
+	<string name="poi_climbing_orientation_n">Wandausrichtung: N</string>
+	<string name="poi_climbing_orientation_ne">Wandausrichtung: NO</string>
+	<string name="poi_climbing_orientation_e">Wandausrichtung: O</string>
+	<string name="poi_climbing_orientation_se">Wandausrichtung: SO</string>
+	<string name="poi_climbing_orientation_s">Wandausrichtung: S</string>
+	<string name="poi_climbing_orientation_sw">Wandausrichtung: SW</string>
+	<string name="poi_climbing_orientation_w">Wandausrichtung: W</string>
+	<string name="poi_climbing_orientation_nw">Wandausrichtung: NW</string>
+	<string name="poi_climbing_routes">Kletterrouten</string>
+
+	<string name="poi_diameter_crown">Durchmesser der Krone</string>
+
+	<string name="poi_meadow_agricultural">Typ: landwirtschaftlich</string>
+	<string name="poi_meadow_transitional">Typ: vorübergehend</string>
+	<string name="poi_frozen_food">Tiefkühlkost</string>
+
+	<string name="poi_agrarian">Hofladen</string>
+
+
+<string name="poi_shop_boat">Bootsgeschäft</string>
+
+	<string name="poi_cannabis">Cannabis-Laden</string>
+
+
+<string name="poi_climbing_boulder_yes">Bouldern: ja</string>
+	<string name="poi_climbing_boulder_no">Bouldern: nein</string>
+	<string name="poi_climbing_toprope_yes">Toprope: ja</string>
+	<string name="poi_climbing_toprope_no">Toprope: nein</string>
+	<string name="poi_climbing_multipitch_yes">Mehrseillängenroute: ja</string>
+	<string name="poi_climbing_multipitch_no">Mehrseillängenroute: nein</string>
+	<string name="poi_climbing_deepwater_yes">Deep Water Soloing: ja</string>
+	<string name="poi_climbing_deepwater_no">Deep Water Soloing: nein</string>
+
+	<string name="poi_climbing_length">Routenlänge</string>
+	<string name="poi_climbing_length_min">Routenmindestlänge</string>
+	<string name="poi_climbing_length_max">Routenhöchstlänge</string>
+	<string name="poi_climbing_quality_solid">Felsqualität: fest</string>
+	<string name="poi_climbing_quality_fragile">Felsqualität: brüchig</string>
+	<string name="poi_climbing_bolted_yes">Fixpunkte: ja</string>
+	<string name="poi_climbing_bolted_no">Fixpunkte: nein</string>
+	<string name="poi_climbing_summit_log_yes">Klettergipfelbuch: ja</string>
+	<string name="poi_climbing_summit_log_no">Klettergipfelbuch: nein</string>
+	<string name="poi_circumference">Umfang</string>
+	<string name="poi_meadow_perpetual">Typ: dauernd</string>
+	<string name="poi_meadow_pasture">Typ: Weide</string>
+
+	<string name="poi_shop_fireplace">Kaminofenbauer</string>
+
+	</resources>
